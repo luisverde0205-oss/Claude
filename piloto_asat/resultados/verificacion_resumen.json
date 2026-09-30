@@ -1,0 +1,40 @@
+{
+  "china_decada": {
+    "observado_2016_2026": 0.209,
+    "modelo_calibrado_2026_2036": 0.202,
+    "modelo_sin_calibrar_2026_2036": 0.013,
+    "nota": "poblaciones distintas (los que quedan hoy son los más resistentes) y ciclos solares distintos: comparación de orden de magnitud"
+  },
+  "vida_mediana_por_prueba": [
+    {
+      "evento": "EE.UU. 2008",
+      "altitud_km": 247,
+      "vida_mediana_obs_dias": 27,
+      "vida_modelo_dias_p50": 2,
+      "rango_modelo_dias": [
+        1,
+        4
+      ]
+    },
+    {
+      "evento": "India 2019",
+      "altitud_km": 283,
+      "vida_mediana_obs_dias": 132,
+      "vida_modelo_dias_p50": 3,
+      "rango_modelo_dias": [
+        2,
+        8
+      ]
+    },
+    {
+      "evento": "Rusia 2021",
+      "altitud_km": 480,
+      "vida_mediana_obs_dias": 192,
+      "vida_modelo_dias_p50": 103,
+      "rango_modelo_dias": [
+        52,
+        379
+      ]
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "fragmentos_modelados": 1951,
+  "control_ndot": {
+    "n_comparados": 1932,
+    "razon_modelo_observado_mediana": 0.026133947203187617,
+    "razon_p16_p84": [
+      0.023,
+      0.04
+    ],
+    "correlacion_log": 0.9654784956812003,
+    "F107_81_en_epoca": 104.0,
+    "razon_mediana_por_perigeo": {
+      "(500, 600]": 0.0565,
+      "(600, 700]": 0.0342,
+      "(700, 800]": 0.0247,
+      "(800, 900]": 0.0237
+    }
+  },
+  "CdA_m_calibrado_p16_p50_p84": [
+    0.0576,
+    0.2083,
+    0.4783
+  ],
+  "proyeccion_fengyun1c": {
+    "actividad solar observada/predicha": {
+      "en_orbita_2036": 1542,
+      "en_orbita_2050": 1056,
+      "en_orbita_2076": 718,
+      "en_orbita_2100": 496,
+      "en_orbita_2126": 355,
+      "vida_restante_mediana_anios": 30.62286105407255
+    },
+    "Sol tranquilo (F10.7=70)": {
+      "en_orbita_2036": 1851,
+      "en_orbita_2050": 1685,
+      "en_orbita_2076": 1349,
+      "en_orbita_2100": 1079,
+      "en_orbita_2126": 933,
+      "vida_restante_mediana_anios": 93.28542094455852
+    },
+    "Sol activo (F10.7=200)": {
+      "en_orbita_2036": 626,
+      "en_orbita_2050": 267,
+      "en_orbita_2076": 103,
+      "en_orbita_2100": 61,
+      "en_orbita_2126": 40,
+      "vida_restante_mediana_anios": 5.181382614647502
+    },
+    "sin calibrar (C_D A/m = 12.74 B*)": {
+      "en_orbita_2036": 1906,
+      "en_orbita_2050": 1888,
+      "en_orbita_2076": 1847,
+      "en_orbita_2100": 1811,
+      "en_orbita_2126": 1770,
+      "vida_restante_mediana_anios": Infinity
+    }
+  },
+  "vida_contra_altitud_CdAm_p16_p50_p84": [
+    0.0576,
+    0.2083,
+    0.4783
+  ],
+  "prediccion_fragmentos_rusos": [
+    {
+      "NORAD": 50032,
+      "perigeo_km": 412.0,
+      "apogeo_km": 430.5,
+      "CdA_m": 0.00272,
+      "epoca": "2026-09-30",
+      "reingreso_predicho": "2035-04-02"
+    },
+    {
+      "NORAD": 50058,
+      "perigeo_km": 267.3,
+      "apogeo_km": 275.3,
+      "CdA_m": 0.00667,
+      "epoca": "2026-09-30",
+      "reingreso_predicho": "2026-11-09"
+    },
+    {
+      "NORAD": 50621,
+      "perigeo_km": 325.1,
+      "apogeo_km": 347.8,
+      "CdA_m": 0.00717,
+      "epoca": "2026-09-30",
+      "reingreso_predicho": "2027-03-15"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+[
+  {
+    "archivo": "satcat.csv",
+    "url": "https://celestrak.org/pub/satcat.csv",
+    "descargado_utc": "2026-09-30T22:26:53+00:00",
+    "bytes": 6751394,
+    "sha256": "3cda1bb1c26fea109f906b38d0ac04c40cb688c98439802bbd0d2ab06549ce97"
+  },
+  {
+    "archivo": "gp_fengyun1c_1999-025.csv",
+    "url": "https://celestrak.org/NORAD/elements/gp.php?INTDES=1999-025&FORMAT=csv",
+    "descargado_utc": "2026-09-30T22:26:54+00:00",
+    "bytes": 304910,
+    "sha256": "cfb0f209c40f3aca69469fdee4851ac8c5cc156c009120d12d40d5331ffd0782"
+  },
+  {
+    "archivo": "gp_kosmos1408_1982-092.csv",
+    "url": "https://celestrak.org/NORAD/elements/gp.php?INTDES=1982-092&FORMAT=csv",
+    "descargado_utc": "2026-09-30T22:26:54+00:00",
+    "bytes": 853,
+    "sha256": "cb125b82cff42ad285a8e011a42fc457dedcb138d14f1a3c5232c04c880331af"
+  },
+  {
+    "archivo": "SW-All.csv",
+    "url": "https://celestrak.org/SpaceData/SW-All.csv",
+    "descargado_utc": "2026-09-30T22:26:56+00:00",
+    "bytes": 2889178,
+    "sha256": "98393fcc46d2da301074747391732c25eb92f5bdf8225972ac3d287ea2af02ad"
+  }
+]

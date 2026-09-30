@@ -1,0 +1,67 @@
+{
+  "objetos_en_orbita_usados": 29319,
+  "por_grupo": {
+    "Resto de objetos": 26271,
+    "Prueba ASAT China 2007": 2315,
+    "Colisión accidental 2009": 729,
+    "Prueba ASAT Rusia 2021": 4
+  },
+  "supuestos": {
+    "v_rel_km_s": 10.0,
+    "area_m2": 10.0,
+    "capa_km": 10
+  },
+  "riesgo_por_altitud": {
+    "420_km": {
+      "choques_por_anio_10m2": 7.564121078111305e-05,
+      "prob_5_anios": 0.00037813454301149907,
+      "años_entre_choques": 13220.306624833816,
+      "fraccion_por_grupo": {
+        "Colisión accidental 2009": 0.006,
+        "Prueba ASAT China 2007": 0.004,
+        "Prueba ASAT Rusia 2021": 0.004,
+        "Resto de objetos": 0.986
+      }
+    },
+    "550_km": {
+      "choques_por_anio_10m2": 0.00011985108591763508,
+      "prob_5_anios": 0.0005990759119139932,
+      "años_entre_choques": 8343.687437986395,
+      "fraccion_por_grupo": {
+        "Colisión accidental 2009": 0.024,
+        "Prueba ASAT China 2007": 0.026,
+        "Prueba ASAT Rusia 2021": 0.0,
+        "Resto de objetos": 0.95
+      }
+    },
+    "800_km": {
+      "choques_por_anio_10m2": 0.00017368596886713534,
+      "prob_5_anios": 0.0008680528682720734,
+      "años_entre_choques": 5757.517469732806,
+      "fraccion_por_grupo": {
+        "Colisión accidental 2009": 0.038,
+        "Prueba ASAT China 2007": 0.249,
+        "Prueba ASAT Rusia 2021": 0.0,
+        "Resto de objetos": 0.713
+      }
+    },
+    "850_km": {
+      "choques_por_anio_10m2": 0.00014901579136346386,
+      "prob_5_anios": 0.000744801454416022,
+      "años_entre_choques": 6710.698180710954,
+      "fraccion_por_grupo": {
+        "Colisión accidental 2009": 0.021,
+        "Prueba ASAT China 2007": 0.362,
+        "Prueba ASAT Rusia 2021": 0.0,
+        "Resto de objetos": 0.617
+      }
+    }
+  },
+  "fengyun1c_futuro": {
+    "nota": "solo los 1,932 fragmentos con elementos y dn/dt válidos; escalar x1.2 para los 2,315 en órbita",
+    "choques_esperados_10m2_800km_2026_2126": 0.0015818390152894776,
+    "tasa_800km_2026": 3.571064668998387e-05,
+    "tasa_800km_2050": 1.9740852079861097e-05,
+    "tasa_800km_2100": 9.216680389782558e-06
+  }
+}

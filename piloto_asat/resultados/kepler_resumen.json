@@ -1,0 +1,31 @@
+{
+  "fragmentos_con_elementos": 1982,
+  "comparados_con_satcat": 1982,
+  "dif_perigeo_km_mediana": -0.010447904337070213,
+  "dif_perigeo_km_p95_abs": 0.5878335955424973,
+  "dif_apogeo_km_mediana": -0.03749397503042928,
+  "dif_apogeo_km_p95_abs": 0.6282031018396536,
+  "dif_periodo_min_mediana": -0.0005078824804627402,
+  "dif_periodo_min_p95_abs": 0.005241101852030991,
+  "perigeo_km_cuantiles_5_50_95": [
+    546.4,
+    760.4,
+    843.8
+  ],
+  "apogeo_km_cuantiles_5_50_95": [
+    681.5,
+    888.5,
+    1300.4
+  ],
+  "excentricidad_mediana": 0.00930939,
+  "v_perigeo_menos_v_apogeo_kms_mediana": 0.13890886058755436,
+  "frac_tiempo_bajo_a_mediana": 0.4970367291286595,
+  "fraccion_bstar_positivo": 0.984359233097881,
+  "CdA_m_m2kg_cuantiles_5_50_95_bstar_pos": [
+    0.001,
+    0.0058,
+    0.0197
+  ],
+  "epoca_min": "2026-09-01T05:20:22.017984",
+  "epoca_max": "2026-09-30T15:21:03.258720"
+}

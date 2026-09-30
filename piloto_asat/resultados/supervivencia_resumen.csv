@@ -1,0 +1,5 @@
+evento,satelite,altitud_km,corte_num_catalogo,fragmentos,excluidos_previos,en_orbita_hoy,pct_en_orbita_hoy,vida_mediana_anios,pct_cayo_1_anio,ultimo_reingreso
+China 2007,Fengyun-1C,865,29671.0,3533,1,2315,65.5,,0.7,2026-09-02
+EE.UU. 2008,USA-193,247,32485.5,174,0,0,0.0,0.074,99.4,2009-10-28
+India 2019,Microsat-R,283,44063.0,129,0,0,0.0,0.361,89.1,2022-06-14
+Rusia 2021,Kosmos 1408,480,49418.0,1805,1,4,0.2,0.526,74.7,2026-06-02

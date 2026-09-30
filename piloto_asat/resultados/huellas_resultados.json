@@ -1,0 +1,18 @@
+{
+  "decaimiento_fengyun1c.csv": "fc67f1a8cd612dfa952add324dadf9abd5f337c6a71006070e12c1e8db4c26aa",
+  "decaimiento_resumen.json": "64c963b89e0fa5b344c6a93279f19aac91cd0f98f6b4205b32062483a26fbaa0",
+  "densidad_espacial.csv": "d7bec6b761b227444328da9fccd2b7cbe2e06f119eaf127192679b1c1d302a5a",
+  "fragmentos_pruebas.csv": "c723e59678b6788ae0b5d0ccfd5f1b95920a4352d90a7ceb403f65a3203bc249",
+  "huellas_resultados.json": "52e6a1c2ef48bbede3fc25ba17c7b7ea74bbce3fcc58d08b5a974e5b86f0a298",
+  "kepler_fengyun1c.csv": "f6938f8a080289cedf2e67e07eea334c94fcdd0ab44fa81bd75e3e51ff6e087c",
+  "kepler_resumen.json": "b15c4b778ae42b0e277eda889a27164f6bbadc6f4e3126dc4a2b8672140f0eeb",
+  "proyeccion_fengyun1c_200.csv": "67e8bd8c038ca4da6dc41242ebffbbe49ca54b160f0a317bbe4f6b478cde7624",
+  "proyeccion_fengyun1c_70.csv": "5fcdd687b45c096e98db011e332448da450ca8afef17710494c730f0da532b57",
+  "proyeccion_fengyun1c_observado.csv": "9dee5d3b7610b8bc26d19e272d3aa09cc4e3728e7a68eb6e672012e3da08bd49",
+  "proyeccion_fengyun1c_observado_sin_calibrar.csv": "851bd5240fb920fdd97538536001bf768b3b695839fef0760a35e8d8f16dd1b0",
+  "riesgo_fengyun1c_tiempo.csv": "d2b50892f670d80c802d82855eace1b59443375d2d4463971368bf9cddb566ca",
+  "riesgo_resumen.json": "b078ffe9fd9a86bd1a52660b53138a6f080818af35e6d19ab323304c80b0ed85",
+  "supervivencia_resumen.csv": "5b15506dc985a50401b8d30a63f7004f7d27262480ed66ac69b3b6771a224676",
+  "verificacion_resumen.json": "01df627be07b2650da98b965934a6ee3564116da3ee4da91810f24ae3d28a006",
+  "vida_contra_altitud.csv": "64419147d260ecd208a5770f3973a60f1af72653343f57f8ac80250ca2df280c"
+}
