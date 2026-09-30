@@ -29,6 +29,10 @@ python ejecutar_todo.py --descargar  # descarga datos actuales (las cifras cambi
 
 ## Trazabilidad
 
+**Tablas de datos crudos (Excel):** `datos_crudos_piloto_ASAT.xlsx` (fuentes con SHA-256, resumen con fórmulas,
+fragmentos de las 4 pruebas y elementos orbitales) y `datos_crudos_clima_espacial.xlsx` (actividad solar diaria).
+Las genera `07_tabla_datos_crudos.py` sin modificar los valores de los archivos originales.
+
 - `datos_crudos/` guarda los archivos **tal como se descargaron**.
 - `datos_crudos/manifiesto.json` registra la URL, la fecha y hora de descarga y la huella SHA-256 de cada uno.
 - Cada cifra de este documento sale de un archivo en `resultados/`, generado por un script numerado.

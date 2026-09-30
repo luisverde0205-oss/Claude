@@ -9,7 +9,7 @@ from pathlib import Path
 RAIZ = Path(__file__).resolve().parent
 pasos = (['01_descarga.py'] if '--descargar' in sys.argv else []) + [
     'test_piloto.py', '02_kepler.py', '03_supervivencia.py', '04_decaimiento.py',
-    '04b_verificacion.py', '05_riesgo.py', '06_figuras.py']
+    '04b_verificacion.py', '05_riesgo.py', '06_figuras.py', '07_tabla_datos_crudos.py']
 for p in pasos:
     print(f'== {p}', flush=True)
     subprocess.run([sys.executable, str(RAIZ / p)], check=True, cwd=RAIZ)
