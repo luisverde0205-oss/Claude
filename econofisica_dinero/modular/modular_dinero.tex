@@ -108,14 +108,14 @@
 \thispagestyle{fancy}
 
 \section*{Resumen}
-Se estudia, como trabajo introductorio, el modelo de intercambio aleatorio de Drăgulescu y Yakovenko, que trata a las personas de una economía como las moléculas de un gas y al dinero como su energía. En el modelo, $N$ personas empiezan con exactamente la misma cantidad de dinero y realizan intercambios al azar en los que el dinero total se conserva y nadie puede endeudarse. Se muestra, primero contando de manera exacta todos los repartos posibles y después con una simulación numérica de 2000 personas y $4\times10^{6}$ intercambios, que el sistema pasa espontáneamente de la igualdad perfecta a una distribución exponencial de Boltzmann, $P(m)\propto e^{-m/T}$, donde la ``temperatura'' $T$ es el dinero promedio por persona. La entropía crece hasta su valor máximo y el coeficiente de Gini sube de 0 a $0.508\pm0.004$, en acuerdo con el valor teórico $\approx0.51$ (exactamente $1/2$ para dinero continuo). El resultado no depende del número de personas, del dinero inicial ni de la regla concreta de intercambio. Se explica por qué los estados de poco dinero son los más probables: cada moneda que acumula una persona reduce exponencialmente las formas en que el resto puede repartirse el dinero. Todos los datos de este trabajo son simulados. Se plantea, como hipótesis para trabajo posterior, que la desigualdad observada en el mundo real excede la que produciría el azar.
+Se estudia, como trabajo introductorio, el modelo de intercambio aleatorio de Drăgulescu y Yakovenko, que trata a las personas de una economía como las moléculas de un gas y al dinero como su energía. En el modelo, $N$ personas empiezan con exactamente la misma cantidad de dinero y realizan intercambios al azar en los que el dinero total se conserva y nadie puede endeudarse. Se muestra, primero contando de manera exacta todos los repartos posibles y después con una simulación numérica de 2000 personas y $4\times10^{6}$ intercambios, que el sistema pasa espontáneamente de la igualdad perfecta a una distribución exponencial de Boltzmann, $P(m)\propto e^{-m/T}$, donde la ``temperatura'' $T$ es el dinero promedio por persona. La entropía crece hasta su valor máximo y el coeficiente de Gini sube de 0 a $0.508\pm0.004$, en acuerdo con el valor teórico $\approx0.51$ (exactamente $1/2$ para dinero continuo). El resultado no depende del número de personas, del dinero inicial ni de la regla concreta de intercambio. Se explica por qué los estados de poco dinero son los más probables: cada moneda que acumula una persona reduce exponencialmente las formas en que el resto puede repartirse el dinero. Los datos del modelo son simulados. Como primera prueba de la hipótesis de que la desigualdad real excede la que produciría el azar, se comparó la predicción con datos reales del Banco Mundial para los diez países más desiguales y México. En los países más desiguales el 10\% más rico recibe entre 38 y 47\% del ingreso, frente al 33\% del modelo, mientras que el 10\% más pobre recibe más que en el modelo; la diferencia la paga la clase media.
 
 \section*{Introducción}
 La desigualdad económica es uno de los temas centrales de la economía política y de las relaciones internacionales: se discute entre países y dentro de ellos, y se asocia con conflictos, migración y estabilidad política. Suele explicarse con causas particulares, como diferencias de educación, de capital heredado, de instituciones o de poder. Este trabajo plantea una pregunta previa y más básica: \emph{si todas las personas fueran idénticas y siguieran exactamente las mismas reglas, ¿se mantendría la igualdad?}
 
 La física estadística ofrece una respuesta sorprendente. En un gas, todas las moléculas son idénticas y obedecen las mismas leyes; sin embargo, en equilibrio, sus energías no son iguales: la mayoría tiene poca energía y unas pocas tienen mucha. Esa distribución, la ley de Boltzmann, no es consecuencia de ninguna diferencia entre moléculas, sino de cuántas maneras hay de repartir la energía total \cite{reif}. En el año 2000, Drăgulescu y Yakovenko propusieron aplicar exactamente esta idea al dinero \cite{dy2000}: las personas son las moléculas, el dinero es la energía y cada compra o venta es un choque en el que el dinero pasa de una persona a otra sin crearse ni destruirse.
 
-El objetivo de este trabajo introductorio es (i) explicar con claridad por qué, en este modelo, la desigualdad aparece sola, (ii) aclarar qué significa físicamente que los ``estados de menor energía'' sean los más probables y cómo se traduce eso al dinero, y (iii) verificarlo con una simulación propia. \textbf{Todos los datos que se presentan son simulados}; no se utilizan todavía datos económicos reales. Su comparación con datos reales se deja para una etapa posterior.
+El objetivo de este trabajo introductorio es (i) explicar con claridad por qué, en este modelo, la desigualdad aparece sola, (ii) aclarar qué significa físicamente que los ``estados de menor energía'' sean los más probables y cómo se traduce eso al dinero, y (iii) verificarlo con una simulación propia. \textbf{Los resultados del modelo son datos simulados.} Como cuarto objetivo, (iv) se hace una primera comparación con datos reales de distribución del ingreso de los países más desiguales del mundo, publicados por el Banco Mundial \cite{pip}; estos datos reales se identifican explícitamente como tales en la sección correspondiente.
 
 \section*{Marco teórico}
 
@@ -203,7 +203,7 @@ Con dinero en monedas enteras de valor $\Delta m$, la distribución es geométri
 \section*{Metodología}
 
 \subsection*{Naturaleza de los datos}
-\textbf{Todos los datos de este trabajo son simulados por computadora.} No provienen de encuestas, registros fiscales ni cuentas bancarias. Su propósito es mostrar lo que el modelo predice en condiciones controladas, para tener una referencia contra la cual comparar datos reales en una etapa posterior.
+\textbf{Los datos del modelo son simulados por computadora.} No provienen de encuestas, registros fiscales ni cuentas bancarias. Su propósito es mostrar lo que el modelo predice en condiciones controladas, para tener una referencia contra la cual comparar datos reales. La única excepción es la comparación entre países, que usa datos reales del Banco Mundial y se describe más abajo.
 
 \subsection*{Algoritmo de simulación}
 Se reprodujo el modelo de la ref.~\cite{dy2000} en Python con NumPy \cite{numpy}:
@@ -222,6 +222,9 @@ De manera independiente de la simulación, se evaluó la ec.~\ref{eq:pexacta} pa
 
 \subsection*{Pruebas de robustez}
 Para comprobar que el resultado no depende de las elecciones particulares, se repitió la simulación con 5 semillas distintas en cinco configuraciones: el caso base; menos personas ($N=500$); menos dinero inicial ($m_0=10$); más dinero y pagos más grandes ($m_0=40$, $\Delta m=2$); y una regla de intercambio distinta, en la que cada pareja junta su dinero y lo reparte con una fracción aleatoria uniforme, lo que también conserva el dinero.
+
+\subsection*{Comparación con datos reales de países}
+Se descargaron de la interfaz de datos abiertos del Banco Mundial, que publica las estimaciones de la Plataforma de Pobreza y Desigualdad \cite{pip}, el índice de Gini y la participación en el ingreso (o consumo) total de cada decil y quintil de la población, tomando el dato más reciente disponible de cada país. Se seleccionaron los diez países con mayor Gini y se agregó México como referencia. Se verificó que, para cada país, el Gini y las participaciones provienen del mismo año de encuesta. Con los puntos $p=0.1,0.2,0.4,0.6,0.8,0.9$ se construyó una curva de Lorenz aproximada para cada país, que se comparó con la curva exacta de la exponencial (ec.~\ref{eq:lorenz}). Los datos descargados se conservan sin modificar en el archivo \texttt{resultados/banco\_mundial\_crudo.csv}.
 
 \section*{Resultados}
 
@@ -326,6 +329,65 @@ La Tabla~\ref{tab:robustez} muestra que el coeficiente de Gini de equilibrio no 
   \label{tab:robustez}
 \end{table}
 
+\subsection*{Comparación con los países más desiguales (datos reales)}
+La Tabla~\ref{tab:paises} compara la predicción del modelo con los datos \textbf{reales} de los diez países más desiguales según el Banco Mundial y con México. Se encuentran cuatro diferencias.
+
+\begin{table}[H]
+  \begin{center}
+    \small
+    \begin{tabular}{|l|c|c|c|c|c|c|}
+      \hline
+      \textbf{País} & \textbf{Año} & \textbf{Gini} & \textbf{10\% pobre} & \textbf{60\% medio} & \textbf{20\% rico} & \textbf{10\% rico} \\
+      \hline \hline
+      \textbf{Modelo (exponencial)} & -- & \textbf{50.0} & \textbf{0.5} & \textbf{45.6} & \textbf{52.2} & \textbf{33.0} \\
+      \hline
+      Namibia & 2015 & 59.1 & 1.0 & 33.5 & 63.7 & 47.2 \\
+      \hline
+      Botswana & 2015 & 54.9 & 1.4 & 36.4 & 59.9 & 42.9 \\
+      \hline
+      Eswatini & 2016 & 54.6 & 1.4 & 36.1 & 60.2 & 42.7 \\
+      \hline
+      Colombia & 2024 & 54.4 & 1.0 & 37.9 & 58.9 & 42.7 \\
+      \hline
+      Sudáfrica & 2022 & 54.1 & 1.4 & 36.8 & 59.5 & 42.1 \\
+      \hline
+      Zambia & 2022 & 51.5 & 1.5 & 39.7 & 56.4 & 39.1 \\
+      \hline
+      Angola & 2018 & 51.3 & 1.3 & 40.6 & 55.6 & 39.6 \\
+      \hline
+      Brasil & 2024 & 50.3 & 1.3 & 40.7 & 55.4 & 39.3 \\
+      \hline
+      Zimbabue & 2019 & 50.3 & 1.9 & 39.1 & 56.1 & 40.5 \\
+      \hline
+      Panamá & 2024 & 49.7 & 1.2 & 42.1 & 54.3 & 37.6 \\
+      \hline
+      México & 2024 & 42.6 & 2.1 & 45.5 & 48.9 & 33.4 \\
+      \hline
+    \end{tabular}
+  \end{center}
+  \caption{Participación (\%) en el ingreso o consumo total por grupo de población. Fila del modelo: predicción teórica de la distribución exponencial. Resto de filas: \textbf{datos reales} del Banco Mundial \cite{pip}, dato más reciente de cada país. El ``60\% medio'' es el 100\% menos el 20\% más pobre y el 20\% más rico.}
+  \label{tab:paises}
+\end{table}
+
+\textbf{(1) Los países más desiguales superan al azar.} Nueve de los once países de la tabla tienen un Gini mayor o igual a 50, el valor del intercambio aleatorio. En ellos la desigualdad es mayor que la que produce el puro azar en el modelo.
+
+\textbf{(2) El extremo rico recibe mucho más que en el modelo.} En el modelo el 10\% más rico recibe el 33.0\% del total; en los países más desiguales recibe entre 37.6 y 47.2\%, es decir, de 5 a 14 puntos porcentuales más (Fig.~\ref{fig:paises}, derecha). El intercambio aleatorio no es capaz de producir esa concentración en la parte alta.
+
+\textbf{(3) El extremo pobre recibe más que en el modelo.} En el modelo el 10\% más pobre recibe solo el 0.5\% y cerca del 5\% de las personas no tiene nada. En todos los países el 10\% más pobre recibe más (entre 1.0 y 2.1\%). En la realidad nadie puede sobrevivir con ingreso nulo: el trabajo informal, las transferencias públicas y las redes familiares imponen un ``piso'' que el modelo no contiene.
+
+\textbf{(4) La diferencia la paga la clase media.} Si ambos extremos reciben más que en el modelo, el centro debe recibir menos. El 60\% medio de la población recibe el 45.6\% del total en el modelo, pero solo entre 33.5 y 42.1\% en los diez países más desiguales. Por ello las curvas de Lorenz reales \emph{cruzan} la del modelo (Fig.~\ref{fig:paises}, izquierda): quedan por encima entre los pobres y por debajo cerca de los ricos. Dos distribuciones con Gini parecido pueden, entonces, tener formas de desigualdad muy diferentes, y el Gini por sí solo no basta para describirlas.
+
+México se comporta de manera distinta: su Gini (42.6) queda por debajo del valor del azar, su 10\% más rico recibe prácticamente lo mismo que en el modelo (33.4\%) y su 60\% medio coincide con el del modelo (45.5\%); la menor desigualdad proviene de que su parte baja recibe más.
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=\textwidth]{fig6_paises}
+   \caption{Izquierda: curvas de Lorenz de los cuatro países más desiguales y de México (\textbf{datos reales}, Banco Mundial), comparadas con la del modelo. Derecha: diferencia, en puntos porcentuales, entre la participación real de cada grupo y la predicha por el modelo.}
+   \label{fig:paises}
+\end{figure}
+
+\textbf{Limitaciones de la comparación.} (i) Las encuestas de hogares subestiman los ingresos más altos, porque los hogares más ricos responden menos y reportan de menos; las estimaciones que incorporan datos fiscales, como las de la World Inequality Database \cite{wid}, suelen asignar al 10\% más rico una participación bastante mayor, lo que podría cambiar la conclusión para México. (ii) Muchos países, sobre todo africanos, miden consumo y no ingreso, y el consumo suele ser menos desigual. (iii) Los años de las encuestas difieren entre países. (iv) El modelo describe dinero acumulado, mientras que los datos describen ingreso.
+
 \section*{Discusión}
 
 \subsection*{Lo que el modelo dice}
@@ -337,17 +399,21 @@ Desde la perspectiva de las relaciones internacionales y de la política públic
 El modelo es deliberadamente simple. Ignora que las personas ahorran \cite{cc2000}, que pueden endeudarse, que producen bienes, que heredan, y sobre todo que la riqueza genera más riqueza mediante intereses e inversiones, un mecanismo multiplicativo que puede concentrar el dinero en muy pocas manos \cite{bm2000}. Tampoco distingue entre dinero, ingreso y riqueza, que en los datos reales son variables distintas \cite{yr2009}. Además, en el modelo la movilidad es total: cualquiera puede pasar de pobre a rico y viceversa, mientras que en las sociedades reales la posición económica es bastante persistente.
 
 \subsection*{Hipótesis para el trabajo posterior}
-El autor plantea la hipótesis de que, aunque la tendencia a la desigualdad sea natural en el sentido de este modelo, \textbf{la desigualdad que se mide actualmente es un caso extremo, más allá de lo que dictaría la probabilidad}. El modelo proporciona tres pruebas concretas para evaluarla con datos reales: (i) comparar el coeficiente de Gini observado con el valor de referencia $1/2$; (ii) comprobar si el extremo superior de la distribución decae más lentamente que una exponencial, como ya se ha reportado para Estados Unidos y Reino Unido, donde los ingresos más altos siguen una ley de potencias \cite{dy2001}; y (iii) comparar la movilidad observada con la movilidad total del modelo. Esta evaluación requiere cuidado: el ingreso medido por encuestas de hogares, como la ENIGH del INEGI \cite{enigh}, tiende a subestimar a los más ricos y suele arrojar valores de Gini menores que los de la riqueza, por lo que será necesario elegir la variable adecuada y corregir el extremo superior con fuentes complementarias.
+El autor plantea la hipótesis de que, aunque la tendencia a la desigualdad sea natural en el sentido de este modelo, \textbf{la desigualdad que se mide actualmente es un caso extremo, más allá de lo que dictaría la probabilidad}. El modelo proporciona tres pruebas concretas para evaluarla con datos reales: (i) comparar el coeficiente de Gini observado con el valor de referencia $1/2$; (ii) comprobar si el extremo superior de la distribución decae más lentamente que una exponencial, como ya se ha reportado para Estados Unidos y Reino Unido, donde los ingresos más altos siguen una ley de potencias \cite{dy2001}; y (iii) comparar la movilidad observada con la movilidad total del modelo.
+
+La comparación entre países de este trabajo ofrece un primer resultado parcial a favor de la hipótesis en las pruebas (i) y (ii): en los países más desiguales el Gini supera 1/2 y, sobre todo, la parte alta concentra mucho más de lo que permite el azar. Al mismo tiempo, muestra que la desviación no está en toda la distribución: la parte baja está \emph{mejor} que en el modelo. Esto sugiere ampliar el modelo con dos mecanismos opuestos: uno que concentre en la parte alta, como la acumulación por intereses \cite{bm2000}, y otro que sostenga la parte baja, como las transferencias o un ingreso de subsistencia. La evaluación definitiva requiere cuidado: el ingreso medido por encuestas de hogares, como la ENIGH del INEGI \cite{enigh}, tiende a subestimar a los más ricos y suele arrojar valores de Gini menores que los de la riqueza, por lo que será necesario elegir la variable adecuada y corregir el extremo superior con fuentes complementarias \cite{wid}.
 
 \section*{Conclusiones}
 Con un modelo en el que todas las personas son idénticas y siguen las mismas reglas, se mostró que la desigualdad aparece sola. El sistema pasó de la igualdad perfecta ($G=0$) a la distribución exponencial de Boltzmann con $G\approx1/2$, la entropía alcanzó su valor máximo y el resultado se mantuvo al cambiar el tamaño del sistema, el dinero inicial y la regla de intercambio.
 
 La razón es la misma por la que en un gas los estados de menor energía son los más probables: cada unidad de dinero que concentra una persona reduce exponencialmente las formas en que el resto puede repartirse lo que queda. La ``temperatura'' del dinero resulta ser el dinero promedio por persona.
 
-Todos los datos de este trabajo son simulados. El modelo ofrece una línea base física, $G=1/2$ con una distribución exponencial, contra la cual podrá medirse en etapas posteriores cuánta desigualdad real se explica por el azar y cuánta requiere mecanismos adicionales, como la acumulación por intereses, que es donde se pondrá a prueba la hipótesis de que la desigualdad actual es un caso extremo.
+Al comparar con datos reales del Banco Mundial, los países más desiguales del mundo superan esta línea base: su 10\% más rico recibe entre 38 y 47\% del ingreso, frente al 33\% del azar puro. Sin embargo, su 10\% más pobre recibe más que en el modelo, de modo que la diferencia la absorbe la clase media. El azar explica razonablemente la parte media y baja de la distribución, pero no la concentración en la parte alta.
+
+Los resultados del modelo son datos simulados; solo la comparación entre países usa datos reales. El modelo ofrece una línea base física, $G=1/2$ con una distribución exponencial, contra la cual podrá medirse en etapas posteriores cuánta desigualdad real se explica por el azar y cuánta requiere mecanismos adicionales, como la acumulación por intereses, que es donde se pondrá a prueba la hipótesis de que la desigualdad actual es un caso extremo.
 
 \subsection*{Disponibilidad del código}
-El código que genera todas las figuras y tablas (\texttt{modelo.py} y \texttt{generar\_resultados.py}) se encuentra en la carpeta \texttt{econofisica\_dinero} del repositorio del proyecto.
+El código que genera todas las figuras y tablas se encuentra en la carpeta \texttt{econofisica\_dinero} del repositorio del proyecto: \texttt{modelo.py} (núcleo del modelo), \texttt{generar\_resultados.py} (simulaciones) y \texttt{comparar\_paises.py} (descarga y comparación de datos del Banco Mundial).
 
 \begin{thebibliography}{99}
 
@@ -368,6 +434,10 @@ El código que genera todas las figuras y tablas (\texttt{modelo.py} y \texttt{g
 \bibitem{gini} \fontsize{0.35cm}{0.5cm}\selectfont{C. Gini, ``Variabilità e mutabilità'', \emph{Studi Economico-Giuridici della Regia Università di Cagliari}, 1912.}
 
 \bibitem{enigh} \fontsize{0.35cm}{0.5cm}\selectfont{INEGI, ``Encuesta Nacional de Ingresos y Gastos de los Hogares (ENIGH)'', Instituto Nacional de Estadística y Geografía, México, \url{https://www.inegi.org.mx}.}
+
+\bibitem{pip} \fontsize{0.35cm}{0.5cm}\selectfont{Banco Mundial, ``Poverty and Inequality Platform'', indicadores SI.POV.GINI y SI.DST (participación en el ingreso por decil y quintil), World Development Indicators, \url{https://data.worldbank.org}, consultado en octubre de 2026.}
+
+\bibitem{wid} \fontsize{0.35cm}{0.5cm}\selectfont{World Inequality Lab, ``World Inequality Database'', \url{https://wid.world}.}
 
 \bibitem{numpy} \fontsize{0.35cm}{0.5cm}\selectfont{C. R. Harris \emph{et al.}, ``Array programming with NumPy'', \emph{Nature}, Vol. 585, p. 357-362, 2020.}
 
