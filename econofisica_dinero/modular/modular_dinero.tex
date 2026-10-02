@@ -108,7 +108,7 @@
 \thispagestyle{fancy}
 
 \section*{Resumen}
-Se estudia, como trabajo introductorio, el modelo de intercambio aleatorio de Drăgulescu y Yakovenko, que trata a las personas de una economía como las moléculas de un gas y al dinero como su energía. $N$ personas empiezan con la misma cantidad de dinero e intercambian al azar; el dinero total se conserva y nadie puede endeudarse. A partir de la primera y la segunda ley de la termodinámica se deduce que, en equilibrio, el dinero debe repartirse según la distribución de Boltzmann, $P(m)\propto e^{-m/T}$, donde la ``temperatura'' $T$ resulta ser el dinero promedio por persona. Esto se verifica contando de manera exacta los repartos posibles y con una simulación de 2000 personas y $4\times10^{6}$ intercambios (datos simulados): la entropía crece hasta su máximo y el coeficiente de Gini pasa de 0 a $0.508\pm0.004$, en acuerdo con el valor teórico ($1/2$ en el límite continuo), sin importar el tamaño del sistema ni la regla de intercambio. Si se permite endeudarse hasta un límite $m_d$, la misma deducción predice $G=\tfrac12(1+m_d/\langle m\rangle)$: con un límite de deuda de solo la cuarta parte del dinero promedio, el Gini sube a 0.64 y casi 18\% de las personas queda en deuda, en acuerdo con la simulación. La desigualdad aparece sola porque cada unidad de dinero que acumula una persona reduce exponencialmente las formas en que el resto puede repartirse lo que queda. Finalmente, se compara la predicción con datos reales del Banco Mundial: en los países más desiguales el 10\% más rico recibe entre 38 y 47\% del ingreso, frente al 33\% del modelo, mientras que el 10\% más pobre recibe más que en el modelo; la diferencia la paga la clase media.
+Se estudia, como trabajo introductorio, el modelo de intercambio aleatorio de Drăgulescu y Yakovenko, que trata a las personas de una economía como las moléculas de un gas y al dinero como su energía. $N$ personas empiezan con la misma cantidad de dinero e intercambian al azar; el dinero total se conserva y nadie puede endeudarse. A partir de la primera y la segunda ley de la termodinámica se deduce que, en equilibrio, el dinero debe repartirse según la distribución de Boltzmann, $P(m)\propto e^{-m/T}$, donde la ``temperatura'' $T$ resulta ser el dinero promedio por persona. Esto se verifica contando de manera exacta los repartos posibles y con una simulación de 2000 personas y $4\times10^{6}$ intercambios (datos simulados): la entropía crece hasta su máximo y el coeficiente de Gini pasa de 0 a $0.508\pm0.004$, en acuerdo con el valor teórico ($1/2$ en el límite continuo), sin importar el tamaño del sistema ni la regla de intercambio. Si se permite endeudarse hasta un límite $m_d$, la misma deducción predice $G=\tfrac12(1+m_d/\langle m\rangle)$: con un límite de deuda de solo la cuarta parte del dinero promedio, el Gini sube a 0.64 y casi 18\% de las personas queda en deuda, en acuerdo con la simulación. También se simula un banco nacional que inyecta monedas marcadas por tres canales (a todos, al 50\% más pobre o al 10\% más rico). Las monedas marcadas se mezclan con el resto en 80 a 140 intercambios por persona y no terminan desproporcionadamente en manos de nadie, pero el canal sí importa cuando la inyección es periódica: con la misma cantidad de dinero, el Gini queda en 0.43 si entra por los más pobres y sube a 0.62 si entra por los más ricos. La desigualdad aparece sola porque cada unidad de dinero que acumula una persona reduce exponencialmente las formas en que el resto puede repartirse lo que queda. Finalmente, se compara la predicción con datos reales del Banco Mundial: en los países más desiguales el 10\% más rico recibe entre 38 y 47\% del ingreso, frente al 33\% del modelo, mientras que el 10\% más pobre recibe más que en el modelo; la diferencia la paga la clase media.
 
 \section*{Introducción}
 La desigualdad económica es uno de los temas centrales de la economía política y de las relaciones internacionales: se discute entre países y dentro de ellos, y se asocia con conflictos, migración y estabilidad política. Suele explicarse con causas particulares, como diferencias de educación, de capital heredado, de instituciones o de poder. Este trabajo plantea una pregunta previa y más básica: \emph{si todas las personas fueran idénticas y siguieran exactamente las mismas reglas, ¿se mantendría la igualdad?}
@@ -248,6 +248,16 @@ Permitir deudas \textbf{aumenta la temperatura} del sistema sin agregar dinero: 
 \end{equation}
 El Gini crece linealmente con el límite de deuda, y puede superar 1 cuando $m_d>\langle m\rangle$, porque con riqueza negativa la curva de Lorenz baja de cero.
 
+\subsection*{Extensión: dinero nuevo y monedas marcadas}
+El modelo conserva el dinero, pero en la realidad un banco central lo crea. Para seguir el recorrido del dinero nuevo se usa la idea de las \emph{partículas trazadoras} de la física: las monedas inyectadas se marcan, sin que la marca cambie en nada su dinámica. Como las monedas marcadas son indistinguibles de las demás para las reglas de intercambio, en equilibrio cada moneda tiene la misma probabilidad de estar en cualquier lugar del sistema. Por lo tanto, cada grupo de personas debe tener la misma fracción de las monedas marcadas que de todo el dinero. Se define el \emph{factor de enriquecimiento} de un grupo como
+\begin{equation}
+  R=\frac{\text{fracción de las monedas marcadas que tiene el grupo}}{\text{fracción de todo el dinero que tiene el grupo}},
+  \label{eq:enriquecimiento}
+\end{equation}
+que vale 1 en equilibrio. Un valor $R>1$ indica que el grupo tiene más dinero nuevo del que le correspondería por su riqueza. En economía, que quien recibe primero el dinero nuevo se beneficie más se conoce como \emph{efecto Cantillon} \cite{cantillon}; aquí se pregunta si ese efecto persiste o se diluye.
+
+Hay una diferencia importante entre una inyección única y una periódica. Una inyección única saca al sistema del equilibrio, y la segunda ley predice que regresará a la exponencial con una temperatura nueva, ``olvidando'' por dónde entró el dinero. Una inyección periódica, en cambio, es una fuente externa constante, como calentar continuamente un extremo de una barra: el sistema no llega al equilibrio, sino a un estado que depende del balance entre la rapidez de la inyección y la rapidez con que se mezcla el dinero.
+
 \section*{Metodología}
 
 Todos los resultados del modelo son \textbf{datos simulados}; los únicos datos reales son los del Banco Mundial usados en la comparación entre países.
@@ -272,6 +282,13 @@ Para comprobar que el resultado no depende de las elecciones particulares, se re
 
 \subsection*{Modelo con deuda}
 Se usó el mismo algoritmo con una sola modificación: el pagador puede entregar la moneda mientras su dinero no baje de $-m_d$. Se simularon $N=2000$ personas con $m_0=20$ y límites $m_d=0,5,10$ y 20, con $10^{7}$ intercambios (5000 por persona, porque con deuda el equilibrio tarda más en alcanzarse) y 3 semillas por caso. Se verificó que el dinero total se conserva y que nadie rebasa el límite.
+
+\subsection*{Banco nacional y monedas marcadas}
+Cada persona tiene monedas normales y marcadas. Al pagar, la moneda entregada se escoge al azar de su bolsa, de modo que es marcada con probabilidad igual a la fracción de marcadas que posee. Se usaron $N=1000$ personas con $m_0=20$, sin deuda, que primero intercambian 1000 veces por persona para llegar al equilibrio. El dinero nuevo se reparte en partes iguales por uno de tres canales: (1) \textbf{universal}, a todas las personas; (2) \textbf{apoyos}, al 50\% más pobre; y (3) \textbf{financiero}, al 10\% más rico, como representación simplificada de un dinero que entra por quienes ya tienen activos o acceso al crédito. Se hicieron dos experimentos, con 3 semillas cada uno:
+\begin{itemize}
+  \item \textbf{Inyección única:} se inyecta el 10\% del dinero total y se mide durante 3000 intercambios por persona el factor de enriquecimiento (ec.~\ref{eq:enriquecimiento}) del 50\% más pobre, el 40\% medio y el 10\% más rico, así como el Gini. Se toma como tiempo de mezcla el primer momento en que los tres grupos tienen $|R-1|<0.15$.
+  \item \textbf{Inyección periódica:} cada 100 intercambios por persona se inyecta el 5\% del dinero inicial, 20 veces, de modo que al final el dinero total se duplica; se compara el Gini con el de un control sin inyección.
+\end{itemize}
 
 \subsection*{Comparación con datos reales de países}
 Se descargaron de la interfaz de datos abiertos del Banco Mundial, que publica las estimaciones de la Plataforma de Pobreza y Desigualdad \cite{pip}, el índice de Gini y la participación en el ingreso (o consumo) total de cada decil y quintil de la población, tomando el dato más reciente disponible de cada país. Se seleccionaron los diez países con mayor Gini y se agregó México como referencia. Se verificó que, para cada país, el Gini y las participaciones provienen del mismo año de encuesta. Con los puntos $p=0.1,0.2,0.4,0.6,0.8,0.9$ se construyó una curva de Lorenz aproximada para cada país, que se comparó con la curva exacta de la exponencial (ec.~\ref{eq:lorenz}). Los datos descargados se conservan sin modificar en el archivo \texttt{resultados/banco\_mundial\_crudo.csv}.
@@ -412,6 +429,49 @@ La Fig.~\ref{fig:deuda} y la Tabla~\ref{tab:deuda} muestran que la simulación s
 
 Con un límite de deuda de apenas la cuarta parte del dinero promedio ($m_d=5$), el Gini pasa de 0.51 a 0.64, más que en cualquiera de los países de la Tabla~\ref{tab:paises}, y casi una de cada cinco personas queda en deuda. Con $m_d=10$, el 50\% más pobre tiene en conjunto un saldo \emph{negativo}: debe más de lo que posee.
 
+\subsection*{Banco nacional y monedas marcadas}
+\textbf{El dinero nuevo olvida por dónde entró.} Justo después de la inyección, el grupo que recibió el dinero tiene un factor de enriquecimiento muy alto: 4.0 para el 50\% más pobre con el canal de apoyos y 2.6 para el 10\% más rico con el canal financiero (Tabla~\ref{tab:banco}). Sin embargo, en los tres canales las monedas marcadas se mezclan con el resto en 80 a 140 intercambios por persona, y a partir de ahí todos los grupos tienen $R\approx1$ (Fig.~\ref{fig:rastreo}). Las monedas marcadas sí terminan sobre todo en manos de los ricos, pero solo en la misma proporción en que los ricos tienen todo el dinero. El canal financiero es el que más tarda en mezclarse: durante ese intervalo los más ricos conservan el dinero nuevo, lo que corresponde a un efecto Cantillon transitorio.
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=\textwidth]{fig9_rastreo_monedas}
+   \caption{Factor de enriquecimiento $R$ (ec.~\ref{eq:enriquecimiento}) de cada grupo después de una inyección del 10\% del dinero por cada canal (\textbf{datos simulados}, media de 3 semillas). $R=1$ significa que el grupo tiene la misma parte del dinero nuevo que de todo el dinero.}
+   \label{fig:rastreo}
+\end{figure}
+
+\begin{table}[H]
+  \begin{center}
+    \footnotesize\setlength{\tabcolsep}{4pt}
+    \begin{tabular}{|l|c|c|c|c|c|}
+      \hline
+      \textbf{Canal} & \textbf{$R$ inicial} & \textbf{Gini antes} & \textbf{Gini} & \textbf{Tiempo} & \textbf{Gini} \\
+      & \textbf{pobre/medio/rico} & \textbf{$\to$ después} & \textbf{final} & \textbf{de mezcla} & \textbf{periódico} \\
+      \hline \hline
+      Control & -- & -- & -- & -- & $0.513\pm0.005$ \\
+      \hline
+      Universal & 2.70/0.77/0.34 & $0.495\to0.450$ & 0.519 & 80 & $0.456\pm0.006$ \\
+      \hline
+      Apoyos & 4.00/0.20/0.00 & $0.495\to0.406$ & 0.519 & 100 & $0.427\pm0.007$ \\
+      \hline
+      Financiero & 0.00/0.00/2.63 & $0.495\to0.532$ & 0.520 & 140 & $0.623\pm0.002$ \\
+      \hline
+    \end{tabular}
+  \end{center}
+  \caption{Banco nacional (\textbf{datos simulados}, media de 3 semillas). Canales: universal (a todos), apoyos (50\% más pobre) y financiero (10\% más rico). ``$R$ inicial'': factor de enriquecimiento justo después de la inyección única. ``Gini final'': 3000 intercambios por persona después de la inyección única. ``Tiempo de mezcla'': en intercambios por persona. Última columna: Gini tras 20 inyecciones periódicas del 5\% del dinero inicial.}
+  \label{tab:banco}
+\end{table}
+
+\textbf{Una inyección única cambia la desigualdad solo por un tiempo.} Repartir el 10\% del dinero entre el 50\% más pobre baja el Gini de 0.50 a 0.41 de inmediato, pero en unos 1000 intercambios por persona el sistema regresa a la distribución exponencial y el Gini vuelve a $\approx0.52$, igual que con los otros canales (Fig.~\ref{fig:inyeccion}, izquierda). Como predice la segunda ley, el equilibrio final no depende de cómo se llegó a él. Nótese que la desigualdad tarda más en regresar que las monedas marcadas en mezclarse: las monedas se mezclan rápido, pero reconstruir la forma de toda la distribución requiere más intercambios.
+
+\textbf{Una inyección periódica sí cambia la desigualdad, y el canal decide en qué dirección.} Con la misma cantidad de dinero nuevo, el Gini se mantiene en 0.43 si el dinero entra por el 50\% más pobre, en 0.46 si entra por todos, y sube a 0.62 si entra por el 10\% más rico, frente a 0.51 sin inyección (Fig.~\ref{fig:inyeccion}, derecha). En el canal financiero el Gini sigue subiendo al final de la simulación y ya supera al de cualquiera de los países de la Tabla~\ref{tab:paises}.
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=\textwidth]{fig10_inyeccion_gini}
+   \caption{Coeficiente de Gini con dinero nuevo (\textbf{datos simulados}, media de 3 semillas). Izquierda: una sola inyección del 10\% del dinero en el tiempo 0. Derecha: inyección del 5\% del dinero inicial cada 100 intercambios por persona, comparada con un control sin inyección.}
+   \label{fig:inyeccion}
+\end{figure}
+
 \subsection*{Comparación con los países más desiguales (datos reales)}
 La Tabla~\ref{tab:paises} compara la predicción del modelo con los datos \textbf{reales} de los diez países más desiguales según el Banco Mundial y con México. Se encuentran cuatro diferencias.
 
@@ -487,13 +547,15 @@ Desde la perspectiva de las relaciones internacionales y de la política públic
 
 La extensión con deuda identifica un primer mecanismo que lleva la desigualdad por encima de esa línea base sin suponer diferencias entre personas: el crédito. Poder endeudarse ``calienta'' el sistema, porque abre configuraciones nuevas por debajo de cero, y la entropía máxima se alcanza con una distribución más ancha. El resultado es contraintuitivo desde el punto de vista social: aunque el crédito permite a cada persona seguir comprando cuando no tiene dinero, en el agregado produce más personas endeudadas y una parte mayor del dinero en manos del 10\% más rico. En el modelo esto ocurre aun sin intereses, que en la realidad agravarían el efecto.
 
+El experimento del banco nacional distingue dos preguntas que suelen confundirse. A la pregunta ``¿a dónde va a parar el dinero nuevo?'' el modelo responde que a todas partes por igual: las monedas marcadas se mezclan y no muestran preferencia por los ricos más allá de su riqueza. A la pregunta ``¿cómo cambia la desigualdad?'' responde que depende del canal, pero solo mientras la inyección continúe. Una política de una sola vez se borra con el tiempo; una política sostenida mantiene al sistema fuera del equilibrio y fija su nivel de desigualdad. Con la misma cantidad de dinero, la diferencia entre inyectarlo por abajo y por arriba es de 0.2 en el Gini, mayor que la distancia entre México y Namibia. Esto da una lectura física a debates de política económica como el de los apoyos sociales frente a la expansión monetaria vía mercados financieros.
+
 \subsection*{Lo que el modelo no dice}
-El modelo es deliberadamente simple. Ignora que las personas ahorran \cite{cc2000}, que las deudas generan intereses, que producen bienes, que heredan, y sobre todo que la riqueza genera más riqueza mediante intereses e inversiones, un mecanismo multiplicativo que puede concentrar el dinero en muy pocas manos \cite{bm2000}. Tampoco distingue entre dinero, ingreso y riqueza, que en los datos reales son variables distintas \cite{yr2009}. Además, en el modelo la movilidad es total: cualquiera puede pasar de pobre a rico y viceversa, mientras que en las sociedades reales la posición económica es bastante persistente.
+El modelo es deliberadamente simple. Ignora los precios y la inflación que acompañan a la creación de dinero, que las personas ahorran \cite{cc2000}, que las deudas generan intereses, que producen bienes, que heredan, y sobre todo que la riqueza genera más riqueza mediante intereses e inversiones, un mecanismo multiplicativo que puede concentrar el dinero en muy pocas manos \cite{bm2000}. Tampoco distingue entre dinero, ingreso y riqueza, que en los datos reales son variables distintas \cite{yr2009}. Además, en el modelo la movilidad es total: cualquiera puede pasar de pobre a rico y viceversa, mientras que en las sociedades reales la posición económica es bastante persistente.
 
 \subsection*{Hipótesis para el trabajo posterior}
 El autor plantea la hipótesis de que, aunque la tendencia a la desigualdad sea natural en el sentido de este modelo, \textbf{la desigualdad que se mide actualmente es un caso extremo, más allá de lo que dictaría la probabilidad}. El modelo proporciona tres pruebas concretas para evaluarla con datos reales: (i) comparar el coeficiente de Gini observado con el valor de referencia $1/2$; (ii) comprobar si el extremo superior de la distribución decae más lentamente que una exponencial, como ya se ha reportado para Estados Unidos y Reino Unido, donde los ingresos más altos siguen una ley de potencias \cite{dy2001}; y (iii) comparar la movilidad observada con la movilidad total del modelo.
 
-La comparación entre países de este trabajo ofrece un primer resultado parcial a favor de la hipótesis en las pruebas (i) y (ii): en los países más desiguales el Gini supera 1/2 y, sobre todo, la parte alta concentra mucho más de lo que permite el azar. Al mismo tiempo, muestra que la desviación no está en toda la distribución: la parte baja está \emph{mejor} que en el modelo. La deuda es un mecanismo capaz de elevar el Gini por encima de 1/2, aunque en el modelo actúa sobre la riqueza neta y no sobre el ingreso que miden las encuestas. Esto sugiere ampliar el modelo con dos mecanismos opuestos: uno que concentre en la parte alta, como la acumulación por intereses \cite{bm2000}, y otro que sostenga la parte baja, como las transferencias o un ingreso de subsistencia. La evaluación definitiva requiere cuidado: el ingreso medido por encuestas de hogares, como la ENIGH del INEGI \cite{enigh}, tiende a subestimar a los más ricos y suele arrojar valores de Gini menores que los de la riqueza, por lo que será necesario elegir la variable adecuada y corregir el extremo superior con fuentes complementarias \cite{wid}.
+La comparación entre países de este trabajo ofrece un primer resultado parcial a favor de la hipótesis en las pruebas (i) y (ii): en los países más desiguales el Gini supera 1/2 y, sobre todo, la parte alta concentra mucho más de lo que permite el azar. Al mismo tiempo, muestra que la desviación no está en toda la distribución: la parte baja está \emph{mejor} que en el modelo. La deuda es un mecanismo capaz de elevar el Gini por encima de 1/2, aunque en el modelo actúa sobre la riqueza neta y no sobre el ingreso que miden las encuestas. Esto sugiere ampliar el modelo con dos mecanismos opuestos: uno que concentre en la parte alta, como la acumulación por intereses \cite{bm2000}, y otro que sostenga la parte baja, como las transferencias o un ingreso de subsistencia. El experimento del banco nacional muestra que un flujo sostenido de dinero por arriba basta para llevar el Gini a 0.62, y uno por abajo lo reduce a 0.43, por lo que el canal de entrada del dinero es un candidato natural para explicar parte de la desigualdad que excede al azar. La evaluación definitiva requiere cuidado: el ingreso medido por encuestas de hogares, como la ENIGH del INEGI \cite{enigh}, tiende a subestimar a los más ricos y suele arrojar valores de Gini menores que los de la riqueza, por lo que será necesario elegir la variable adecuada y corregir el extremo superior con fuentes complementarias \cite{wid}.
 
 \section*{Conclusiones}
 Con un modelo en el que todas las personas son idénticas y siguen las mismas reglas, se mostró que la desigualdad aparece sola. El sistema pasó de la igualdad perfecta ($G=0$) a la distribución exponencial de Boltzmann con $G\approx1/2$, la entropía alcanzó su valor máximo y el resultado se mantuvo al cambiar el tamaño del sistema, el dinero inicial y la regla de intercambio.
@@ -501,6 +563,8 @@ Con un modelo en el que todas las personas son idénticas y siguen las mismas re
 La forma exponencial se dedujo de la primera y la segunda ley de la termodinámica: es el reparto que maximiza la entropía cuando el dinero se conserva. La razón es la misma por la que en un gas los estados de menor energía son los más probables: cada unidad de dinero que concentra una persona reduce exponencialmente las formas en que el resto puede repartirse lo que queda. La ``temperatura'' del dinero resulta ser el dinero promedio por persona.
 
 Al permitir deudas, la misma deducción predice que la temperatura sube a $T=\langle m\rangle+m_d$ y que el Gini crece linealmente, $G=\tfrac12(1+m_d/\langle m\rangle)$, lo que la simulación confirma: el crédito, por sí solo, aumenta la desigualdad.
+
+Al marcar el dinero que inyecta un banco nacional se encontró que el dinero nuevo se mezcla con el resto en 80 a 140 intercambios por persona y no termina desproporcionadamente en manos de los ricos. Lo que sí importa es el canal cuando la inyección es sostenida: con la misma cantidad, el Gini queda en 0.43 si el dinero entra por los más pobres y en 0.62 si entra por los más ricos.
 
 Al comparar con datos reales del Banco Mundial, los países más desiguales del mundo superan esta línea base: su 10\% más rico recibe entre 38 y 47\% del ingreso, frente al 33\% del azar puro. Sin embargo, su 10\% más pobre recibe más que en el modelo, de modo que la diferencia la absorbe la clase media. El azar explica razonablemente la parte media y baja de la distribución, pero no la concentración en la parte alta.
 
@@ -512,6 +576,7 @@ El código que genera todas las figuras y tablas se encuentra en la carpeta \tex
   \item \texttt{modelo.py}: núcleo del modelo;
   \item \texttt{generar\_resultados.py}: simulaciones del modelo original;
   \item \texttt{deudas.py}: modelo con deuda;
+  \item \texttt{banco\_nacional.py}: inyección de monedas marcadas por tres canales;
   \item \texttt{comparar\_paises.py}: descarga y comparación de datos del Banco Mundial.
 \end{itemize}
 
@@ -526,6 +591,8 @@ El código que genera todas las figuras y tablas se encuentra en la carpeta \tex
 \bibitem{cc2000} \fontsize{0.35cm}{0.5cm}\selectfont{A. Chakraborti y B. K. Chakrabarti, ``Statistical mechanics of money: how saving propensity affects its distribution'', \emph{The European Physical Journal B}, Vol. 17, No. 1, p. 167-170, 2000.}
 
 \bibitem{bm2000} \fontsize{0.35cm}{0.5cm}\selectfont{J.-P. Bouchaud y M. Mézard, ``Wealth condensation in a simple model of economy'', \emph{Physica A}, Vol. 282, No. 3-4, p. 536-545, 2000.}
+
+\bibitem{cantillon} \fontsize{0.35cm}{0.5cm}\selectfont{R. Cantillon, \emph{Essai sur la nature du commerce en général}, Fletcher Gyles, Londres, 1755.}
 
 \bibitem{reif} \fontsize{0.35cm}{0.5cm}\selectfont{F. Reif, \emph{Fundamentals of Statistical and Thermal Physics}, McGraw-Hill, Nueva York, 1965.}
 

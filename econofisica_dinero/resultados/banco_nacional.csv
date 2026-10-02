@@ -1,0 +1,5 @@
+canal,enr_inicial_50_pobre,enr_inicial_40_medio,enr_inicial_10_rico,gini_antes,gini_justo_despues,gini_final_pulso,tiempo_mezcla_intercambios_por_persona,gini_inyeccion_periodica,gini_inyeccion_periodica_desv
+1. Universal (a todos),2.7,0.77,0.34,0.495,0.45,0.519,80,0.456,0.006
+2. Apoyos (50 % más pobre),4.0,0.2,0.0,0.495,0.406,0.519,100,0.427,0.007
+3. Financiero (10 % más rico),0.0,0.0,2.63,0.495,0.532,0.52,140,0.623,0.002
+Control (sin inyección),,,,,,,,0.513,0.005
