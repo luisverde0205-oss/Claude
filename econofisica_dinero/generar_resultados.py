@@ -22,8 +22,13 @@ os.makedirs(RES, exist_ok=True)
 AZUL, ROJO, GRIS = "#3a6ea5", "#c0504d", "#9bb7d4"
 plt.rcParams.update({"font.size": 11, "axes.spines.top": False, "axes.spines.right": False})
 
-# Caso base
-N, M0, DM, PASOS, SEMILLA = 2000, 20, 1, 4_000_000, 42
+# Caso base: 10 000 intercambios por persona (el análisis de convergencia, convergencia.py,
+# muestra que el Gini se estabiliza después de unos 5000).
+N, M0, DM, SEMILLA = 2000, 20, 1, 42
+POR_PERSONA = 10_000
+PASOS = POR_PERSONA * N
+SEMILLAS_BASE = list(range(200, 240))   # 40 repeticiones del caso base
+SEMILLAS = list(range(100, 120))        # 20 repeticiones por configuración de robustez
 
 
 def guardar(fig, nombre):
@@ -46,8 +51,8 @@ def fig_conteo():
         else:
             lim = min(len(p), int(6 * m / n))
             ax[k].bar(x[:lim], p[:lim], width=1, color=GRIS, label="Conteo exacto")
-            T = m / n
-            ax[k].plot(x[:lim], np.exp(-x[:lim] / T) / T, "k-", lw=2, label=r"$e^{-m/T}/T$")
+            ax[k].plot(x[:lim], modelo.boltzmann_discreta(x[:lim], m / n), "k-", lw=2,
+                       label="Geométrica (N grande)")
             ax[k].legend()
         ax[k].axvline(m / n, color=ROJO, ls="--")
         ax[k].set(title=f"{n} personas, {m} monedas", xlabel="Monedas de una persona, m",
@@ -59,10 +64,10 @@ def fig_distribucion(r):
     d = r["dinero"]
     m = np.arange(d.max() + 1)
     p_sim = np.bincount(d, minlength=len(m)) / N
-    p_teo = modelo.boltzmann_discreta(m, M0, DM)
+    p_teo = modelo.boltzmann_discreta(m, M0)
     fig, ax = plt.subplots(1, 2, figsize=(11, 4))
     ax[0].bar(m, p_sim, width=1, color=GRIS, label="Simulación")
-    ax[0].plot(m, p_teo, "k-", lw=2, label=r"Boltzmann $e^{-m/T}/T$")
+    ax[0].plot(m, p_teo, "k-", lw=2, label=r"Boltzmann: $(1-q)\,q^m$")
     ax[0].axvline(M0, color=ROJO, ls="--", label=f"Dinero inicial de todos ({M0})")
     ax[0].set(xlabel="Dinero m", ylabel="Fracción de personas P(m)")
     ax[0].legend()
@@ -74,16 +79,18 @@ def fig_distribucion(r):
 
 
 def fig_evolucion(r):
-    m = np.arange(400)
-    p = modelo.boltzmann_discreta(m, M0, DM)
-    s_max = -np.sum(p * np.log(p))
+    s_max = modelo.entropia_teorica(M0)
+    g_teo = modelo.gini_teorico(M0)
     fig, ax = plt.subplots(1, 2, figsize=(11, 3.8))
     ax[0].plot(r["t"], r["S"], color=AZUL)
-    ax[0].axhline(s_max, color="k", ls="--", label=f"Máximo teórico ({s_max:.2f})")
-    ax[0].set(xlabel="Intercambios por persona", ylabel="Entropía S")
+    ax[0].axhline(s_max, color="k", ls="--", label=f"Máximo teórico exacto ({s_max:.3f})")
+    ax[0].set(xlabel="Intercambios por persona", ylabel="Entropía S", xscale="symlog",
+              xlim=(0, POR_PERSONA))
     ax[0].legend(loc="lower right")
     ax[1].plot(r["t"], r["gini"], color=ROJO)
-    ax[1].axhline(0.5, color="k", ls="--", label="Teoría: G = 0.5")
+    ax[1].axhline(g_teo, color="k", ls="--", label=f"Teoría exacta: G = {g_teo:.3f}")
+    ax[1].axhline(0.5, color="0.5", ls=":", label="Límite continuo: G = 1/2")
+    ax[1].set(xscale="symlog", xlim=(0, POR_PERSONA))
     ax[1].set(xlabel="Intercambios por persona", ylabel="Coeficiente de Gini G")
     ax[1].legend(loc="lower right")
     guardar(fig, "fig3_evolucion.png")
@@ -95,7 +102,7 @@ def fig_lorenz(r):
     fig, ax = plt.subplots(figsize=(5, 4.6))
     ax.plot([0, 1], [0, 1], color="0.5", ls=":", label="Igualdad perfecta (inicio)")
     ax.plot(p, L, color=AZUL, lw=3, label="Simulación (final)")
-    ax.plot(p, modelo.lorenz_exponencial(p), "k--", label="Exponencial exacta")
+    ax.plot(p, modelo.lorenz_exponencial(p), "k--", label="Exponencial (límite continuo)")
     ax.fill_between(p, L, p, color=GRIS, alpha=0.4)
     ax.set(xlabel="Fracción de personas (de más pobre a más rica)",
            ylabel="Fracción del dinero total", aspect="equal")
@@ -109,7 +116,7 @@ def fig_lorenz(r):
 def fig_movilidad(r):
     tray = r["tray"]
     t = r["t"]
-    eq = t > 500  # después del equilibrio
+    eq = t > 5000  # después de alcanzar el equilibrio (ver convergencia.py)
     frac_abajo = np.array([np.mean(v[eq] < M0) for v in tray.values()])
     fig, ax = plt.subplots(1, 2, figsize=(11, 3.8))
     for k, c in zip(list(tray)[:3], [AZUL, ROJO, "#6a9a4f"]):
@@ -118,7 +125,8 @@ def fig_movilidad(r):
     ax[0].set(xlabel="Intercambios por persona", ylabel="Dinero")
     ax[0].legend(fontsize=9, ncol=2)
     ax[1].hist(frac_abajo, bins=30, color=GRIS, edgecolor="white")
-    ax[1].axvline(1 - np.exp(-1), color="k", ls="--", label=r"Teoría $1-e^{-1}\approx0.63$")
+    teo = modelo.participaciones_teoricas(M0)["bajo_promedio"]
+    ax[1].axvline(teo, color="k", ls="--", label=f"Teoría exacta: {teo:.3f}")
     ax[1].set(xlabel="Fracción del tiempo con menos que el promedio",
               ylabel="Número de personas")
     ax[1].legend(fontsize=9)
@@ -127,32 +135,72 @@ def fig_movilidad(r):
 
 
 def robustez():
-    """Cambia los parámetros y la regla de intercambio; mide G y P(m < promedio)."""
+    """Cambia los parámetros y la regla de intercambio; mide el Gini de equilibrio.
+
+    20 semillas por configuración, 10 000 intercambios por persona. Se reportan la media,
+    la desviación estándar entre semillas, el error estándar de la media, la teoría exacta
+    (N infinito) y el valor esperado en el ensamble exacto para el mismo N.
+    """
     configs = [
         ("Base", dict(N=2000, m0=20, dm=1)),
         ("Menos personas", dict(N=500, m0=20, dm=1)),
-        ("Más pobre (m0=10)", dict(N=2000, m0=10, dm=1)),
-        ("Más rica (m0=40, dm=2)", dict(N=2000, m0=40, dm=2)),
+        ("Menos dinero (m0=10)", dict(N=2000, m0=10, dm=1)),
+        ("Más dinero y pagos (m0=40, dm=2)", dict(N=2000, m0=40, dm=2)),
         ("Regla de reparto al azar", dict(N=2000, m0=20, regla="reparto")),
     ]
     filas = []
     for nombre, c in configs:
-        gs, fs = [], []
-        for s in range(5):
-            r = modelo.simular(pasos=4_000_000, cada=4_000_000, semilla=100 + s, **c)
-            gs.append(modelo.gini(r["dinero"]))
-            fs.append(np.mean(r["dinero"] < c["m0"]))
-        # Gini teórico: 1/(1+e^{-dm/T}) con monedas discretas; 1/2 si el dinero es continuo
-        g_teo = 1 / (1 + np.exp(-c["dm"] / c["m0"])) if "dm" in c else 0.5
-        filas.append([nombre, c["N"], c["m0"], c.get("dm", "-"),
-                      f"{np.mean(gs):.3f}", f"{np.std(gs):.3f}", f"{g_teo:.3f}",
-                      f"{np.mean(fs):.3f}"])
-        print(f"  {nombre}: G = {np.mean(gs):.3f} ± {np.std(gs):.3f} (teoría {g_teo:.3f})")
+        gs = [modelo.gini(modelo.simular(pasos=POR_PERSONA * c["N"], cada=POR_PERSONA * c["N"],
+                                         semilla=s, **c)["dinero"]) for s in SEMILLAS]
+        media, desv, err = modelo.media_y_error(gs)
+        # Teoría exacta: promedio en unidades del pago, mu = m0/dm; la regla de reparto es continua
+        g_teo = modelo.gini_teorico(c["m0"] / c["dm"]) if "dm" in c else 0.5
+        ens = modelo.ensamble_esperado(c["N"], c["m0"] // c.get("dm", 1), muestras=1000,
+                                       continuo="dm" not in c)["gini"]
+        z = (media - ens[0]) / np.hypot(err, ens[1] / np.sqrt(1000))
+        filas.append([nombre, c["N"], c["m0"], c.get("dm", "-"), f"{media:.4f}", f"{desv:.4f}",
+                      f"{err:.4f}", f"{g_teo:.4f}", f"{ens[0]:.4f}", f"{ens[1]:.4f}", f"{z:+.1f}"])
+        print(f"  {nombre}: G = {media:.4f} ± {err:.4f} (desv. {desv:.4f}); teoría {g_teo:.4f}; "
+              f"ensamble N={c['N']}: {ens[0]:.4f} (desv. {ens[1]:.4f}); diferencia {z:+.1f} σ")
     with open(os.path.join(RES, "robustez.csv"), "w", newline="") as f:
         w = csv.writer(f)
-        w.writerow(["configuracion", "N", "m0", "dm", "gini_media", "gini_desv", "gini_teorico", "frac_bajo_promedio"])
+        w.writerow(["configuracion", "N", "m0", "dm", "gini_media", "gini_desv", "gini_error_estandar",
+                    "gini_teorico_N_infinito", "gini_ensamble_mismo_N", "desv_ensamble",
+                    "diferencia_en_errores_estandar"])
         w.writerows(filas)
     return filas
+
+
+def tabla_base():
+    """Caso base con 40 semillas comparado con la teoría exacta, el ensamble exacto
+    para N = 2000 (misma forma de medir) y el límite continuo."""
+    medidas = [modelo.estadisticas(modelo.simular(N, M0, DM, pasos=PASOS, cada=PASOS,
+                                                  semilla=s)["dinero"], M0)
+               for s in SEMILLAS_BASE]
+    ens = modelo.ensamble_esperado(N, M0, muestras=2000)
+    teo = modelo.participaciones_teoricas(M0)
+    teo.update(gini=modelo.gini_teorico(M0), entropia=modelo.entropia_teorica(M0))
+    cont = {"gini": 0.5, "entropia": modelo.entropia_teorica(M0, continuo=True),
+            "bajo_promedio": 1 - np.exp(-1), "sin_dinero": 1 - np.exp(-1 / M0),
+            "mitad_pobre": float(modelo.lorenz_exponencial(0.5)),
+            "diez_rico": float(1 - modelo.lorenz_exponencial(0.9))}
+    filas = []
+    for k in teo:
+        if k == "en_deuda":
+            continue
+        media, desv, err = modelo.media_y_error([m[k] for m in medidas])
+        z = (media - ens[k][0]) / np.hypot(err, ens[k][1] / np.sqrt(2000))
+        filas.append([k, f"{media:.4f}", f"{err:.4f}", f"{desv:.4f}", f"{ens[k][0]:.4f}",
+                      f"{ens[k][1]:.4f}", f"{teo[k]:.4f}", f"{cont[k]:.4f}", f"{z:+.1f}"])
+        print(f"  {k}: {media:.4f} ± {err:.4f} (desv. {desv:.4f}); ensamble N=2000 "
+              f"{ens[k][0]:.4f} (desv. {ens[k][1]:.4f}); N infinito {teo[k]:.4f}; "
+              f"continuo {cont[k]:.4f}; diferencia {z:+.1f} σ")
+    with open(os.path.join(RES, "tabla_caso_base.csv"), "w", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(["cantidad", "media_40_semillas", "error_estandar", "desv_entre_semillas",
+                    "ensamble_exacto_N2000", "desv_ensamble", "teoria_N_infinito",
+                    "limite_continuo", "diferencia_en_errores_estandar"])
+        w.writerows(filas)
 
 
 if __name__ == "__main__":
@@ -162,6 +210,8 @@ if __name__ == "__main__":
                        seguir=range(N))
     fig_distribucion(r)
     s_max = fig_evolucion(r)
+    print("Caso base, 40 semillas:")
+    tabla_base()
     mitad, top10 = fig_lorenz(r)
     fm, fs = fig_movilidad(r)
     d = r["dinero"]
@@ -183,5 +233,5 @@ if __name__ == "__main__":
         w.writerows(resumen.items())
     for k, v in resumen.items():
         print(f"  {k}: {v}")
-    print("Robustez (5 semillas por configuración):")
+    print("Robustez (20 semillas por configuración):")
     robustez()

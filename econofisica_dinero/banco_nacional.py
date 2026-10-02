@@ -25,6 +25,7 @@ import os
 
 import matplotlib.pyplot as plt
 import numpy as np
+from numba import njit
 
 import modelo
 
@@ -33,7 +34,8 @@ FIG = os.path.join(AQUI, "figuras")
 RES = os.path.join(AQUI, "resultados")
 
 N, M0 = 1000, 20
-EQUILIBRIO = 1000            # intercambios por persona antes de inyectar
+EQUILIBRIO = 5000            # intercambios por persona antes de inyectar (equilibrio a partir
+                             # de ~3000; ver convergencia.py)
 PULSO = 0.10                 # fracción del dinero total en el pulso
 DESPUES = 3000               # intercambios por persona después del pulso
 MEDIR_CADA = 20              # intercambios por persona entre mediciones
@@ -41,7 +43,7 @@ PERIODO = 100                # experimento B: intercambios por persona entre iny
 TASA = 0.05                  # experimento B: fracción del dinero inicial por inyección
                              # (1 moneda a cada persona en el canal universal)
 DURACION_B = 2000            # experimento B: intercambios por persona
-SEMILLAS = [21, 22, 23]
+SEMILLAS = list(range(21, 31))   # 10 repeticiones
 
 CANALES = {"universal": "1. Universal (a todos)",
            "apoyos": "2. Apoyos (50 % más pobre)",
@@ -50,22 +52,26 @@ COLORES = {"control": "0.4", "universal": "#3a6ea5", "apoyos": "#6a9a4f", "finan
 GRUPOS = [("50 % más pobre", 0.0, 0.5), ("40 % medio", 0.5, 0.9), ("10 % más rico", 0.9, 1.0)]
 
 
-def intercambiar(libres, marcadas, pasos, rng):
-    a = rng.integers(0, N, pasos)
-    b = rng.integers(0, N, pasos)
-    u = rng.random(pasos)
-    for i, j, x in zip(a, b, u):
+@njit(cache=True)
+def _intercambiar(libres, marcadas, a, b, u):
+    for t in range(len(a)):
+        i, j = a[t], b[t]
         if i == j:
             continue
         tot = libres[i] + marcadas[i]
         if tot < 1:
             continue
-        if x * tot < marcadas[i]:
+        if u[t] * tot < marcadas[i]:
             marcadas[i] -= 1
             marcadas[j] += 1
         else:
             libres[i] -= 1
             libres[j] += 1
+
+
+def intercambiar(libres, marcadas, pasos, rng):
+    _intercambiar(libres, marcadas, rng.integers(0, N, pasos), rng.integers(0, N, pasos),
+                  rng.random(pasos))
 
 
 def inyectar(libres, marcadas, monedas, canal, rng):
@@ -160,7 +166,7 @@ def principal():
         gin = np.mean(pulso[c]["gini"], axis=0)
         mezcla = tiempo_mezcla(t, enr)
         g_fin = np.mean([g[-1] for g in per[c]])
-        g_des = np.std([g[-1] for g in per[c]])
+        _, _, g_des = modelo.media_y_error([g[-1] for g in per[c]])   # error estándar
         filas.append([nombre, *[round(x, 2) for x in enr[0]], round(gin[0], 3), round(gin[1], 3),
                       round(gin[-1], 3), mezcla, round(g_fin, 3), round(g_des, 3)])
         print(f"  {nombre}: enriquecimiento inicial (pobre, medio, rico) = "
@@ -168,16 +174,17 @@ def principal():
               f"-> {gin[-1]:.3f}; mezcla en ~{mezcla} intercambios/persona; "
               f"Gini con inyección periódica {g_fin:.3f} ± {g_des:.3f}")
     g_ctrl = [g[-1] for g in per["control"]]
-    print(f"  Control (sin inyección): Gini {np.mean(g_ctrl):.3f} ± {np.std(g_ctrl):.3f}")
+    _, _, e_ctrl = modelo.media_y_error(g_ctrl)
+    print(f"  Control (sin inyección): Gini {np.mean(g_ctrl):.3f} ± {e_ctrl:.3f}")
     with open(os.path.join(RES, "banco_nacional.csv"), "w", newline="") as fh:
         w = csv.writer(fh)
         w.writerow(["canal", "enr_inicial_50_pobre", "enr_inicial_40_medio", "enr_inicial_10_rico",
                     "gini_antes", "gini_justo_despues", "gini_final_pulso",
                     "tiempo_mezcla_intercambios_por_persona",
-                    "gini_inyeccion_periodica", "gini_inyeccion_periodica_desv"])
+                    "gini_inyeccion_periodica", "gini_inyeccion_periodica_error_estandar"])
         w.writerows(filas)
         w.writerow(["Control (sin inyección)", "", "", "", "", "", "", "",
-                    round(np.mean(g_ctrl), 3), round(np.std(g_ctrl), 3)])
+                    round(np.mean(g_ctrl), 3), round(e_ctrl, 3)])
 
     graficar(t, pulso, t_b, per)
 
