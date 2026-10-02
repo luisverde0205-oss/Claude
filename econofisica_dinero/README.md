@@ -22,3 +22,11 @@ Genera `figuras/simulacion_dinero.png` e imprime la comparación con la teoría.
 ## Datos reales (siguiente paso)
 - **ENIGH (INEGI)**: ingreso corriente de los hogares de México (tabla `concentradohogar`, usar el factor de expansión).
 - **World Inequality Database (wid.world)**: corrige la parte de los más ricos, que las encuestas subestiman.
+
+## Documento modular
+- `modelo.py`: núcleo del modelo (simulación, entropía, Gini, Lorenz, conteo exacto).
+- `generar_resultados.py`: genera `figuras/fig1..fig5` y `resultados/*.csv` (≈1 min).
+- `modular/modular_dinero.tex` y `.pdf`: documento en la plantilla de proyecto modular (Lic. Física, CUCEI).
+  Compilar desde `modular/` con `pdflatex modular_dinero.tex` (dos veces).
+
+Todos los resultados son **datos simulados**.

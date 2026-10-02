@@ -1,0 +1,6 @@
+configuracion,N,m0,dm,gini_media,gini_desv,gini_teorico,frac_bajo_promedio
+Base,2000,20,1,0.508,0.004,0.512,0.620
+Menos personas,500,20,1,0.511,0.009,0.512,0.635
+Más pobre (m0=10),2000,10,1,0.520,0.008,0.525,0.611
+"Más rica (m0=40, dm=2)",2000,40,2,0.508,0.004,0.512,0.620
+Regla de reparto al azar,2000,20,-,0.502,0.008,0.500,0.634
