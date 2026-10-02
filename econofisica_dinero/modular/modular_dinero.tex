@@ -108,7 +108,7 @@
 \thispagestyle{fancy}
 
 \section*{Resumen}
-Se estudia, como trabajo introductorio, el modelo de intercambio aleatorio de Drăgulescu y Yakovenko, que trata a las personas de una economía como las moléculas de un gas y al dinero como su energía. En el modelo, $N$ personas empiezan con exactamente la misma cantidad de dinero y realizan intercambios al azar en los que el dinero total se conserva y nadie puede endeudarse. Se muestra, primero contando de manera exacta todos los repartos posibles y después con una simulación numérica de 2000 personas y $4\times10^{6}$ intercambios, que el sistema pasa espontáneamente de la igualdad perfecta a una distribución exponencial de Boltzmann, $P(m)\propto e^{-m/T}$, donde la ``temperatura'' $T$ es el dinero promedio por persona. La entropía crece hasta su valor máximo y el coeficiente de Gini sube de 0 a $0.508\pm0.004$, en acuerdo con el valor teórico $\approx0.51$ (exactamente $1/2$ para dinero continuo). El resultado no depende del número de personas, del dinero inicial ni de la regla concreta de intercambio. Se explica por qué los estados de poco dinero son los más probables: cada moneda que acumula una persona reduce exponencialmente las formas en que el resto puede repartirse el dinero. Los datos del modelo son simulados. Como primera prueba de la hipótesis de que la desigualdad real excede la que produciría el azar, se comparó la predicción con datos reales del Banco Mundial para los diez países más desiguales y México. En los países más desiguales el 10\% más rico recibe entre 38 y 47\% del ingreso, frente al 33\% del modelo, mientras que el 10\% más pobre recibe más que en el modelo; la diferencia la paga la clase media.
+Se estudia, como trabajo introductorio, el modelo de intercambio aleatorio de Drăgulescu y Yakovenko, que trata a las personas de una economía como las moléculas de un gas y al dinero como su energía. En el modelo, $N$ personas empiezan con exactamente la misma cantidad de dinero y realizan intercambios al azar en los que el dinero total se conserva y nadie puede endeudarse. Se muestra, primero contando de manera exacta todos los repartos posibles y después con una simulación numérica de 2000 personas y $4\times10^{6}$ intercambios, que el sistema pasa espontáneamente de la igualdad perfecta a una distribución exponencial de Boltzmann, $P(m)\propto e^{-m/T}$, donde la ``temperatura'' $T$ es el dinero promedio por persona. La entropía crece hasta su valor máximo y el coeficiente de Gini sube de 0 a $0.508\pm0.004$, en acuerdo con el valor teórico $\approx0.51$ (exactamente $1/2$ para dinero continuo). El resultado no depende del número de personas, del dinero inicial ni de la regla concreta de intercambio. Se explica por qué los estados de poco dinero son los más probables: cada moneda que acumula una persona reduce exponencialmente las formas en que el resto puede repartirse el dinero. Los datos del modelo son simulados. Como primera prueba de la hipótesis de que la desigualdad real excede la que produciría el azar, se comparó la predicción con datos reales del Banco Mundial para los diez países más desiguales y México. En los países más desiguales el 10\% más rico recibe entre 38 y 47\% del ingreso, frente al 33\% del modelo, mientras que el 10\% más pobre recibe más que en el modelo; la diferencia la paga la clase media. Por último, se simuló un crecimiento anual de 10\% tomando como referencia el S\&P 500. Si el dinero de todos crece 10\%, la desigualdad relativa no cambia, aunque la brecha absoluta se multiplica por 18 en 30 años. Si solo crece el dinero de quienes tienen más que el promedio, o si cada persona tiene un rendimiento distinto, la desigualdad aumenta, y con poca movilidad alcanza valores comparables a los de los países más desiguales.
 
 \section*{Introducción}
 La desigualdad económica es uno de los temas centrales de la economía política y de las relaciones internacionales: se discute entre países y dentro de ellos, y se asocia con conflictos, migración y estabilidad política. Suele explicarse con causas particulares, como diferencias de educación, de capital heredado, de instituciones o de poder. Este trabajo plantea una pregunta previa y más básica: \emph{si todas las personas fueran idénticas y siguieran exactamente las mismas reglas, ¿se mantendría la igualdad?}
@@ -226,6 +226,18 @@ Para comprobar que el resultado no depende de las elecciones particulares, se re
 \subsection*{Comparación con datos reales de países}
 Se descargaron de la interfaz de datos abiertos del Banco Mundial, que publica las estimaciones de la Plataforma de Pobreza y Desigualdad \cite{pip}, el índice de Gini y la participación en el ingreso (o consumo) total de cada decil y quintil de la población, tomando el dato más reciente disponible de cada país. Se seleccionaron los diez países con mayor Gini y se agregó México como referencia. Se verificó que, para cada país, el Gini y las participaciones provienen del mismo año de encuesta. Con los puntos $p=0.1,0.2,0.4,0.6,0.8,0.9$ se construyó una curva de Lorenz aproximada para cada país, que se comparó con la curva exacta de la exponencial (ec.~\ref{eq:lorenz}). Los datos descargados se conservan sin modificar en el archivo \texttt{resultados/banco\_mundial\_crudo.csv}.
 
+\subsection*{Extensión: crecimiento anual tipo S\&P 500}
+El modelo original conserva el dinero. Para explorar qué ocurre cuando la riqueza crece, se tomó como referencia el índice bursátil S\&P 500, cuyo rendimiento anual promedio histórico es de alrededor de 10\%, con años muy buenos y muy malos (desviación estándar cercana a 20\%) \cite{damodaran}. Como el modelo no tiene un tiempo físico, se definió \textbf{un año como 50 intercambios por persona}, aproximadamente uno por semana. Para que los intercambios sigan teniendo sentido cuando el dinero crece, el pago en cada intercambio se fijó en 10\% del dinero promedio del momento, como precios que suben junto con la economía. Con esta elección el modelo es invariante de escala: si se multiplica el dinero de todos por el mismo factor, la dinámica es idéntica.
+
+Se simularon $N=1000$ personas que parten de cantidades casi iguales ($\pm5\%$). Primero se hacen 500 intercambios por persona sin crecimiento para llegar al equilibrio del modelo (año 0), y después 30 años en cuatro escenarios, con 3 semillas cada uno:
+\begin{itemize}
+  \item \textbf{Control:} sin crecimiento, el modelo original.
+  \item \textbf{A. Todos +10\%:} al final de cada año el dinero de \emph{todas} las personas se multiplica por 1.1.
+  \item \textbf{B. Solo invierte quien tiene más que el promedio:} solo esas personas reciben el 10\%, lo que representa que invertir requiere tener un excedente.
+  \item \textbf{C. Rendimiento al azar:} todos invierten, pero cada persona recibe un rendimiento distinto, sorteado con promedio 10\% y desviación estándar 20\%, como si cada quien escogiera acciones distintas.
+\end{itemize}
+Finalmente, para estudiar el papel de la movilidad se repitieron los cuatro escenarios con 10 y con 2 intercambios por persona al año: menos intercambios significa que las posiciones de las personas cambian más despacio.
+
 \section*{Resultados}
 
 \subsection*{El conteo exacto ya produce la desigualdad}
@@ -334,46 +346,53 @@ La Tabla~\ref{tab:paises} compara la predicción del modelo con los datos \textb
 
 \begin{table}[H]
   \begin{center}
-    \small
-    \begin{tabular}{|l|c|c|c|c|c|c|}
+    \footnotesize\setlength{\tabcolsep}{4pt}
+    \begin{tabular}{|l|c|c|c|c|c|c|c|}
       \hline
-      \textbf{País} & \textbf{Año} & \textbf{Gini} & \textbf{10\% pobre} & \textbf{60\% medio} & \textbf{20\% rico} & \textbf{10\% rico} \\
+      \textbf{País} & \textbf{Año} & \textbf{Gini} & \textbf{10\% pobre} & \textbf{60\% medio} & \textbf{20\% rico} & \textbf{10\% rico} & \textbf{Rico/pobre} \\
       \hline \hline
-      \textbf{Modelo (exponencial)} & -- & \textbf{50.0} & \textbf{0.5} & \textbf{45.6} & \textbf{52.2} & \textbf{33.0} \\
+      \textbf{Modelo (exponencial)} & -- & \textbf{50.0} & \textbf{0.5} & \textbf{45.6} & \textbf{52.2} & \textbf{33.0} & \textbf{64} \\
       \hline
-      Namibia & 2015 & 59.1 & 1.0 & 33.5 & 63.7 & 47.2 \\
+      Namibia & 2015 & 59.1 & 1.0 & 33.5 & 63.7 & 47.2 & 47 \\
       \hline
-      Botswana & 2015 & 54.9 & 1.4 & 36.4 & 59.9 & 42.9 \\
+      Botswana & 2015 & 54.9 & 1.4 & 36.4 & 59.9 & 42.9 & 31 \\
       \hline
-      Eswatini & 2016 & 54.6 & 1.4 & 36.1 & 60.2 & 42.7 \\
+      Eswatini & 2016 & 54.6 & 1.4 & 36.1 & 60.2 & 42.7 & 31 \\
       \hline
-      Colombia & 2024 & 54.4 & 1.0 & 37.9 & 58.9 & 42.7 \\
+      Colombia & 2024 & 54.4 & 1.0 & 37.9 & 58.9 & 42.7 & 43 \\
       \hline
-      Sudáfrica & 2022 & 54.1 & 1.4 & 36.8 & 59.5 & 42.1 \\
+      Sudáfrica & 2022 & 54.1 & 1.4 & 36.8 & 59.5 & 42.1 & 30 \\
       \hline
-      Zambia & 2022 & 51.5 & 1.5 & 39.7 & 56.4 & 39.1 \\
+      Zambia & 2022 & 51.5 & 1.5 & 39.7 & 56.4 & 39.1 & 26 \\
       \hline
-      Angola & 2018 & 51.3 & 1.3 & 40.6 & 55.6 & 39.6 \\
+      Angola & 2018 & 51.3 & 1.3 & 40.6 & 55.6 & 39.6 & 31 \\
       \hline
-      Brasil & 2024 & 50.3 & 1.3 & 40.7 & 55.4 & 39.3 \\
+      Brasil & 2024 & 50.3 & 1.3 & 40.7 & 55.4 & 39.3 & 30 \\
       \hline
-      Zimbabue & 2019 & 50.3 & 1.9 & 39.1 & 56.1 & 40.5 \\
+      Zimbabue & 2019 & 50.3 & 1.9 & 39.1 & 56.1 & 40.5 & 21 \\
       \hline
-      Panamá & 2024 & 49.7 & 1.2 & 42.1 & 54.3 & 37.6 \\
+      Panamá & 2024 & 49.7 & 1.2 & 42.1 & 54.3 & 37.6 & 31 \\
       \hline
-      México & 2024 & 42.6 & 2.1 & 45.5 & 48.9 & 33.4 \\
+      México & 2024 & 42.6 & 2.1 & 45.5 & 48.9 & 33.4 & 16 \\
       \hline
     \end{tabular}
   \end{center}
-  \caption{Participación (\%) en el ingreso o consumo total por grupo de población. Fila del modelo: predicción teórica de la distribución exponencial. Resto de filas: \textbf{datos reales} del Banco Mundial \cite{pip}, dato más reciente de cada país. El ``60\% medio'' es el 100\% menos el 20\% más pobre y el 20\% más rico.}
+  \caption{Participación (\%) en el ingreso o consumo total por grupo de población. Fila del modelo: predicción teórica de la distribución exponencial. Resto de filas: \textbf{datos reales} del Banco Mundial \cite{pip}, dato más reciente de cada país. El ``60\% medio'' es el 100\% menos el 20\% más pobre y el 20\% más rico. ``Rico/pobre'' es cuántas veces recibe el 10\% más rico lo que recibe el 10\% más pobre.}
   \label{tab:paises}
 \end{table}
 
-\textbf{(1) Los países más desiguales superan al azar.} Nueve de los once países de la tabla tienen un Gini mayor o igual a 50, el valor del intercambio aleatorio. En ellos la desigualdad es mayor que la que produce el puro azar en el modelo.
+\textbf{(1) Los países más desiguales superan al azar.} Nueve de los once países de la tabla tienen un Gini mayor o igual a 50, el valor del intercambio aleatorio. En ellos la desigualdad es mayor que la que produce el puro azar en el modelo (Fig.~\ref{fig:gini}).
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=0.75\textwidth]{fig7_gini_paises}
+   \caption{Índice de Gini de los diez países más desiguales del mundo y de México (\textbf{datos reales}, Banco Mundial, dato más reciente de cada país). La línea punteada marca el valor del modelo de intercambio aleatorio. En rojo, los países más desiguales que el azar puro.}
+   \label{fig:gini}
+\end{figure}
 
 \textbf{(2) El extremo rico recibe mucho más que en el modelo.} En el modelo el 10\% más rico recibe el 33.0\% del total; en los países más desiguales recibe entre 37.6 y 47.2\%, es decir, de 5 a 14 puntos porcentuales más (Fig.~\ref{fig:paises}, derecha). El intercambio aleatorio no es capaz de producir esa concentración en la parte alta.
 
-\textbf{(3) El extremo pobre recibe más que en el modelo.} En el modelo el 10\% más pobre recibe solo el 0.5\% y cerca del 5\% de las personas no tiene nada. En todos los países el 10\% más pobre recibe más (entre 1.0 y 2.1\%). En la realidad nadie puede sobrevivir con ingreso nulo: el trabajo informal, las transferencias públicas y las redes familiares imponen un ``piso'' que el modelo no contiene.
+\textbf{(3) El extremo pobre recibe más que en el modelo.} En el modelo el 10\% más pobre recibe solo el 0.5\% y cerca del 5\% de las personas no tiene nada. En todos los países el 10\% más pobre recibe más (entre 1.0 y 2.1\%). Por eso la razón entre lo que recibe el 10\% más rico y el 10\% más pobre es mayor en el modelo (64 veces) que en cualquiera de los países (de 16 a 47 veces), aunque su Gini sea menor. En la realidad nadie puede sobrevivir con ingreso nulo: el trabajo informal, las transferencias públicas y las redes familiares imponen un ``piso'' que el modelo no contiene.
 
 \textbf{(4) La diferencia la paga la clase media.} Si ambos extremos reciben más que en el modelo, el centro debe recibir menos. El 60\% medio de la población recibe el 45.6\% del total en el modelo, pero solo entre 33.5 y 42.1\% en los diez países más desiguales. Por ello las curvas de Lorenz reales \emph{cruzan} la del modelo (Fig.~\ref{fig:paises}, izquierda): quedan por encima entre los pobres y por debajo cerca de los ricos. Dos distribuciones con Gini parecido pueden, entonces, tener formas de desigualdad muy diferentes, y el Gini por sí solo no basta para describirlas.
 
@@ -388,6 +407,78 @@ México se comporta de manera distinta: su Gini (42.6) queda por debajo del valo
 
 \textbf{Limitaciones de la comparación.} (i) Las encuestas de hogares subestiman los ingresos más altos, porque los hogares más ricos responden menos y reportan de menos; las estimaciones que incorporan datos fiscales, como las de la World Inequality Database \cite{wid}, suelen asignar al 10\% más rico una participación bastante mayor, lo que podría cambiar la conclusión para México. (ii) Muchos países, sobre todo africanos, miden consumo y no ingreso, y el consumo suele ser menos desigual. (iii) Los años de las encuestas difieren entre países. (iv) El modelo describe dinero acumulado, mientras que los datos describen ingreso.
 
+\subsection*{Crecimiento anual tipo S\&P 500 (datos simulados)}
+La Tabla~\ref{tab:crec} resume el año 30 de cada escenario y la Fig.~\ref{fig:crec} muestra su evolución.
+
+\begin{table}[H]
+  \begin{center}
+    \footnotesize\setlength{\tabcolsep}{4pt}
+    \begin{tabular}{|l|c|c|c|c|c|c|}
+      \hline
+      \textbf{Escenario} & \textbf{Dinero} & \textbf{Gini} & \textbf{10\% rico} & \textbf{50\% pobre} & \textbf{Brecha} & \textbf{Más rico} \\
+      & \textbf{promedio} & \textbf{año 30} & \textbf{(\%)} & \textbf{(\%)} & \textbf{absoluta} & \textbf{/ promedio} \\
+      \hline \hline
+      Control & $\times1.0$ & $0.502\pm0.007$ & 33.2 & 15.3 & $\times1.0$ & 8.2 \\
+      \hline
+      A. Todos +10\% & $\times17.5$ & $0.502\pm0.007$ & 33.2 & 15.3 & $\times18.1$ & 8.2 \\
+      \hline
+      B. Solo arriba del promedio & $\times8.4$ & $0.535\pm0.008$ & 36.2 & 13.5 & $\times9.7$ & 10.4 \\
+      \hline
+      C. Rendimiento al azar & $\times16.6$ & $0.537\pm0.009$ & 37.2 & 13.6 & $\times19.6$ & 14.2 \\
+      \hline
+    \end{tabular}
+  \end{center}
+  \caption{Año 30 de cada escenario (\textbf{datos simulados}, 50 intercambios por persona al año, media de 3 semillas). En el año 0 todos los escenarios tienen $G=0.495$. ``Brecha absoluta'': cuántas veces creció la diferencia entre el dinero promedio del 10\% más rico y el del 50\% más pobre. ``Más rico / promedio'': cuántas veces el promedio tiene la persona más rica.}
+  \label{tab:crec}
+\end{table}
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=\textwidth]{fig8_crecimiento}
+   \caption{Evolución durante 30 años (\textbf{datos simulados}). (1) Dinero promedio. (2) Coeficiente de Gini; la banda indica el intervalo entre semillas. (3) Parte del dinero total del 10\% más rico. (4) Brecha absoluta entre el promedio del 10\% más rico y el del 50\% más pobre. El control (línea punteada) coincide exactamente con el escenario A en los paneles 2 y 3.}
+   \label{fig:crec}
+\end{figure}
+
+\textbf{Escenario A: si a todos les sube 10\%, la desigualdad relativa no cambia, pero la brecha absoluta sí.} En 30 años el dinero de todos se multiplica por $1.1^{30}\approx17.5$, y el Gini, la parte del 10\% más rico y la del 50\% más pobre quedan \emph{exactamente} iguales a las del control. Esto no es una coincidencia numérica: como el modelo es invariante de escala, multiplicar el dinero de todos por 1.1 equivale a cambiar de unidad, como pasar de pesos a centavos. En lenguaje físico, el crecimiento uniforme \emph{calienta} el sistema: la temperatura $T$ sube 10\% cada año, pero la forma de la distribución de Boltzmann no cambia. Sin embargo, la diferencia en pesos entre ricos y pobres crece 18 veces. Quien tiene 10 veces más recibe un aumento 10 veces mayor.
+
+\textbf{Escenarios B y C: cuando el rendimiento no llega a todos por igual, la desigualdad sí aumenta.} Si solo invierte quien tiene más que el promedio (B), el Gini sube de 0.495 a 0.535 y el 50\% más pobre baja de 15.3 a 13.5\% del total. Si todos invierten pero con suerte distinta (C), el Gini sube a 0.537 y, sobre todo, aparecen personas mucho más ricas: la más rica llega a tener 14 veces el promedio, frente a 8 en el control. La Fig.~\ref{fig:cola} muestra que en B y C el extremo rico decae más lentamente que la exponencial. Es el comienzo de la ``cola gruesa'' que se observa en los datos reales \cite{dy2001} y que se explica por la acumulación multiplicativa \cite{bm2000}.
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=0.62\textwidth]{fig9_cola_ricos}
+   \caption{Fracción de personas que tienen más de $x$ veces el dinero promedio en el año 30 (\textbf{datos simulados}, escala logarítmica en ambos ejes). El control y el escenario A siguen la exponencial; en B y C hay más personas muy ricas de las que permite el azar puro.}
+   \label{fig:cola}
+\end{figure}
+
+\textbf{La movilidad decide cuánto pesa el rendimiento.} Con 50 intercambios al año, el dinero circula tanto que la ventaja de quien invierte se diluye rápidamente. Cuando las personas intercambian menos, es decir, cuando la posición de cada quien cambia más despacio, el efecto se vuelve mucho mayor (Tabla~\ref{tab:movil} y Fig.~\ref{fig:movil2}). Con 10 intercambios al año, el escenario B alcanza $G=0.61$ y el 10\% más rico concentra el 45\%, valores del orden de los de Namibia o Colombia. Con 2 intercambios al año llega a $G=0.69$. En cambio, en el control y en el escenario A el Gini se mantiene en 0.50 sin importar la movilidad.
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|l|c|c|c|}
+      \hline
+      \textbf{Escenario} & \textbf{50 / año} & \textbf{10 / año} & \textbf{2 / año} \\
+      \hline \hline
+      Control y A. Todos +10\% & 0.502 (33.2\%) & 0.505 (33.4\%) & 0.496 (32.1\%) \\
+      \hline
+      B. Solo arriba del promedio & 0.535 (36.2\%) & 0.612 (45.4\%) & 0.687 (48.8\%) \\
+      \hline
+      C. Rendimiento al azar & 0.537 (37.2\%) & 0.590 (44.4\%) & 0.626 (48.2\%) \\
+      \hline
+    \end{tabular}
+  \end{center}
+  \caption{Gini en el año 30 y, entre paréntesis, parte del dinero total del 10\% más rico, según el número de intercambios por persona al año (\textbf{datos simulados}, media de 3 semillas).}
+  \label{tab:movil}
+\end{table}
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=0.85\textwidth]{fig10_movilidad_gini}
+   \caption{Gini en el año 30 según la movilidad (\textbf{datos simulados}), comparado con el Gini real de Namibia, Colombia y México (líneas horizontales; Banco Mundial).}
+   \label{fig:movil2}
+\end{figure}
+
+Estos resultados deben leerse con cautela. El S\&P 500 se usa solo como referencia del orden de magnitud del rendimiento; el modelo no representa el mercado de valores. Además, el ``año'' es una convención: lo que importa físicamente es cuántos intercambios ocurren entre dos aplicaciones del rendimiento.
+
 \section*{Discusión}
 
 \subsection*{Lo que el modelo dice}
@@ -401,7 +492,9 @@ El modelo es deliberadamente simple. Ignora que las personas ahorran \cite{cc200
 \subsection*{Hipótesis para el trabajo posterior}
 El autor plantea la hipótesis de que, aunque la tendencia a la desigualdad sea natural en el sentido de este modelo, \textbf{la desigualdad que se mide actualmente es un caso extremo, más allá de lo que dictaría la probabilidad}. El modelo proporciona tres pruebas concretas para evaluarla con datos reales: (i) comparar el coeficiente de Gini observado con el valor de referencia $1/2$; (ii) comprobar si el extremo superior de la distribución decae más lentamente que una exponencial, como ya se ha reportado para Estados Unidos y Reino Unido, donde los ingresos más altos siguen una ley de potencias \cite{dy2001}; y (iii) comparar la movilidad observada con la movilidad total del modelo.
 
-La comparación entre países de este trabajo ofrece un primer resultado parcial a favor de la hipótesis en las pruebas (i) y (ii): en los países más desiguales el Gini supera 1/2 y, sobre todo, la parte alta concentra mucho más de lo que permite el azar. Al mismo tiempo, muestra que la desviación no está en toda la distribución: la parte baja está \emph{mejor} que en el modelo. Esto sugiere ampliar el modelo con dos mecanismos opuestos: uno que concentre en la parte alta, como la acumulación por intereses \cite{bm2000}, y otro que sostenga la parte baja, como las transferencias o un ingreso de subsistencia. La evaluación definitiva requiere cuidado: el ingreso medido por encuestas de hogares, como la ENIGH del INEGI \cite{enigh}, tiende a subestimar a los más ricos y suele arrojar valores de Gini menores que los de la riqueza, por lo que será necesario elegir la variable adecuada y corregir el extremo superior con fuentes complementarias \cite{wid}.
+La comparación entre países de este trabajo ofrece un primer resultado parcial a favor de la hipótesis en las pruebas (i) y (ii): en los países más desiguales el Gini supera 1/2 y, sobre todo, la parte alta concentra mucho más de lo que permite el azar. Al mismo tiempo, muestra que la desviación no está en toda la distribución: la parte baja está \emph{mejor} que en el modelo. Esto sugiere ampliar el modelo con dos mecanismos opuestos: uno que concentre en la parte alta, como la acumulación por intereses \cite{bm2000}, y otro que sostenga la parte baja, como las transferencias o un ingreso de subsistencia.
+
+La extensión con crecimiento tipo S\&P 500 explora el primero de esos mecanismos y matiza la hipótesis. El crecimiento por sí mismo no produce desigualdad relativa: si a todos les sube lo mismo en proporción, el Gini no cambia. Lo que produce la desigualdad adicional es que el rendimiento no llegue a todos por igual (escenario B) o que dependa de la suerte de cada quien (escenario C), \emph{combinado} con poca movilidad. Con esos dos ingredientes el modelo alcanza valores de Gini y de concentración en el 10\% más rico parecidos a los de los países más desiguales. Esto sugiere que la desigualdad que excede al azar podría explicarse por quién tiene acceso al rendimiento del capital y por qué tan difícil es cambiar de posición, dos temas de política pública. La evaluación definitiva requiere cuidado: el ingreso medido por encuestas de hogares, como la ENIGH del INEGI \cite{enigh}, tiende a subestimar a los más ricos y suele arrojar valores de Gini menores que los de la riqueza, por lo que será necesario elegir la variable adecuada y corregir el extremo superior con fuentes complementarias \cite{wid}.
 
 \section*{Conclusiones}
 Con un modelo en el que todas las personas son idénticas y siguen las mismas reglas, se mostró que la desigualdad aparece sola. El sistema pasó de la igualdad perfecta ($G=0$) a la distribución exponencial de Boltzmann con $G\approx1/2$, la entropía alcanzó su valor máximo y el resultado se mantuvo al cambiar el tamaño del sistema, el dinero inicial y la regla de intercambio.
@@ -410,10 +503,18 @@ La razón es la misma por la que en un gas los estados de menor energía son los
 
 Al comparar con datos reales del Banco Mundial, los países más desiguales del mundo superan esta línea base: su 10\% más rico recibe entre 38 y 47\% del ingreso, frente al 33\% del azar puro. Sin embargo, su 10\% más pobre recibe más que en el modelo, de modo que la diferencia la absorbe la clase media. El azar explica razonablemente la parte media y baja de la distribución, pero no la concentración en la parte alta.
 
+Al agregar un crecimiento anual de 10\%, con el S\&P 500 como referencia, se encontró que el crecimiento uniforme no cambia la desigualdad relativa ($G$ se mantiene en 0.50), aunque multiplica por 18 la brecha absoluta en 30 años. La desigualdad relativa crece cuando solo una parte de la población recibe el rendimiento o cuando este depende de la suerte individual, y el efecto se vuelve grande cuando la movilidad es baja: con 10 intercambios por persona al año se obtiene $G\approx0.6$, comparable con Namibia.
+
 Los resultados del modelo son datos simulados; solo la comparación entre países usa datos reales. El modelo ofrece una línea base física, $G=1/2$ con una distribución exponencial, contra la cual podrá medirse en etapas posteriores cuánta desigualdad real se explica por el azar y cuánta requiere mecanismos adicionales, como la acumulación por intereses, que es donde se pondrá a prueba la hipótesis de que la desigualdad actual es un caso extremo.
 
 \subsection*{Disponibilidad del código}
-El código que genera todas las figuras y tablas se encuentra en la carpeta \texttt{econofisica\_dinero} del repositorio del proyecto: \texttt{modelo.py} (núcleo del modelo), \texttt{generar\_resultados.py} (simulaciones) y \texttt{comparar\_paises.py} (descarga y comparación de datos del Banco Mundial).
+El código que genera todas las figuras y tablas se encuentra en la carpeta \texttt{econofisica\_dinero} del repositorio del proyecto:
+\begin{itemize}
+  \item \texttt{modelo.py}: núcleo del modelo;
+  \item \texttt{generar\_resultados.py}: simulaciones del modelo original;
+  \item \texttt{comparar\_paises.py}: descarga y comparación de datos del Banco Mundial;
+  \item \texttt{crecimiento.py}: crecimiento tipo S\&P 500.
+\end{itemize}
 
 \begin{thebibliography}{99}
 
@@ -438,6 +539,8 @@ El código que genera todas las figuras y tablas se encuentra en la carpeta \tex
 \bibitem{pip} \fontsize{0.35cm}{0.5cm}\selectfont{Banco Mundial, ``Poverty and Inequality Platform'', indicadores SI.POV.GINI y SI.DST (participación en el ingreso por decil y quintil), World Development Indicators, \url{https://data.worldbank.org}, consultado en octubre de 2026.}
 
 \bibitem{wid} \fontsize{0.35cm}{0.5cm}\selectfont{World Inequality Lab, ``World Inequality Database'', \url{https://wid.world}.}
+
+\bibitem{damodaran} \fontsize{0.35cm}{0.5cm}\selectfont{A. Damodaran, ``Historical Returns on Stocks, Bonds and Bills: 1928--presente'', Stern School of Business, New York University, \url{https://pages.stern.nyu.edu/~adamodar/}.}
 
 \bibitem{numpy} \fontsize{0.35cm}{0.5cm}\selectfont{C. R. Harris \emph{et al.}, ``Array programming with NumPy'', \emph{Nature}, Vol. 585, p. 357-362, 2020.}
 

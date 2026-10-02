@@ -113,6 +113,28 @@ def principal():
         w.writerows(filas)
 
     graficar(sel, mod)
+    graficar_gini(sel)
+
+
+def graficar_gini(sel):
+    """Barras del índice de Gini de cada país comparado con el del modelo (50)."""
+    sel = sorted(sel, key=lambda f: f["gini"])
+    es = {"South Africa": "Sudáfrica", "Brazil": "Brasil", "Zimbabwe": "Zimbabue",
+          "Panama": "Panamá", "Mexico": "México"}
+    nombres = [f"{es.get(f['pais'], f['pais'])} ({f['anio_gini']})" for f in sel]
+    g = [f["gini"] for f in sel]
+    colores = ["#c0504d" if v > 50 else "#3a6ea5" for v in g]
+    fig, ax = plt.subplots(figsize=(8, 5))
+    barras = ax.barh(nombres, g, color=colores)
+    ax.bar_label(barras, fmt="%.1f", padding=3, fontsize=9)
+    ax.axvline(50, color="k", ls="--", lw=1.5)
+    ax.text(50.3, -0.9, "Modelo de azar puro = 50", fontsize=9)
+    ax.set(xlabel="Índice de Gini (datos reales, Banco Mundial)", xlim=(35, 63),
+           ylim=(-1.3, len(sel) - 0.5),
+           title="Rojo: más desigual que el azar puro · Azul: menos desigual")
+    fig.tight_layout()
+    fig.savefig(os.path.join(AQUI, "figuras", "fig7_gini_paises.png"), dpi=150)
+    plt.close(fig)
 
 
 def graficar(sel, mod):

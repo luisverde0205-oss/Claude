@@ -1,0 +1,5 @@
+escenario,promedio_final_vs_inicial,gini_anio0,gini_anio30,gini_desv,pct_10_rico,pct_50_pobre,brecha_absoluta_crece_x,mas_rico_vs_promedio
+Sin crecimiento (control),1.0,0.495,0.502,0.007,33.2,15.3,1.0,8.2
+A. Todos +10 % al año,17.45,0.495,0.502,0.007,33.2,15.3,18.1,8.2
+B. Solo quien tiene más que el promedio +10 %,8.4,0.495,0.535,0.008,36.2,13.5,9.7,10.4
+"C. Rendimiento al azar (promedio 10 %, desv. 20 %)",16.58,0.495,0.537,0.009,37.2,13.6,19.6,14.2
