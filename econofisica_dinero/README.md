@@ -27,7 +27,6 @@ Genera `figuras/simulacion_dinero.png` e imprime la comparación con la teoría.
 - `modelo.py`: núcleo del modelo (simulación, entropía, Gini, Lorenz, conteo exacto).
 - `generar_resultados.py`: genera `figuras/fig1..fig5` y `resultados/*.csv` (≈1 min).
 - `comparar_paises.py`: descarga Gini y participaciones del Banco Mundial (datos reales) y genera `fig6`, `fig7`.
-- `crecimiento.py`: crecimiento anual tipo S&P 500 (≈10 %) en cuatro escenarios y tres niveles de movilidad; genera `fig8`–`fig10` (≈30 s).
 - `modular/modular_dinero.tex` y `.pdf`: documento en la plantilla de proyecto modular (Lic. Física, CUCEI).
   Compilar desde `modular/` con `pdflatex modular_dinero.tex` (dos veces).
 
