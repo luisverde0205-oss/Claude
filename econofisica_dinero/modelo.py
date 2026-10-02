@@ -10,13 +10,15 @@ import numpy as np
 
 
 def simular(N, m0, dm=1, pasos=4_000_000, cada=20_000, semilla=0,
-            regla="fijo", seguir=()):
+            regla="fijo", seguir=(), deuda=0):
     """Simula N personas que intercambian dinero al azar.
 
     regla="fijo":   el pagador entrega `dm` monedas; si no las tiene, no hay intercambio.
     regla="reparto": la pareja junta su dinero y lo reparte con una fracción al azar
                      (variante continua, también conserva el dinero).
     seguir:         índices de personas cuyo dinero se registra a lo largo del tiempo.
+    deuda:          límite de deuda m_d (solo regla "fijo"): se puede pagar mientras
+                    el dinero no baje de -m_d. Con deuda=0 es el modelo original.
 
     Devuelve un diccionario con el dinero final y las series de tiempo medidas.
     """
@@ -34,7 +36,7 @@ def simular(N, m0, dm=1, pasos=4_000_000, cada=20_000, semilla=0,
         i, j = a[t], b[t]
         if i != j:
             if entero:
-                if dinero[i] >= dm:
+                if dinero[i] - dm >= -deuda:
                     dinero[i] -= dm
                     dinero[j] += dm
             else:
@@ -60,7 +62,7 @@ def entropia(dinero, m0):
     Para dinero continuo se agrupa en intervalos de ancho m0/20.
     """
     if np.issubdtype(np.asarray(dinero).dtype, np.integer):
-        conteos = np.bincount(dinero)
+        conteos = np.bincount(dinero - dinero.min())
     else:
         conteos = np.bincount((dinero / (m0 / 20)).astype(int))
     p = conteos[conteos > 0] / len(dinero)

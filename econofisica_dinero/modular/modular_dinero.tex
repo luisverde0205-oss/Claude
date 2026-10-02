@@ -108,7 +108,7 @@
 \thispagestyle{fancy}
 
 \section*{Resumen}
-Se estudia, como trabajo introductorio, el modelo de intercambio aleatorio de Drăgulescu y Yakovenko, que trata a las personas de una economía como las moléculas de un gas y al dinero como su energía. $N$ personas empiezan con la misma cantidad de dinero e intercambian al azar; el dinero total se conserva y nadie puede endeudarse. A partir de la primera y la segunda ley de la termodinámica se deduce que, en equilibrio, el dinero debe repartirse según la distribución de Boltzmann, $P(m)\propto e^{-m/T}$, donde la ``temperatura'' $T$ resulta ser el dinero promedio por persona. Esto se verifica contando de manera exacta los repartos posibles y con una simulación de 2000 personas y $4\times10^{6}$ intercambios (datos simulados): la entropía crece hasta su máximo y el coeficiente de Gini pasa de 0 a $0.508\pm0.004$, en acuerdo con el valor teórico ($1/2$ en el límite continuo), sin importar el tamaño del sistema ni la regla de intercambio. La desigualdad aparece sola porque cada unidad de dinero que acumula una persona reduce exponencialmente las formas en que el resto puede repartirse lo que queda. Finalmente, se compara la predicción con datos reales del Banco Mundial: en los países más desiguales el 10\% más rico recibe entre 38 y 47\% del ingreso, frente al 33\% del modelo, mientras que el 10\% más pobre recibe más que en el modelo; la diferencia la paga la clase media.
+Se estudia, como trabajo introductorio, el modelo de intercambio aleatorio de Drăgulescu y Yakovenko, que trata a las personas de una economía como las moléculas de un gas y al dinero como su energía. $N$ personas empiezan con la misma cantidad de dinero e intercambian al azar; el dinero total se conserva y nadie puede endeudarse. A partir de la primera y la segunda ley de la termodinámica se deduce que, en equilibrio, el dinero debe repartirse según la distribución de Boltzmann, $P(m)\propto e^{-m/T}$, donde la ``temperatura'' $T$ resulta ser el dinero promedio por persona. Esto se verifica contando de manera exacta los repartos posibles y con una simulación de 2000 personas y $4\times10^{6}$ intercambios (datos simulados): la entropía crece hasta su máximo y el coeficiente de Gini pasa de 0 a $0.508\pm0.004$, en acuerdo con el valor teórico ($1/2$ en el límite continuo), sin importar el tamaño del sistema ni la regla de intercambio. Si se permite endeudarse hasta un límite $m_d$, la misma deducción predice $G=\tfrac12(1+m_d/\langle m\rangle)$: con un límite de deuda de solo la cuarta parte del dinero promedio, el Gini sube a 0.64 y casi 18\% de las personas queda en deuda, en acuerdo con la simulación. La desigualdad aparece sola porque cada unidad de dinero que acumula una persona reduce exponencialmente las formas en que el resto puede repartirse lo que queda. Finalmente, se compara la predicción con datos reales del Banco Mundial: en los países más desiguales el 10\% más rico recibe entre 38 y 47\% del ingreso, frente al 33\% del modelo, mientras que el 10\% más pobre recibe más que en el modelo; la diferencia la paga la clase media.
 
 \section*{Introducción}
 La desigualdad económica es uno de los temas centrales de la economía política y de las relaciones internacionales: se discute entre países y dentro de ellos, y se asocia con conflictos, migración y estabilidad política. Suele explicarse con causas particulares, como diferencias de educación, de capital heredado, de instituciones o de poder. Este trabajo plantea una pregunta previa y más básica: \emph{si todas las personas fueran idénticas y siguieran exactamente las mismas reglas, ¿se mantendría la igualdad?}
@@ -235,6 +235,19 @@ La \emph{curva de Lorenz} $L(p)$ indica qué fracción del dinero total tiene la
 \end{equation}
 Con dinero en monedas enteras de valor $\Delta m$, la distribución es geométrica y $G=1/(1+e^{-\Delta m/T})$, que tiende a $1/2$ cuando $T\gg\Delta m$. De la ec.~\ref{eq:lorenz} se derivan predicciones concretas: la mitad más pobre posee el 15.3\% del dinero, el 10\% más rico posee el 33.0\%, y una fracción $1-e^{-1}\approx63.2\%$ de las personas tiene menos que el promedio.
 
+\subsection*{Extensión: deudas}
+Drăgulescu y Yakovenko consideran también qué ocurre si las personas pueden endeudarse \cite{dy2000}. Supóngase que cada persona puede tener dinero negativo hasta un límite $-m_d$, sin intereses. La deducción anterior se aplica sin cambios a la variable $m'=m+m_d\geq0$, cuyo total es $M+Nm_d$; por lo tanto,
+\begin{equation}
+  P(m)=\frac{1}{T}\,e^{-(m+m_d)/T},\qquad m\geq-m_d,\qquad T=\frac{M}{N}+m_d .
+  \label{eq:deuda}
+\end{equation}
+Permitir deudas \textbf{aumenta la temperatura} del sistema sin agregar dinero: la distribución se recorre hacia los negativos y se ensancha. La fracción de personas en deuda es $P(m<0)=1-e^{-m_d/T}$. Para el Gini se usa que $G$ es la diferencia promedio entre dos personas dividida entre el doble del promedio, $G=\langle|m_1-m_2|\rangle/(2\langle m\rangle)$ \cite{gini}. Para una exponencial, $\langle|m_1-m_2|\rangle=T$ sin importar el desplazamiento, mientras que el promedio sigue siendo $\langle m\rangle=M/N$; entonces
+\begin{equation}
+  G=\frac{T}{2\langle m\rangle}=\frac{1}{2}\left(1+\frac{m_d}{\langle m\rangle}\right).
+  \label{eq:ginideuda}
+\end{equation}
+El Gini crece linealmente con el límite de deuda, y puede superar 1 cuando $m_d>\langle m\rangle$, porque con riqueza negativa la curva de Lorenz baja de cero.
+
 \section*{Metodología}
 
 Todos los resultados del modelo son \textbf{datos simulados}; los únicos datos reales son los del Banco Mundial usados en la comparación entre países.
@@ -256,6 +269,9 @@ De manera independiente de la simulación, se evaluó la ec.~\ref{eq:pexacta} pa
 
 \subsection*{Pruebas de robustez}
 Para comprobar que el resultado no depende de las elecciones particulares, se repitió la simulación con 5 semillas distintas en cinco configuraciones: el caso base; menos personas ($N=500$); menos dinero inicial ($m_0=10$); más dinero y pagos más grandes ($m_0=40$, $\Delta m=2$); y una regla de intercambio distinta, en la que cada pareja junta su dinero y lo reparte con una fracción aleatoria uniforme, lo que también conserva el dinero.
+
+\subsection*{Modelo con deuda}
+Se usó el mismo algoritmo con una sola modificación: el pagador puede entregar la moneda mientras su dinero no baje de $-m_d$. Se simularon $N=2000$ personas con $m_0=20$ y límites $m_d=0,5,10$ y 20, con $10^{7}$ intercambios (5000 por persona, porque con deuda el equilibrio tarda más en alcanzarse) y 3 semillas por caso. Se verificó que el dinero total se conserva y que nadie rebasa el límite.
 
 \subsection*{Comparación con datos reales de países}
 Se descargaron de la interfaz de datos abiertos del Banco Mundial, que publica las estimaciones de la Plataforma de Pobreza y Desigualdad \cite{pip}, el índice de Gini y la participación en el ingreso (o consumo) total de cada decil y quintil de la población, tomando el dato más reciente disponible de cada país. Se seleccionaron los diez países con mayor Gini y se agregó México como referencia. Se verificó que, para cada país, el Gini y las participaciones provienen del mismo año de encuesta. Con los puntos $p=0.1,0.2,0.4,0.6,0.8,0.9$ se construyó una curva de Lorenz aproximada para cada país, que se comparó con la curva exacta de la exponencial (ec.~\ref{eq:lorenz}). Los datos descargados se conservan sin modificar en el archivo \texttt{resultados/banco\_mundial\_crudo.csv}.
@@ -363,6 +379,39 @@ La Tabla~\ref{tab:robustez} muestra que el coeficiente de Gini de equilibrio no 
   \label{tab:robustez}
 \end{table}
 
+\subsection*{Modelo con deuda}
+La Fig.~\ref{fig:deuda} y la Tabla~\ref{tab:deuda} muestran que la simulación sigue la ec.~\ref{eq:deuda}: en escala logarítmica cada distribución es una recta que empieza en $-m_d$ y es menos inclinada cuanto mayor es el límite de deuda. El Gini, la fracción de personas endeudadas y la forma de la distribución coinciden con la teoría.
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=\textwidth]{fig8_deudas}
+   \caption{Modelo con deuda (\textbf{datos simulados}, $N=2000$, dinero promedio 20, 3 semillas). Izquierda: distribución del dinero; los valores negativos son deudas. Derecha: coeficiente de Gini en función del límite de deuda, comparado con la ec.~\ref{eq:ginideuda}.}
+   \label{fig:deuda}
+\end{figure}
+
+\begin{table}[H]
+  \begin{center}
+    \footnotesize\setlength{\tabcolsep}{4pt}
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+      \hline
+      \textbf{Límite} $m_d$ & $T$ & \textbf{Gini simulado} & \textbf{Gini teórico} & \textbf{En deuda} & \textbf{10\% rico} & \textbf{50\% pobre} \\
+      \hline \hline
+      0 & 20 & $0.515\pm0.006$ & 0.512 & 0\% & 33.7\% & 14.3\% \\
+      \hline
+      5 & 25 & $0.638\pm0.007$ & 0.637 & 17.7\% (17.8\%) & 39.4\% & 5.7\% \\
+      \hline
+      10 & 30 & $0.758\pm0.010$ & 0.762 & 28.1\% (28.0\%) & 44.6\% & $-2.8$\% \\
+      \hline
+      20 & 40 & $0.997\pm0.014$ & 1.012 & 38.2\% (39.0\%) & 54.2\% & $-19.7$\% \\
+      \hline
+    \end{tabular}
+  \end{center}
+  \caption{Modelo con deuda (\textbf{datos simulados}, media de 3 semillas; dinero promedio 20). Entre paréntesis, la fracción en deuda teórica $1-e^{-m_d/T}$. El Gini teórico es el de monedas enteras, que tiende a la ec.~\ref{eq:ginideuda}. Las dos últimas columnas son la parte del dinero total del 10\% más rico y del 50\% más pobre.}
+  \label{tab:deuda}
+\end{table}
+
+Con un límite de deuda de apenas la cuarta parte del dinero promedio ($m_d=5$), el Gini pasa de 0.51 a 0.64, más que en cualquiera de los países de la Tabla~\ref{tab:paises}, y casi una de cada cinco personas queda en deuda. Con $m_d=10$, el 50\% más pobre tiene en conjunto un saldo \emph{negativo}: debe más de lo que posee.
+
 \subsection*{Comparación con los países más desiguales (datos reales)}
 La Tabla~\ref{tab:paises} compara la predicción del modelo con los datos \textbf{reales} de los diez países más desiguales según el Banco Mundial y con México. Se encuentran cuatro diferencias.
 
@@ -436,18 +485,22 @@ El resultado central es que \textbf{la igualdad perfecta es inestable bajo inter
 
 Desde la perspectiva de las relaciones internacionales y de la política pública, esto cambia la pregunta. En lugar de preguntar solamente ``¿por qué existe la desigualdad?'', el modelo sugiere preguntar ``¿cuánta desigualdad existe \emph{por encima} de la que produciría el puro azar, y qué mecanismos la generan?''. El valor $G=1/2$ y la forma exponencial funcionan como una línea base física contra la cual medir.
 
+La extensión con deuda identifica un primer mecanismo que lleva la desigualdad por encima de esa línea base sin suponer diferencias entre personas: el crédito. Poder endeudarse ``calienta'' el sistema, porque abre configuraciones nuevas por debajo de cero, y la entropía máxima se alcanza con una distribución más ancha. El resultado es contraintuitivo desde el punto de vista social: aunque el crédito permite a cada persona seguir comprando cuando no tiene dinero, en el agregado produce más personas endeudadas y una parte mayor del dinero en manos del 10\% más rico. En el modelo esto ocurre aun sin intereses, que en la realidad agravarían el efecto.
+
 \subsection*{Lo que el modelo no dice}
-El modelo es deliberadamente simple. Ignora que las personas ahorran \cite{cc2000}, que pueden endeudarse, que producen bienes, que heredan, y sobre todo que la riqueza genera más riqueza mediante intereses e inversiones, un mecanismo multiplicativo que puede concentrar el dinero en muy pocas manos \cite{bm2000}. Tampoco distingue entre dinero, ingreso y riqueza, que en los datos reales son variables distintas \cite{yr2009}. Además, en el modelo la movilidad es total: cualquiera puede pasar de pobre a rico y viceversa, mientras que en las sociedades reales la posición económica es bastante persistente.
+El modelo es deliberadamente simple. Ignora que las personas ahorran \cite{cc2000}, que las deudas generan intereses, que producen bienes, que heredan, y sobre todo que la riqueza genera más riqueza mediante intereses e inversiones, un mecanismo multiplicativo que puede concentrar el dinero en muy pocas manos \cite{bm2000}. Tampoco distingue entre dinero, ingreso y riqueza, que en los datos reales son variables distintas \cite{yr2009}. Además, en el modelo la movilidad es total: cualquiera puede pasar de pobre a rico y viceversa, mientras que en las sociedades reales la posición económica es bastante persistente.
 
 \subsection*{Hipótesis para el trabajo posterior}
 El autor plantea la hipótesis de que, aunque la tendencia a la desigualdad sea natural en el sentido de este modelo, \textbf{la desigualdad que se mide actualmente es un caso extremo, más allá de lo que dictaría la probabilidad}. El modelo proporciona tres pruebas concretas para evaluarla con datos reales: (i) comparar el coeficiente de Gini observado con el valor de referencia $1/2$; (ii) comprobar si el extremo superior de la distribución decae más lentamente que una exponencial, como ya se ha reportado para Estados Unidos y Reino Unido, donde los ingresos más altos siguen una ley de potencias \cite{dy2001}; y (iii) comparar la movilidad observada con la movilidad total del modelo.
 
-La comparación entre países de este trabajo ofrece un primer resultado parcial a favor de la hipótesis en las pruebas (i) y (ii): en los países más desiguales el Gini supera 1/2 y, sobre todo, la parte alta concentra mucho más de lo que permite el azar. Al mismo tiempo, muestra que la desviación no está en toda la distribución: la parte baja está \emph{mejor} que en el modelo. Esto sugiere ampliar el modelo con dos mecanismos opuestos: uno que concentre en la parte alta, como la acumulación por intereses \cite{bm2000}, y otro que sostenga la parte baja, como las transferencias o un ingreso de subsistencia. La evaluación definitiva requiere cuidado: el ingreso medido por encuestas de hogares, como la ENIGH del INEGI \cite{enigh}, tiende a subestimar a los más ricos y suele arrojar valores de Gini menores que los de la riqueza, por lo que será necesario elegir la variable adecuada y corregir el extremo superior con fuentes complementarias \cite{wid}.
+La comparación entre países de este trabajo ofrece un primer resultado parcial a favor de la hipótesis en las pruebas (i) y (ii): en los países más desiguales el Gini supera 1/2 y, sobre todo, la parte alta concentra mucho más de lo que permite el azar. Al mismo tiempo, muestra que la desviación no está en toda la distribución: la parte baja está \emph{mejor} que en el modelo. La deuda es un mecanismo capaz de elevar el Gini por encima de 1/2, aunque en el modelo actúa sobre la riqueza neta y no sobre el ingreso que miden las encuestas. Esto sugiere ampliar el modelo con dos mecanismos opuestos: uno que concentre en la parte alta, como la acumulación por intereses \cite{bm2000}, y otro que sostenga la parte baja, como las transferencias o un ingreso de subsistencia. La evaluación definitiva requiere cuidado: el ingreso medido por encuestas de hogares, como la ENIGH del INEGI \cite{enigh}, tiende a subestimar a los más ricos y suele arrojar valores de Gini menores que los de la riqueza, por lo que será necesario elegir la variable adecuada y corregir el extremo superior con fuentes complementarias \cite{wid}.
 
 \section*{Conclusiones}
 Con un modelo en el que todas las personas son idénticas y siguen las mismas reglas, se mostró que la desigualdad aparece sola. El sistema pasó de la igualdad perfecta ($G=0$) a la distribución exponencial de Boltzmann con $G\approx1/2$, la entropía alcanzó su valor máximo y el resultado se mantuvo al cambiar el tamaño del sistema, el dinero inicial y la regla de intercambio.
 
 La forma exponencial se dedujo de la primera y la segunda ley de la termodinámica: es el reparto que maximiza la entropía cuando el dinero se conserva. La razón es la misma por la que en un gas los estados de menor energía son los más probables: cada unidad de dinero que concentra una persona reduce exponencialmente las formas en que el resto puede repartirse lo que queda. La ``temperatura'' del dinero resulta ser el dinero promedio por persona.
+
+Al permitir deudas, la misma deducción predice que la temperatura sube a $T=\langle m\rangle+m_d$ y que el Gini crece linealmente, $G=\tfrac12(1+m_d/\langle m\rangle)$, lo que la simulación confirma: el crédito, por sí solo, aumenta la desigualdad.
 
 Al comparar con datos reales del Banco Mundial, los países más desiguales del mundo superan esta línea base: su 10\% más rico recibe entre 38 y 47\% del ingreso, frente al 33\% del azar puro. Sin embargo, su 10\% más pobre recibe más que en el modelo, de modo que la diferencia la absorbe la clase media. El azar explica razonablemente la parte media y baja de la distribución, pero no la concentración en la parte alta.
 
@@ -458,6 +511,7 @@ El código que genera todas las figuras y tablas se encuentra en la carpeta \tex
 \begin{itemize}
   \item \texttt{modelo.py}: núcleo del modelo;
   \item \texttt{generar\_resultados.py}: simulaciones del modelo original;
+  \item \texttt{deudas.py}: modelo con deuda;
   \item \texttt{comparar\_paises.py}: descarga y comparación de datos del Banco Mundial.
 \end{itemize}
 
