@@ -62,7 +62,7 @@ def relajacion():
     z_movil = np.convolve(z, np.ones(VENTANA) / VENTANA, mode="valid")
     k = next(i for i in range(len(z_movil)) if np.all(z_movil[i:] < 2))
     t_eq = t[k + VENTANA - 1]
-    return t, (g_m, g_e, pg, np.sqrt(np.diag(cg))), (s_m, s_e, ps, np.sqrt(np.diag(cs))), t_eq
+    return t, (g_m, g_e, pg, np.sqrt(np.diag(cg))), (s_m, s_e, ps, np.sqrt(np.diag(cs))), t_eq, g
 
 
 def fluctuaciones():
@@ -107,7 +107,7 @@ def microestados():
 
 def principal():
     print("Datos SIMULADOS: convergencia e incertidumbre.")
-    t, (g_m, g_e, pg, eg), (s_m, s_e, ps, es), t_eq = relajacion()
+    t, (g_m, g_e, pg, eg), (s_m, s_e, ps, es), t_eq, g_todas = relajacion()
     ens = modelo.ensamble_esperado(N, M0, muestras=2000)
     print(f"  Gini: G_eq = {pg[0]:.4f} ± {eg[0]:.4f}, tau1 = {pg[2]:.0f} ± {eg[2]:.0f}, "
           f"tau2 = {pg[4]:.0f} ± {eg[4]:.0f} intercambios/persona (A1={pg[1]:.3f}, A2={pg[3]:.4f}); "
@@ -141,15 +141,17 @@ def principal():
             w.writerow([int(f[0])] + [f"{v:.4f}" for v in f[1:]])
 
     fig, ax = plt.subplots(1, 3, figsize=(15, 4.3))
-    dev = np.abs(ens["gini"][0] - g_m)
-    ax[0].semilogy(t, dev, ".", color="#c0504d", ms=3, label="|G ensamble − G simulado| (40 semillas)")
-    ax[0].semilogy(t, pg[1] * np.exp(-t / pg[2]) + pg[3] * np.exp(-t / pg[4]), "k-",
-                   label=rf"Ajuste, $\tau_1$ = {pg[2]:.0f}, $\tau_2$ = {pg[4]:.0f}")
-    ax[0].semilogy(t, 2 * g_e, "--", color="0.5", label="2 errores estándar")
-    ax[0].axvline(t_eq, color="#3a6ea5", ls=":", label=f"Equilibrio: t ≈ {t_eq:.0f}")
-    ax[0].set(xlabel="Intercambios por persona", ylabel="Distancia al equilibrio (Gini)",
-              ylim=(1e-5, 1), title=f"1. Relajación: equilibrio a partir de t ≈ {t_eq:.0f}")
-    ax[0].legend(fontsize=7.5)
+    g_ens = ens["gini"][0]
+    for k in range(5):   # algunas simulaciones individuales
+        ax[0].plot(t, g_todas[k], color="0.75", lw=0.6, label="Simulaciones individuales" if k == 0 else None)
+    ax[0].fill_between(t, g_m - 2 * g_e, g_m + 2 * g_e, color="#c0504d", alpha=0.25, lw=0)
+    ax[0].plot(t, g_m, color="#c0504d", lw=2, label="Promedio de 40 simulaciones (± 2 errores est.)")
+    ax[0].axhline(g_ens, color="k", ls="--", label=f"Valor de equilibrio: {g_ens:.3f}")
+    ax[0].axvline(t_eq, color="#3a6ea5", ls=":", lw=2, label=f"Equilibrio: t ≈ {t_eq:.0f}")
+    ax[0].set(xlabel="Intercambios por persona", ylabel="Coeficiente de Gini",
+              xlim=(0, POR_PERSONA), ylim=(0.48, 0.535),
+              title=f"1. Gini contra tiempo: deja de cambiar en t ≈ {t_eq:.0f}")
+    ax[0].legend(fontsize=7.5, loc="lower right")
 
     ax[1].loglog(fl[:, 0], fl[:, 3], "o", color="#c0504d", label="Simulación (20 semillas)")
     ax[1].loglog(fl[:, 0], fl[:, 5], "s", mfc="none", color="k", label="Ensamble exacto")

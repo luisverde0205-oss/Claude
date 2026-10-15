@@ -209,12 +209,12 @@ Para la convergencia se promedió el Gini de 40 semillas en el tiempo y se defin
 \section*{Resultados}
 
 \subsection*{Igual probabilidad, convergencia y fluctuaciones}
-Con 3 personas y 3 monedas, los 10 repartos aparecen con frecuencia $0.100$ ($\chi^2=5.8$, 9 grados de libertad, $p=0.76$), como exige la simetría de la dinámica (Fig.~\ref{fig:convergencia}). El Gini se relaja con dos tiempos, $\tau_1=112\pm5$ y $\tau_2=586\pm24$ intercambios por persona; el lento corresponde a llenar la cola de los más ricos, a la que solo se llega con una larga racha de ganancias. \textbf{El equilibrio se alcanza a los 3000 intercambios por persona}, y las simulaciones usan $10^{4}$. La dispersión del Gini entre semillas disminuye como $N^{-1/2}$ y coincide con la del ensamble exacto.
+Con 3 personas y 3 monedas, los 10 repartos aparecen con frecuencia $0.100$ ($\chi^2=5.8$, 9 grados de libertad, $p=0.76$), como exige la simetría de la dinámica (Fig.~\ref{fig:convergencia}). El Gini promedio sube y, a partir de cierto momento, deja de cambiar y solo fluctúa alrededor de su valor de equilibrio (panel 1). Un ajuste $G(t)=G_{\rm eq}-A_1e^{-t/\tau_1}-A_2e^{-t/\tau_2}$ da dos tiempos de relajación, $\tau_1=112\pm5$ y $\tau_2=586\pm24$ intercambios por persona; el lento corresponde a llenar la cola de los más ricos, a la que solo se llega con una larga racha de ganancias. \textbf{El equilibrio se alcanza a los 3000 intercambios por persona}, y las simulaciones usan $10^{4}$. La dispersión del Gini entre semillas disminuye como $N^{-1/2}$ y coincide con la del ensamble exacto.
 
 \begin{figure}[H]
    \centering
    \includegraphics[width=\textwidth]{fig11_convergencia}
-   \caption{\textbf{Datos simulados.} (1) Distancia del Gini promedio (40 semillas) al ensamble exacto, con ajuste de dos exponenciales. (2) Dispersión del Gini contra $N$. (3) Frecuencia de los 10 repartos de 3 monedas entre 3 personas.}
+   \caption{\textbf{Datos simulados.} (1) Gini contra número de intercambios: cinco simulaciones individuales (gris) y promedio de 40 con su banda de $\pm2$ errores estándar (rojo); la línea discontinua es el valor de equilibrio. (2) Dispersión del Gini contra $N$. (3) Frecuencia de los 10 repartos de 3 monedas entre 3 personas.}
    \label{fig:convergencia}
 \end{figure}
 
