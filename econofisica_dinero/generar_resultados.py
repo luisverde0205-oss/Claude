@@ -97,6 +97,27 @@ def fig_evolucion(r):
     return s_max
 
 
+def fig_equilibrio(r):
+    """Figura compacta para el documento: distribución de equilibrio y evolución del Gini."""
+    d = r["dinero"]
+    m = np.arange(d.max() + 1)
+    p_sim = np.bincount(d, minlength=len(m)) / N
+    g_teo = modelo.gini_teorico(M0)
+    fig, ax = plt.subplots(1, 2, figsize=(11, 3.4))
+    ax[0].semilogy(m, np.where(p_sim > 0, p_sim, np.nan), "o", ms=3, color=AZUL, label="Simulación")
+    ax[0].semilogy(m, modelo.boltzmann_discreta(m, M0), "k-", lw=2, label=r"Geométrica $(1-q)\,q^m$")
+    ax[0].axvline(M0, color=ROJO, ls="--", lw=1, label=f"Dinero inicial ({M0})")
+    ax[0].set(xlabel="Dinero m", ylabel="P(m)", ylim=(1e-4, 0.1))
+    ax[0].legend(fontsize=9)
+    ax[1].plot(r["t"], r["gini"], color=ROJO)
+    ax[1].axhline(g_teo, color="k", ls="--", label=f"Teoría exacta: {g_teo:.3f}")
+    ax[1].axhline(0.5, color="0.5", ls=":", label="Límite continuo: 1/2")
+    ax[1].set(xscale="symlog", xlim=(0, POR_PERSONA), xlabel="Intercambios por persona",
+              ylabel="Coeficiente de Gini")
+    ax[1].legend(fontsize=9, loc="lower right")
+    guardar(fig, "fig_equilibrio.png")
+
+
 def fig_lorenz(r):
     p, L = modelo.lorenz(r["dinero"])
     fig, ax = plt.subplots(figsize=(5, 4.6))
@@ -209,6 +230,7 @@ if __name__ == "__main__":
     r = modelo.simular(N, M0, DM, pasos=PASOS, cada=10_000, semilla=SEMILLA,
                        seguir=range(N))
     fig_distribucion(r)
+    fig_equilibrio(r)
     s_max = fig_evolucion(r)
     print("Caso base, 40 semillas:")
     tabla_base()
