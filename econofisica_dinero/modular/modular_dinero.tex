@@ -166,7 +166,7 @@ Entonces $Wf'(W)$ es una constante $c$, de donde $f'(W)=c/W$ y $f(W)=c\ln W+K$. 
 donde $W$ cuenta los microestados con energía entre $E$ y $E+\delta E$, volumen $V$ y $N$ partículas. Mientras más microestados haya, mayor es la entropía.
 
 \subsubsection*{Temperatura}
-El teorema de Clausius establece que, en un proceso reversible y cuasiestático, $dS=\text{đ}Q_{\rm rev}/T$. Si se combina con la primera ley, $T\,dS=\text{đ}Q=dU-\text{đ}W$, se obtiene para un sistema $(p,V,N)$ la forma entrópica del primer principio,
+El teorema de Clausius establece que, en un proceso reversible y cuasiestático \cite{garciacolin}, $dS=\text{đ}Q_{\rm rev}/T$. Si se combina con la primera ley, $T\,dS=\text{đ}Q=dU-\text{đ}W$, se obtiene para un sistema $(p,V,N)$ la forma entrópica del primer principio,
 \begin{equation}
   T\,dS=dU+p\,dV-\mu\,dN
   \quad\Rightarrow\quad
@@ -179,7 +179,7 @@ En la diferencial de $S(U,V,N)$ el coeficiente de $dU$ es $\partial S/\partial U
 \end{equation}
 
 \subsubsection*{Equilibrio y aumento de la entropía}
-Un sistema aislado está en equilibrio cuando su entropía es máxima respecto a cualquier variable interna $Y$, es decir, cuando $\partial S/\partial Y|_U=0$ y $\partial^2S/\partial Y^2|_U<0$. Tómese como $Y$ la energía $U_1$ de una parte del sistema, sabiendo que $U_1+U_2=U$ no cambia. La primera condición da
+Un sistema aislado está en equilibrio cuando su entropía es máxima respecto a cualquier variable interna $Y$ \cite{garciacolin}, es decir, cuando $\partial S/\partial Y|_U=0$ y $\partial^2S/\partial Y^2|_U<0$. Tómese como $Y$ la energía $U_1$ de una parte del sistema, sabiendo que $U_1+U_2=U$ no cambia. La primera condición da
 \begin{equation}
   \frac{\partial S}{\partial U_1}=\frac{\partial S_1}{\partial U_1}-\frac{\partial S_2}{\partial U_2}=\frac{1}{T_1}-\frac{1}{T_2}=0
   \;\Rightarrow\; T_1=T_2 .
@@ -311,17 +311,18 @@ La desigualdad del modelo no nace de diferencias entre las personas, porque no l
 
 \begin{thebibliography}{99}
 \small\setlength{\itemsep}{0pt}
-\bibitem{dy2000} A. Drăgulescu y V. M. Yakovenko, ``Statistical mechanics of money'', \emph{Eur. Phys. J. B}, Vol. 17, p. 723-729, 2000.
-\bibitem{yr2009} V. M. Yakovenko y J. B. Rosser, ``Colloquium: Statistical mechanics of money, wealth, and income'', \emph{Rev. Mod. Phys.}, Vol. 81, p. 1703-1725, 2009.
-\bibitem{dy2001} A. Drăgulescu y V. M. Yakovenko, ``Exponential and power-law probability distributions of wealth and income in the United Kingdom and the United States'', \emph{Physica A}, Vol. 299, p. 213-221, 2001.
-\bibitem{bm2000} J.-P. Bouchaud y M. Mézard, ``Wealth condensation in a simple model of economy'', \emph{Physica A}, Vol. 282, p. 536-545, 2000.
+\bibitem{dy2000} A. Drăgulescu y V. M. Yakovenko, ``Statistical mechanics of money'', \emph{Eur. Phys. J. B}, Vol. 17, p. 723, 2000. DOI 10.1007/s100510070114.
+\bibitem{yr2009} V. M. Yakovenko y J. B. Rosser, ``Colloquium: Statistical mechanics of money, wealth, and income'', \emph{Rev. Mod. Phys.}, Vol. 81, p. 1703, 2009. DOI 10.1103/RevModPhys.81.1703.
+\bibitem{dy2001} A. Drăgulescu y V. M. Yakovenko, ``Exponential and power-law probability distributions of wealth and income in the United Kingdom and the United States'', \emph{Physica A}, Vol. 299, p. 213, 2001. DOI 10.1016/S0378-4371(01)00298-9.
+\bibitem{bm2000} J.-P. Bouchaud y M. Mézard, ``Wealth condensation in a simple model of economy'', \emph{Physica A}, Vol. 282, No. 3-4, p. 536-545, 2000. DOI 10.1016/S0378-4371(00)00205-3.
 \bibitem{reif} F. Reif, \emph{Fundamentals of Statistical and Thermal Physics}, McGraw-Hill, 1965.
-\bibitem{lorenz} M. O. Lorenz, ``Methods of measuring the concentration of wealth'', \emph{Publ. Am. Stat. Assoc.}, Vol. 9, p. 209-219, 1905.
-\bibitem{gini} C. Gini, ``Variabilità e mutabilità'', \emph{Studi Economico-Giuridici della R. Università di Cagliari}, 1912.
+\bibitem{garciacolin} L. García-Colín Scherer, \emph{Introducción a la termodinámica clásica}, Trillas, México, 2003.
+\bibitem{lorenz} M. O. Lorenz, ``Methods of measuring the concentration of wealth'', \emph{Publications of the American Statistical Association}, Vol. 9, No. 70, p. 209-219, 1905. DOI 10.1080/15225437.1905.10503443.
+\bibitem{gini} C. Gini, \emph{Variabilità e mutabilità. Contributo allo studio delle distribuzioni e delle relazioni statistiche}, C. Cuppini, Bolonia, 1912.
 \bibitem{pip} Banco Mundial, ``Poverty and Inequality Platform'', indicadores SI.POV.GINI y SI.DST, \url{https://data.worldbank.org}, consultado en octubre de 2026.
 \bibitem{wid} World Inequality Lab, ``World Inequality Database'', \url{https://wid.world}.
 \bibitem{enigh} INEGI, ``Encuesta Nacional de Ingresos y Gastos de los Hogares'', \url{https://www.inegi.org.mx}.
-\bibitem{numpy} C. R. Harris \emph{et al.}, ``Array programming with NumPy'', \emph{Nature}, Vol. 585, p. 357-362, 2020.
+\bibitem{numpy} C. R. Harris \emph{et al.}, ``Array programming with NumPy'', \emph{Nature}, Vol. 585, No. 7825, p. 357-362, 2020. DOI 10.1038/s41586-020-2649-2.
 \end{thebibliography}
 
 \end{document}
