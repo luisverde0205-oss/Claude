@@ -114,6 +114,28 @@ def principal():
 
     graficar(sel, mod)
     graficar_gini(sel)
+    graficar_lorenz(sel)
+
+
+def graficar_lorenz(sel):
+    """Una sola gráfica con las curvas de Lorenz del modelo y de algunos países (documento)."""
+    es = {"South Africa": "Sudáfrica", "Mexico": "México"}
+    top = sel[:4] + [f for f in sel if f["iso3"] in REFERENCIAS]
+    colores = ["#c0504d", "#d98b3a", "#8e6bb5", "#6a9a4f", "#3a6ea5"]
+    fig, ax = plt.subplots(figsize=(5.6, 5))
+    p = np.linspace(0, 1, 400)
+    ax.plot([0, 1], [0, 1], color="0.6", ls=":", label="Igualdad perfecta")
+    ax.plot(p, modelo.lorenz_exponencial(p), "k-", lw=2.5, label="Modelo de intercambio aleatorio")
+    for f, c in zip(top, colores):
+        pp, L = lorenz_pais(f)
+        ax.plot(pp, L, "o-", color=c, ms=4, lw=1.3,
+                label=f"{es.get(f['pais'], f['pais'])} {f['anio_gini']} (Gini {f['gini']/100:.2f})")
+    ax.set(xlabel="Fracción de la población, de la más pobre a la más rica",
+           ylabel="Fracción del ingreso total", xlim=(0, 1), ylim=(0, 1), aspect="equal")
+    ax.legend(fontsize=8, loc="upper left")
+    fig.tight_layout()
+    fig.savefig(os.path.join(AQUI, "figuras", "fig_lorenz_paises.png"), dpi=150)
+    plt.close(fig)
 
 
 def graficar_gini(sel):
