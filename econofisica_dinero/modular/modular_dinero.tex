@@ -19,6 +19,7 @@
 \usepackage[spanish,es-tabla]{babel} % Se considera TABLA en lugar de CUADRO en las tablas. Modificado por Rotosca
 \usepackage{fancyhdr}
 \usepackage{caption}
+\usepackage{placeins}
 \captionsetup{labelsep=period}
 \usepackage{geometry}
 
@@ -110,7 +111,7 @@
 \thispagestyle{fancy}
 
 \section*{Resumen}
-Este trabajo estudia el modelo de intercambio aleatorio de Drăgulescu y Yakovenko, en el que las personas se comportan como las moléculas de un gas y el dinero hace el papel de la energía. Todas empiezan con la misma cantidad. Después intercambian monedas al azar, sin que el total cambie y sin que nadie pueda endeudarse. A partir de la aditividad de la entropía, de la primera ley escrita en forma entrópica y de la igual probabilidad de los microestados, que en este modelo puede demostrarse, se deduce que en equilibrio el dinero se reparte según la versión discreta de la distribución de Boltzmann. Su coeficiente de Gini es $G=(1+\langle m\rangle)/(1+2\langle m\rangle)$, que se acerca a $1/2$ cuando hay muchas monedas por persona. Una simulación propia con 2000 personas y 40 repeticiones da $G=0.5109\pm0.0010$, muy cerca del valor esperado de $0.5118$, y todas las cantidades medidas coinciden con la teoría dentro de dos errores estándar. El sistema tarda unos 3000 intercambios por persona en llegar al equilibrio. Cuando se permiten deudas, la desigualdad del modelo crece en proporción al límite de endeudamiento. Por último se comparan las curvas de Lorenz del modelo con las de algunos países, una comparación solo exploratoria porque los datos reales miden ingreso y no dinero acumulado.
+Este trabajo estudia el modelo de intercambio aleatorio de Drăgulescu y Yakovenko, en el que las personas se comportan como las moléculas de un gas y el dinero hace el papel de la energía. Todas empiezan con la misma cantidad e intercambian monedas al azar, sin que el total cambie. A partir de la aditividad de la entropía, de la primera ley y de la igual probabilidad de los microestados, que en este modelo puede demostrarse, se deduce que en equilibrio el dinero sigue la distribución de Boltzmann, con un coeficiente de Gini cercano a $1/2$. Una simulación propia con 2000 personas lo confirma dentro de dos errores estándar. El equilibrio llega tras unos 3000 intercambios por persona. Permitir deudas aumenta la desigualdad del modelo, y una comparación con las curvas de Lorenz de varios países, solo exploratoria porque esos datos miden ingreso y no dinero acumulado, muestra países más desiguales y más iguales que el azar.
 
 \section*{Introducción}
 La desigualdad económica es uno de los grandes temas de la economía política y de las relaciones internacionales. Casi siempre se explica por causas concretas, como la educación, la herencia o el poder. Aquí se hace una pregunta anterior. Si todas las personas fueran idénticas y siguieran las mismas reglas, ¿cómo quedaría repartido el dinero?
@@ -171,11 +172,9 @@ El teorema de Clausius establece que, en un proceso reversible y cuasiestático,
   \quad\Rightarrow\quad
   dS=\frac{1}{T}\,dU+\frac{p}{T}\,dV-\frac{\mu}{T}\,dN .
 \end{equation}
-Basta compararla con la diferencial de $S(U,V,N)$, $dS=\frac{\partial S}{\partial U}dU+\frac{\partial S}{\partial V}dV+\frac{\partial S}{\partial N}dN$, para identificar
+En la diferencial de $S(U,V,N)$ el coeficiente de $dU$ es $\partial S/\partial U$, así que la comparación da
 \begin{equation}
-  \left.\frac{\partial S}{\partial U}\right|_{V,N}=\frac{1}{T},\qquad
-  \left.\frac{\partial S}{\partial V}\right|_{U,N}=\frac{p}{T},\qquad
-  \left.\frac{\partial S}{\partial N}\right|_{U,V}=-\frac{\mu}{T}.
+  \left.\frac{\partial S}{\partial U}\right|_{V,N}=\frac{1}{T}.
   \label{eq:temperatura}
 \end{equation}
 
@@ -185,7 +184,7 @@ Un sistema aislado está en equilibrio cuando su entropía es máxima respecto a
   \frac{\partial S}{\partial U_1}=\frac{\partial S_1}{\partial U_1}-\frac{\partial S_2}{\partial U_2}=\frac{1}{T_1}-\frac{1}{T_2}=0
   \;\Rightarrow\; T_1=T_2 .
 \end{equation}
-La segunda, usando $\partial(1/T)/\partial U=-1/(T^2C_V)$, da $\partial^2S/\partial U_1^2=-\frac{1}{T^2}\big(\frac{1}{C_1}+\frac{1}{C_2}\big)$, que es negativa cuando las capacidades caloríficas son positivas. Se trata, por lo tanto, de un máximo. Y mientras el sistema no ha llegado ahí, $dS=(1/T_1-1/T_2)\,dU_1\geq0$ obliga a que la energía pase de la parte caliente a la fría.
+La segunda, usando $\partial(1/T)/\partial U=-1/(T^2C_V)$, da $\partial^2S/\partial U_1^2=-\frac{1}{T^2}\big(\frac{1}{C_1}+\frac{1}{C_2}\big)$, que es negativa cuando las capacidades caloríficas son positivas. Se trata, por lo tanto, de un máximo.
 
 \subsubsection*{Distribución de Boltzmann}
 Supóngase ahora que la parte 1 es una sola partícula y la parte 2 todo lo demás, que actúa como reservorio. Si la partícula está en un estado $i$ con energía $\varepsilon_i$, al reservorio le queda $U-\varepsilon_i$. Como todos los microestados del conjunto son igual de probables, la probabilidad del estado $i$ es proporcional al número de microestados que le quedan al reservorio, y con la ec.~\ref{eq:sboltzmann}
@@ -227,7 +226,7 @@ Cada cantidad de dinero corresponde a un solo estado de la persona, así que la 
   P(m)=(1-q)\,q^{m},\qquad q=e^{-1/T}=\frac{\langle m\rangle}{1+\langle m\rangle},
   \label{eq:geometrica}
 \end{equation}
-cuyo promedio es exactamente $\langle m\rangle=M/N$. Con 20 monedas por persona, $q=20/21$ y $T=20.50$. La temperatura no es exactamente el dinero promedio, sino media moneda más. Solo cuando cada persona tiene muchas monedas se recupera la exponencial $P(m)=e^{-m/T}/T$ con $T=\langle m\rangle$, de modo que la igualdad entre temperatura y dinero promedio es un resultado y no una definición. La entropía por persona vale $(1+\langle m\rangle)\ln(1+\langle m\rangle)-\langle m\rangle\ln\langle m\rangle=4.0203$, contra $1+\ln\langle m\rangle=3.9957$ en el caso continuo.
+cuyo promedio es exactamente $\langle m\rangle=M/N$. Con 20 monedas por persona, $q=20/21$ y $T=20.50$. La temperatura no es exactamente el dinero promedio, sino media moneda más. Solo cuando cada persona tiene muchas monedas se recupera la exponencial $P(m)=e^{-m/T}/T$ con $T=\langle m\rangle$, de modo que la igualdad entre temperatura y dinero promedio es un resultado y no una definición.
 
 \subsection*{Medida de la desigualdad}
 La curva de Lorenz indica qué fracción del dinero total tiene cada fracción de la población, ordenada de la más pobre a la más rica \cite{lorenz}. Si todos tuvieran lo mismo sería una línea diagonal. El coeficiente de Gini es el doble del área entre esa diagonal y la curva \cite{gini}, y también puede calcularse como $G=\langle|m_1-m_2|\rangle/(2\langle m\rangle)$, la diferencia promedio entre dos personas dividida entre el doble del promedio. En el caso continuo, la diferencia entre dos personas tiene a su vez una distribución exponencial con promedio $T$, por lo que $G=1/2$. Para la distribución geométrica, $\langle|m_1-m_2|\rangle=2q/[(1-q)(1+q)]$ y
@@ -250,14 +249,15 @@ Este Gini puede pasar de 1, algo posible solo cuando hay riqueza negativa.
 \section*{Metodología}
 Los resultados del modelo son datos simulados. La simulación se escribió en Python con NumPy y Numba \cite{numpy} y reproduce el modelo de la ref.~\cite{dy2000}. Hay 2000 personas con 20 monedas cada una. En cada paso se eligen al azar una persona que paga y otra que recibe, y si la primera tiene al menos una moneda se la entrega a la segunda. Cada simulación tiene $10^{4}$ intercambios por persona, es decir $2\times10^{7}$ pasos, y se repitió 40 veces con distintas secuencias de números aleatorios. En todas se comprobó que el dinero total se mantenía.
 
-Se reporta el promedio de las repeticiones con su error estándar. La entropía lleva la corrección de Miller y Madow, porque el cálculo directo la subestima en muestras finitas. La teoría se tomó de dos formas. Una es la distribución geométrica para infinitas personas, y la otra el valor esperado para 2000, que se obtiene escogiendo al azar 2000 repartos posibles y midiéndolos igual que la simulación. La diferencia se expresa como $z$, en errores estándar.
+Se reporta el promedio de las repeticiones con su error estándar. La teoría se tomó de dos formas. Una es la distribución geométrica para infinitas personas, y la otra el valor esperado para 2000, que se obtiene escogiendo al azar 2000 repartos posibles y midiéndolos igual que la simulación. La diferencia se expresa como $z$, en errores estándar.
 
 Se tomó como tiempo de equilibrio el momento a partir del cual el Gini promedio ya no se aleja del valor esperado más de dos errores estándar. Con 3 personas y 3 monedas se registró un millón de veces el reparto, para comprobar con una prueba $\chi^2$ que todos aparecen igual de seguido. Para las deudas se usaron límites de 0, 5, 10 y 20 monedas y 20 repeticiones. Los datos reales provienen del Banco Mundial \cite{pip}.
 
+\FloatBarrier
 \section*{Resultados}
 
 \subsection*{La distribución de Boltzmann aparece sola}
-La Fig.~\ref{fig:boltzmann}(a) muestra cómo se ve la distribución de Boltzmann que predice la teoría para un promedio de 20 monedas. Lo más probable es no tener nada. A partir de ahí la probabilidad baja poco a poco, y el 62\% de las personas queda por debajo del promedio. En la Fig.~\ref{fig:boltzmann}(b) aparece lo que produce el modelo aleatorio con las 40 repeticiones juntas, 80\,000 personas en total. Todas empezaron con 20 monedas exactas y, sin embargo, el histograma cae sobre la curva teórica. La Tabla~\ref{tab:base} lo pone en números. Todas las cantidades coinciden con el valor esperado dentro de dos errores estándar, mientras que la aproximación continua se aleja hasta 11.
+La Fig.~\ref{fig:boltzmann}(a) muestra cómo se ve la distribución de Boltzmann que predice la teoría para un promedio de 20 monedas. Lo más probable es no tener nada. A partir de ahí la probabilidad baja poco a poco, y el 62\% de las personas queda por debajo del promedio. En la Fig.~\ref{fig:boltzmann}(b) aparece lo que produce el modelo aleatorio con las 40 repeticiones juntas, 80\,000 personas en total. Todas empezaron con 20 monedas exactas y, sin embargo, el histograma cae sobre la curva teórica. La Tabla~\ref{tab:base} lo pone en números, y todas las cantidades coinciden con el valor esperado dentro de dos errores estándar. La última columna muestra que la aproximación continua daría valores claramente distintos.
 
 \begin{figure}[!htb]
    \centering
@@ -271,24 +271,23 @@ La Fig.~\ref{fig:boltzmann}(a) muestra cómo se ve la distribución de Boltzmann
     \footnotesize\setlength{\tabcolsep}{4pt}
     \begin{tabular}{|l|c|c|c|c|c|}
       \hline
-      \textbf{Cantidad} & \textbf{Simulación} & \textbf{Esperado} & \textbf{Exacto} & \textbf{Continuo} & $z$ \\
+      \textbf{Cantidad} & \textbf{Simulación} & \textbf{Esperado} & \textbf{Exacto} & $z$ & \textbf{Continuo} \\
       & \textbf{(40 repeticiones)} & \textbf{($N=2000$)} & \textbf{($N\to\infty$)} & & \\
       \hline
-      Coeficiente de Gini & $0.5109\pm0.0010$ & 0.5118 & 0.5122 & 0.5000 & $-0.9$ \\
-      Entropía por persona & $4.0099\pm0.0005$ & 4.0089 & 4.0203 & 3.9957 & $+1.7$ \\
-      Con menos que el promedio & $0.6220\pm0.0009$ & 0.6229 & 0.6231 & 0.6321 & $-1.0$ \\
-      Sin dinero & $0.0472\pm0.0007$ & 0.0475 & 0.0476 & 0.0488 & $-0.4$ \\
-      Dinero de la mitad más pobre & $0.1457\pm0.0007$ & 0.1451 & 0.1449 & 0.1534 & $+0.8$ \\
-      Dinero del 10\% más rico & $0.3347\pm0.0011$ & 0.3356 & 0.3359 & 0.3303 & $-0.9$ \\
+      Coeficiente de Gini & $0.5109\pm0.0010$ & 0.5118 & 0.5122 & $-0.9$ & 0.5000 \\
+      Con menos que el promedio & $0.6220\pm0.0009$ & 0.6229 & 0.6231 & $-1.0$ & 0.6321 \\
+      Sin dinero & $0.0472\pm0.0007$ & 0.0475 & 0.0476 & $-0.4$ & 0.0488 \\
+      Dinero de la mitad más pobre & $0.1457\pm0.0007$ & 0.1451 & 0.1449 & $+0.8$ & 0.1534 \\
+      Dinero del 10\% más rico & $0.3347\pm0.0011$ & 0.3356 & 0.3359 & $-0.9$ & 0.3303 \\
       \hline
     \end{tabular}
   \end{center}
-  \caption{Caso base (datos simulados) comparado con el valor esperado para 2000 personas, con la teoría para un número infinito de personas y con el caso continuo. $z$ es la diferencia con el valor esperado en errores estándar. La entropía esperada para 2000 personas es menor que la exacta porque el cálculo con una muestra finita la subestima.}
+  \caption{Caso base (datos simulados) comparado con el valor esperado para 2000 personas, con la teoría para un número infinito de personas y con el caso continuo. $z$ es la diferencia con el valor esperado en errores estándar.}
   \label{tab:base}
 \end{table}
 
 \subsection*{Llegada al equilibrio}
-La Fig.~\ref{fig:gini} sigue el Gini promedio conforme pasan los intercambios. Sube muy rápido al principio. Hacia los 3000 intercambios por persona deja de cambiar y se queda en el valor teórico, y por eso las simulaciones llegan hasta $10^{4}$. Al ajustar la subida con dos exponenciales salen dos tiempos, $\tau_1=112\pm5$ y $\tau_2=586\pm24$ intercambios por persona. El segundo, más lento, corresponde a la formación de la cola de los más ricos, porque llegar a tener mucho dinero requiere una larga racha de ganancias. En la prueba con 3 personas y 3 monedas los 10 repartos aparecieron con la misma frecuencia ($\chi^2=5.8$ con 9 grados de libertad, $p=0.76$). Además, la variación del Gini de una repetición a otra disminuye como $N^{-1/2}$, igual que en la teoría.
+La Fig.~\ref{fig:gini} sigue el Gini promedio conforme pasan los intercambios. Sube muy rápido al principio. Hacia los 3000 intercambios por persona deja de cambiar y se queda en el valor teórico, y por eso las simulaciones llegan hasta $10^{4}$. La parte final de la subida es lenta porque corresponde a la formación de la cola de los más ricos, y llegar a tener mucho dinero requiere una larga racha de ganancias. En la prueba con 3 personas y 3 monedas los 10 repartos aparecieron con la misma frecuencia ($\chi^2=5.8$ con 9 grados de libertad, $p=0.76$). Además, la variación del Gini de una repetición a otra disminuye como $N^{-1/2}$, igual que en la teoría.
 
 \begin{figure}[!htb]
    \centering
@@ -305,14 +304,14 @@ La simulación con deudas sigue la ec.~\ref{eq:ginideuda} dentro de un error est
 \begin{table}[!htb]
   \begin{center}
     \footnotesize\setlength{\tabcolsep}{3pt}
-    \begin{tabular}{|c|c|c|c|c|c|c|}
+    \begin{tabular}{|c|c|c|c|c|c|}
       \hline
-      $m_d$ & $T$ & \textbf{Gini simulado} & \textbf{Exacto} & \textbf{Continuo} & \textbf{Con deuda} & \textbf{Mitad más pobre} \\
+      $m_d$ & $T$ & \textbf{Gini simulado} & \textbf{Gini exacto} & \textbf{Con deuda} & \textbf{Mitad más pobre} \\
       \hline
-      0 & 20.50 & $0.5122\pm0.0015$ & 0.5122 & 0.500 & 0\% & 14.5\% (14.5\%) \\
-      5 & 25.50 & $0.6376\pm0.0015$ & 0.6373 & 0.625 & 17.9\% (17.8\%) & 5.8\% (5.8\%) \\
-      10 & 30.50 & $0.7633\pm0.0017$ & 0.7623 & 0.750 & 28.0\% (28.0\%) & $-2.9$\% ($-2.8$\%) \\
-      20 & 40.50 & $1.0145\pm0.0026$ & 1.0123 & 1.000 & 39.2\% (39.0\%) & $-20.2$\% ($-20.2$\%) \\
+      0 & 20.50 & $0.5122\pm0.0015$ & 0.5122 & 0\% & 14.5\% (14.5\%) \\
+      5 & 25.50 & $0.6376\pm0.0015$ & 0.6373 & 17.9\% (17.8\%) & 5.8\% (5.8\%) \\
+      10 & 30.50 & $0.7633\pm0.0017$ & 0.7623 & 28.0\% (28.0\%) & $-2.9$\% ($-2.8$\%) \\
+      20 & 40.50 & $1.0145\pm0.0026$ & 1.0123 & 39.2\% (39.0\%) & $-20.2$\% ($-20.2$\%) \\
       \hline
     \end{tabular}
   \end{center}
@@ -330,15 +329,16 @@ Esta comparación no sirve para validar el modelo. El modelo habla de dinero acu
    \label{fig:lorenz}
 \end{figure}
 
+\FloatBarrier
 \section*{Discusión}
 Si todos empiezan con 20 monedas, ¿de dónde sale la desigualdad? El punto de partida es un solo reparto entre una cantidad enorme de repartos posibles. Los intercambios hacen que el sistema los recorra todos con la misma probabilidad, y casi todos tienen forma geométrica. En equilibrio se ve el tipo de reparto que puede lograrse de más maneras, y ese no es el igualitario. Cada moneda que acumula una persona es una moneda que el resto ya no puede repartirse. Esto no quiere decir que la física obligue a la desigualdad en general, sino que con las reglas de este modelo el equilibrio es desigual.
 
-Dentro del modelo, y con la simulación como prueba, el trabajo demuestra que los repartos son igual de probables, que el dinero sigue la distribución geométrica de las ecs.~\ref{eq:tdinero} y \ref{eq:ginidiscreto} y que las deudas elevan el Gini según la ec.~\ref{eq:ginideuda}. Sugiere que esta distribución sirve como referencia para estudiar distribuciones reales. No demuestra que la desigualdad real se deba al azar o al crédito, ni que la comparación con el Banco Mundial confirme el modelo.
+La deducción y la simulación coinciden, pero solo dentro del modelo. Lo que el trabajo sugiere es que esta distribución puede servir como referencia para estudiar distribuciones reales. No demuestra que la desigualdad real se deba al azar o al crédito, ni que la comparación con el Banco Mundial confirme el modelo.
 
 El modelo deja fuera los precios, la producción, el ahorro, la herencia y los intereses, y sobre todo que la riqueza genera más riqueza, algo que puede concentrarla en muy pocas manos \cite{bm2000}. Su valor está en aislar el efecto del azar. Queda como hipótesis para un trabajo posterior que la desigualdad actual va más allá de la que produciría el intercambio aleatorio. La comparación exploratoria es compatible con esa idea en el extremo rico, que en Estados Unidos y Reino Unido sigue una ley de potencias \cite{dy2001}. Probarla requeriría datos de riqueza y corregir la información sobre los más ricos con datos fiscales \cite{enigh,wid}.
 
 \section*{Conclusiones}
-En un modelo en el que todas las personas son iguales, intercambian al azar y el dinero total no cambia, el equilibrio no es la igualdad. Es una distribución geométrica del dinero, la versión discreta de la distribución de Boltzmann, que se dedujo a partir de la aditividad de la entropía, de la primera ley y de la igual probabilidad de los repartos, demostrada aquí para este modelo. Tomar en cuenta que las monedas son enteras resultó necesario. Con 20 monedas por persona la temperatura es 20.50 y el Gini 0.5122, y la simulación coincide con estos valores dentro de dos errores estándar, cosa que no ocurre con la aproximación continua. En el modelo, permitir deudas aumenta la desigualdad en proporción al límite de endeudamiento. El modelo ofrece así una referencia física contra la cual, con los datos adecuados, podrá ponerse a prueba si la desigualdad actual supera la que produciría el azar. El código se encuentra en la carpeta \texttt{econofisica\_dinero} del repositorio del proyecto.
+La desigualdad del modelo no nace de diferencias entre las personas, porque no las hay, sino de contar. Hay muchísimas más maneras de repartir el dinero de forma desigual que de forma pareja, y un sistema que intercambia al azar termina en el reparto que puede lograrse de más maneras. La mecánica estadística permite predecir ese reparto con precisión, y la simulación lo reproduce. Basta además cambiar una regla, como permitir deudas, para que la desigualdad crezca. Por eso el modelo sirve como punto de comparación. Frente a él, unos países resultan más desiguales que el azar y otros más iguales, y entender qué los separa queda como la pregunta para un trabajo posterior. El código se encuentra en la carpeta \texttt{econofisica\_dinero} del repositorio del proyecto.
 
 \begin{thebibliography}{99}
 \small\setlength{\itemsep}{0pt}
