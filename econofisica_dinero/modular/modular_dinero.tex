@@ -136,47 +136,80 @@ Los objetivos son (i) deducir la distribución de equilibrio del dinero tratando
 
 \section*{Marco teórico}
 
-\subsection*{Entropía, temperatura y distribución de Boltzmann}
-\paragraph{Entropía.} Sea $S=f(\Omega)$ la entropía de un sistema con $\Omega$ microestados. Para dos sistemas independientes los microestados se multiplican, $\Omega=\Omega_1\Omega_2$, mientras que la entropía, que es extensiva, se suma: $f(\Omega_1\Omega_2)=f(\Omega_1)+f(\Omega_2)$. Derivando respecto a $\Omega_1$ y luego respecto a $\Omega_2$, y usando la regla de la cadena,
+\subsection*{Deducción de la distribución de Boltzmann}
+
+\paragraph{Microestados y probabilidad.} Considérense $n$ partículas que pueden estar en cualquiera de las dos mitades de una caja. Cada partícula está en la mitad izquierda con probabilidad $1/2$, de modo que la probabilidad de que las $n$ estén del mismo lado es $(1/2)^n$, que se anula rápidamente al crecer $n$. Hay un solo arreglo con todas las partículas a la izquierda, mientras que con la mitad de cada lado hay $\binom{n}{n/2}$, un número enorme. El estado que se observa en equilibrio es el que puede realizarse de más maneras. Llamando $W$ al número de microestados compatibles con un macroestado, falta saber qué relación tiene $W$ con la entropía.
+
+\paragraph{Entropía de Boltzmann.} Se plantean tres hipótesis para dos sistemas independientes 1 y 2: (i) la entropía es una función del número de microestados, $S=f(W)$; (ii) los microestados se multiplican, $W=W_1W_2$, porque cada microestado de uno puede combinarse con cada microestado del otro; y (iii) la entropía es extensiva, $S=S_1+S_2$. Entonces
 \begin{equation}
-  \Omega_2 f'(\Omega_1\Omega_2)=f'(\Omega_1)
-  \;\Rightarrow\;
-  f'(\Omega)+\Omega f''(\Omega)=\frac{d}{d\Omega}\big[\Omega f'(\Omega)\big]=0,
+  f(W_1W_2)=f_1(W_1)+f_2(W_2).
+  \label{eq:funcional}
 \end{equation}
-cuya solución es $f(\Omega)=k\ln\Omega+c$. Tomando $c=0$ (un solo microestado tiene entropía nula) se obtiene la entropía de Boltzmann,
+Por la regla de la cadena, con $W=W_1W_2$, se cumple $\partial/\partial W_1=W_2\,d/dW$ y $\partial/\partial W_2=W_1\,d/dW$. Aplicando $\partial^2/\partial W_1\partial W_2$ a la ec.~\ref{eq:funcional}, el lado derecho se anula porque cada término depende de una sola variable, y el izquierdo da
 \begin{equation}
-  S=k_B\ln\Omega(U,V,N),
+  \frac{\partial}{\partial W_1}\Big[W_1f'(W)\Big]=f'(W)+W_1W_2\,f''(W)=0
+  \;\Rightarrow\;
+  f'(W)+W\frac{df'(W)}{dW}=\frac{d}{dW}\Big[Wf'(W)\Big]=0 .
+\end{equation}
+Por lo tanto $Wf'(W)=c$, $f'(W)=c/W$ y $f(W)=c\ln W+K$. Como un sistema con un solo microestado no tiene desorden, $f(1)=0$ y $K=0$; la constante $c$ es la de Boltzmann, $k_B$. Se obtiene la \textbf{ecuación de entropía de Boltzmann},
+\begin{equation}
+  S=k_B\ln W(E,\delta E,V,N),
   \label{eq:sboltzmann}
 \end{equation}
-que crece con el número de microestados accesibles.
+donde $W$ cuenta los microestados con energía entre $E$ y $E+\delta E$, volumen $V$ y $N$ partículas: la entropía aumenta cuantos más microestados hay.
 
-\paragraph{Temperatura.} Para un proceso cuasiestático reversible $dS=\delta Q_{\rm rev}/T$, y la primera ley toma la forma entrópica $T\,dS=dU+p\,dV-\mu\,dN$. Por lo tanto,
+\paragraph{Temperatura.} Por el teorema de Clausius, en un proceso reversible cuasiestático $dS=\text{đ}Q_{\rm rev}/T$. Con la primera ley, $T\,dS=\text{đ}Q=dU-\text{đ}W$, se obtiene para un sistema $(p,V,N)$ la forma entrópica del primer principio,
 \begin{equation}
-  \frac{1}{T}=\left(\frac{\partial S}{\partial U}\right)_{V,N}.
+  T\,dS=dU+p\,dV-\mu\,dN
+  \quad\Rightarrow\quad
+  dS=\frac{1}{T}\,dU+\frac{p}{T}\,dV-\frac{\mu}{T}\,dN .
+\end{equation}
+Comparando con la diferencial de $S(U,V,N)$, $dS=\frac{\partial S}{\partial U}dU+\frac{\partial S}{\partial V}dV+\frac{\partial S}{\partial N}dN$, se identifican
+\begin{equation}
+  \left.\frac{\partial S}{\partial U}\right|_{V,N}=\frac{1}{T},\qquad
+  \left.\frac{\partial S}{\partial V}\right|_{U,N}=\frac{p}{T},\qquad
+  \left.\frac{\partial S}{\partial N}\right|_{U,V}=-\frac{\mu}{T}.
   \label{eq:temperatura}
 \end{equation}
-Si dos partes intercambian energía conservando el total, el máximo de $S_1+S_2$ exige $\partial S_1/\partial U_1=\partial S_2/\partial U_2$: en equilibrio las temperaturas se igualan.
 
-\paragraph{Distribución de Boltzmann.} Sea una molécula en contacto con el resto del sistema, que funciona como reservorio. Si los microestados del conjunto son igualmente probables, la probabilidad de que la molécula esté en un estado de energía $\varepsilon_i$ es proporcional al número de microestados que le quedan al reservorio. Desarrollando su entropía en serie de Taylor para $\varepsilon_i\ll U$ y usando la ec.~\ref{eq:temperatura},
+\paragraph{Equilibrio: principio de aumento de entropía.} El estado de equilibrio de un sistema aislado es aquel en el que la entropía alcanza su valor máximo respecto a cualquier variable interna $Y$: $\partial S/\partial Y|_U=0$ y $\partial^2S/\partial Y^2|_U<0$. Tómese como $Y$ la energía $U_1$ de una parte del sistema, con $U_1+U_2=U$ fija. La primera condición da
 \begin{equation}
-  P_i\propto\Omega_R(U-\varepsilon_i)=e^{S_R(U-\varepsilon_i)/k_B}\approx e^{S_R(U)/k_B}\,e^{-\varepsilon_i/k_BT}
-  \;\Rightarrow\;
-  P_i=\frac{e^{-\varepsilon_i/k_BT}}{Z}.
+  \frac{\partial S}{\partial U_1}=\frac{\partial S_1}{\partial U_1}-\frac{\partial S_2}{\partial U_2}=\frac{1}{T_1}-\frac{1}{T_2}=0
+  \;\Rightarrow\; T_1=T_2 ,
+\end{equation}
+y la segunda, usando $\partial(1/T)/\partial U=-1/(T^2C_V)$, da $\partial^2S/\partial U_1^2=-\frac{1}{T^2}\big(\frac{1}{C_1}+\frac{1}{C_2}\big)<0$ si las capacidades caloríficas son positivas: el punto crítico es un máximo. Fuera del equilibrio, $dS=(1/T_1-1/T_2)\,dU_1\geq0$ implica que la energía pasa de la parte más caliente a la más fría.
+
+\paragraph{Distribución de Boltzmann.} Sea ahora la parte 1 una sola partícula y la parte 2 el resto del sistema, que funciona como reservorio de energía $U-\varepsilon_i$ cuando la partícula está en un estado $i$ de energía $\varepsilon_i$. Si todos los microestados del conjunto son igualmente probables, la probabilidad del estado $i$ es proporcional al número de microestados del reservorio, y por la ec.~\ref{eq:sboltzmann}
+\begin{equation}
+  P_i\propto W_R(U-\varepsilon_i)=\exp\!\left[\frac{S_R(U-\varepsilon_i)}{k_B}\right].
+\end{equation}
+Como $\varepsilon_i\ll U$, se desarrolla en serie de Taylor y se usa la ec.~\ref{eq:temperatura}:
+\begin{equation}
+  S_R(U-\varepsilon_i)=S_R(U)-\varepsilon_i\frac{\partial S_R}{\partial U}+\frac{\varepsilon_i^2}{2}\frac{\partial^2S_R}{\partial U^2}-\dots
+  =S_R(U)-\frac{\varepsilon_i}{T}-\frac{\varepsilon_i^2}{2T^2C_R}-\dots
+\end{equation}
+El tercer término es despreciable porque la capacidad calorífica del reservorio, $C_R$, crece con su tamaño, y el primero no depende de $i$. Normalizando,
+\begin{equation}
+  P_i=\frac{e^{-\varepsilon_i/k_BT}}{Z},\qquad Z=\sum_i e^{-\varepsilon_i/k_BT}.
   \label{eq:boltzmann}
 \end{equation}
-La molécula no ``prefiere'' tener poca energía: toda la energía que tiene le falta al reservorio, que entonces tiene exponencialmente menos microestados.
+La partícula no ``prefiere'' tener poca energía: toda la energía que tiene le falta al reservorio, que entonces tiene exponencialmente menos microestados.
 
 \subsection*{Aplicación al dinero}
-Con $N$ personas y $M$ monedas, un microestado es un reparto de las monedas, y hay $\Omega(N,M)=\binom{M+N-1}{N-1}$ repartos. \textbf{En este modelo la igual probabilidad se demuestra:} en cada paso se escoge un pagador $i$ y un receptor $j$ con probabilidad $1/N^2$; si el reparto $B$ se obtiene de $A$ moviendo una moneda de $i$ a $j$, la transición inversa (de $j$ a $i$) tiene la misma probabilidad. La matriz de transición es simétrica, por lo que conserva la distribución uniforme, y como todo reparto es alcanzable desde cualquier otro, esa es la única distribución estacionaria. Una regla asimétrica, por ejemplo un pago que dependa del dinero del pagador, no tiene esta propiedad \cite{yr2009}.
+El modelo es el mismo problema con el dinero en el lugar de la energía. Con $N$ personas y $M$ monedas, un microestado es un reparto concreto, y el número de repartos se obtiene acomodando $M$ monedas y $N-1$ separadores en una fila: $W(N,M)=\binom{M+N-1}{N-1}$. \textbf{En este modelo la igual probabilidad se demuestra:} en cada paso se escoge un pagador $i$ y un receptor $j$ con probabilidad $1/N^2$; si el reparto $B$ se obtiene de $A$ moviendo una moneda de $i$ a $j$, la transición inversa tiene la misma probabilidad. La matriz de transición es simétrica, conserva la distribución uniforme y, como todo reparto es alcanzable desde cualquier otro, esa es la única distribución estacionaria. Una regla asimétrica, como un pago que dependa del dinero del pagador, no tiene esta propiedad \cite{yr2009}.
 
-Una persona con $m$ monedas deja $M-m$ para las otras $N-1$, así que $P(m)=\Omega(N-1,M-m)/\Omega(N,M)$. Con 3 personas y 3 monedas hay 10 repartos, en 4, 3, 2 y 1 de los cuales una persona tiene 0, 1, 2 y 3 monedas: \textbf{lo más probable es tener poco}, aunque nadie tenga ventaja. Para $N,M\gg1$, Stirling da $S=\ln\Omega\approx(M+N)\ln(M+N)-M\ln M-N\ln N$ ($k_B=1$, $T$ en monedas) y la ec.~\ref{eq:temperatura} con el dinero en lugar de la energía da
+Una persona con $m$ monedas deja $M-m$ para las otras $N-1$, así que, exactamente, $P(m)=W(N-1,M-m)/W(N,M)$. Con 3 personas y 3 monedas hay 10 repartos, en 4, 3, 2 y 1 de los cuales una persona tiene 0, 1, 2 y 3 monedas: \textbf{lo más probable es tener poco}, aunque nadie tenga ventaja. Como en la caja, la igualdad perfecta es un solo microestado entre los $W$ posibles. Para $N,M\gg1$, la aproximación de Stirling, $\ln x!\approx x\ln x-x$, da (con $k_B=1$, de modo que $T$ se mide en monedas)
+\begin{equation}
+  S=\ln W\approx(M+N)\ln(M+N)-M\ln M-N\ln N ,
+\end{equation}
+y la ec.~\ref{eq:temperatura}, con $M$ en lugar de $U$, da la temperatura
 \begin{equation}
   \frac{1}{T}=\frac{\partial S}{\partial M}=\ln\!\left(1+\frac{N}{M}\right),
   \qquad
   T=\frac{1}{\ln(1+1/\langle m\rangle)}=\langle m\rangle+\frac12-\frac{1}{12\langle m\rangle}+\dots
   \label{eq:tdinero}
 \end{equation}
-Como cada valor de $m$ es un solo estado, la ec.~\ref{eq:boltzmann} da la distribución \textbf{geométrica}
+Como cada valor de $m$ es un solo estado de la persona, la ec.~\ref{eq:boltzmann} da la distribución \textbf{geométrica}
 \begin{equation}
   P(m)=(1-q)\,q^{m},\qquad q=e^{-1/T}=\frac{\langle m\rangle}{1+\langle m\rangle},
   \label{eq:geometrica}
@@ -302,7 +335,7 @@ Esta comparación \textbf{no valida el modelo}: el modelo describe dinero acumul
 \end{table}
 
 \section*{Discusión}
-Si todos empiezan con 20 monedas, ¿de dónde sale la desigualdad? La condición inicial es un único microestado. Los intercambios conservan el dinero, pero recorren con igual probabilidad los $\Omega(N,M)$ repartos posibles, y casi todos ellos tienen forma geométrica. El equilibrio es el macroestado de máxima multiplicidad compatible con las restricciones del modelo (conservación y reglas simétricas), y ese macroestado no es uniforme. Cada moneda que acumula una persona es una moneda que el resto ya no puede repartirse.
+Si todos empiezan con 20 monedas, ¿de dónde sale la desigualdad? La condición inicial es un único microestado. Los intercambios conservan el dinero, pero recorren con igual probabilidad los $W(N,M)$ repartos posibles, y casi todos ellos tienen forma geométrica. El equilibrio es el macroestado de máxima multiplicidad compatible con las restricciones del modelo (conservación y reglas simétricas), y ese macroestado no es uniforme. Cada moneda que acumula una persona es una moneda que el resto ya no puede repartirse.
 
 \textbf{Lo que el trabajo demuestra}, dentro del modelo y con verificación numérica: la igual probabilidad de los repartos; la distribución geométrica con $T=1/\ln(1+1/\langle m\rangle)$ y $G=(1+\langle m\rangle)/(1+2\langle m\rangle)$; un tiempo de equilibrio de 3000 intercambios por persona; y el aumento del Gini con el límite de deuda según la ec.~\ref{eq:ginideuda}. \textbf{Lo que sugiere:} que la distribución de equilibrio sirve como línea base para comparar distribuciones reales, y que mecanismos como la deuda pueden elevar el Gini por encima de ella. \textbf{Lo que no demuestra:} que la desigualdad real se deba al azar o a la deuda, ni que la comparación con el Banco Mundial valide el modelo.
 
