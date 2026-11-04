@@ -81,7 +81,7 @@
           \centering
           \tiny{Licenciatura en Física\\%para usar en otras carreras consulte a su coordinador
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-            Modular: [I, II o III]\\ %elija el que corresponda ejemplo :  Modular : I
+            Modular: II\\ %elija el que corresponda ejemplo :  Modular : I
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             Página \thepage \hspace{1pt} de \pageref{LastPage}\\
           }\tabularnewline
@@ -321,12 +321,12 @@ La simulación con deudas sigue la ec.~\ref{eq:ginideuda} dentro de un error est
 \end{table}
 
 \subsection*{Comparación exploratoria con datos reales}
-Esta comparación no sirve para validar el modelo. El modelo habla de dinero acumulado, mientras que los datos del Banco Mundial miden ingreso o consumo, vienen de encuestas de años distintos y tienden a quedarse cortos con los más ricos \cite{wid}. Aun así ayuda a ver dónde se parecen y dónde no. La Fig.~\ref{fig:lorenz} compara la curva de Lorenz del modelo con las de cuatro de los países con mayor Gini y con la de México. Las curvas reales cruzan la del modelo. Entre los más pobres van por encima, porque en todos esos países el 10\% más pobre recibe entre 1.0 y 2.1\% del ingreso, más que el 0.5\% del modelo, posiblemente porque nadie puede vivir con ingreso cero. Cerca de los más ricos van por debajo, ya que el 10\% más rico recibe entre 42 y 47\%, frente al 33\% del modelo. Quien pierde es la clase media. Dos países con un Gini parecido pueden tener, entonces, formas de desigualdad muy distintas.
+Esta comparación no sirve para validar el modelo. El modelo habla de dinero acumulado, mientras que los datos del Banco Mundial miden ingreso o consumo, vienen de encuestas de años distintos y tienden a quedarse cortos con los más ricos \cite{wid}. Aun así ayuda a ver dónde se parecen y dónde no. La Fig.~\ref{fig:lorenz} compara la curva de Lorenz del modelo con las de dos de los países con mayor Gini, Namibia y Colombia, con la de México y con las de los tres países con menor Gini en estos datos, Eslovaquia, Bielorrusia y Eslovenia. Las curvas de Namibia y Colombia cruzan la del modelo. Entre los más pobres van por encima, porque su 10\% más pobre recibe el 1.0\% del ingreso, más que el 0.5\% del modelo, posiblemente porque nadie puede vivir con ingreso cero. Cerca de los más ricos van por debajo, y su 10\% más rico se queda con el 43 y el 47\%, frente al 33\% del modelo. Quien pierde es la clase media. Los países más iguales muestran otra cosa. Su curva va por encima de la del modelo en toda su extensión, muy cerca de la diagonal, con un Gini de apenas 0.24. Ahí el 10\% más pobre recibe entre 3.3 y 4.5\% del ingreso, el 10\% más rico alrededor del 20\% y el 60\% de en medio entre 55 y 58\%, mucho más que el 46\% del modelo. Son más iguales de lo que produciría el puro azar.
 
 \begin{figure}[!htb]
    \centering
    \includegraphics[width=0.42\textwidth]{fig_lorenz_paises}
-   \caption{Curvas de Lorenz del modelo, en el caso continuo, y de cuatro de los países con mayor Gini y México (datos reales del Banco Mundial \cite{pip}, dato más reciente de cada país). Las curvas de Botswana y Eswatini casi se superponen.}
+   \caption{Curvas de Lorenz del modelo, en el caso continuo, de dos países con Gini alto, de México y de los tres países con Gini más bajo en los datos del Banco Mundial (datos reales \cite{pip}, dato más reciente de cada país). Kiribati empata con Eslovenia y no se incluye.}
    \label{fig:lorenz}
 \end{figure}
 
@@ -338,10 +338,10 @@ Dentro del modelo, y con la simulación como prueba, el trabajo demuestra que lo
 El modelo deja fuera los precios, la producción, el ahorro, la herencia y los intereses, y sobre todo que la riqueza genera más riqueza, algo que puede concentrarla en muy pocas manos \cite{bm2000}. Su valor está en aislar el efecto del azar. Queda como hipótesis para un trabajo posterior que la desigualdad actual va más allá de la que produciría el intercambio aleatorio. La comparación exploratoria es compatible con esa idea en el extremo rico, que en Estados Unidos y Reino Unido sigue una ley de potencias \cite{dy2001}. Probarla requeriría datos de riqueza y corregir la información sobre los más ricos con datos fiscales \cite{enigh,wid}.
 
 \section*{Conclusiones}
-En un modelo en el que todas las personas son iguales, intercambian al azar y el dinero total no cambia, el equilibrio no es la igualdad. Es una distribución geométrica del dinero, la versión discreta de la distribución de Boltzmann, que se dedujo a partir de la aditividad de la entropía, de la primera ley y de la igual probabilidad de los repartos, demostrada aquí para este modelo. Tomar en cuenta que las monedas son enteras resultó necesario. Con 20 monedas por persona la temperatura es 20.50 y el Gini 0.5122, y la simulación coincide con estos valores dentro de dos errores estándar, cosa que no ocurre con la aproximación continua. En el modelo, permitir deudas aumenta la desigualdad en proporción al límite de endeudamiento. La comparación con datos de ingreso es solo exploratoria. El modelo ofrece así una referencia física contra la cual, con los datos adecuados, podrá ponerse a prueba si la desigualdad actual supera la que produciría el azar. El código se encuentra en la carpeta \texttt{econofisica\_dinero} del repositorio del proyecto.
+En un modelo en el que todas las personas son iguales, intercambian al azar y el dinero total no cambia, el equilibrio no es la igualdad. Es una distribución geométrica del dinero, la versión discreta de la distribución de Boltzmann, que se dedujo a partir de la aditividad de la entropía, de la primera ley y de la igual probabilidad de los repartos, demostrada aquí para este modelo. Tomar en cuenta que las monedas son enteras resultó necesario. Con 20 monedas por persona la temperatura es 20.50 y el Gini 0.5122, y la simulación coincide con estos valores dentro de dos errores estándar, cosa que no ocurre con la aproximación continua. En el modelo, permitir deudas aumenta la desigualdad en proporción al límite de endeudamiento. El modelo ofrece así una referencia física contra la cual, con los datos adecuados, podrá ponerse a prueba si la desigualdad actual supera la que produciría el azar. El código se encuentra en la carpeta \texttt{econofisica\_dinero} del repositorio del proyecto.
 
 \begin{thebibliography}{99}
-\small
+\small\setlength{\itemsep}{0pt}
 \bibitem{dy2000} A. Drăgulescu y V. M. Yakovenko, ``Statistical mechanics of money'', \emph{Eur. Phys. J. B}, Vol. 17, p. 723-729, 2000.
 \bibitem{yr2009} V. M. Yakovenko y J. B. Rosser, ``Colloquium: Statistical mechanics of money, wealth, and income'', \emph{Rev. Mod. Phys.}, Vol. 81, p. 1703-1725, 2009.
 \bibitem{dy2001} A. Drăgulescu y V. M. Yakovenko, ``Exponential and power-law probability distributions of wealth and income in the United Kingdom and the United States'', \emph{Physica A}, Vol. 299, p. 213-221, 2001.
