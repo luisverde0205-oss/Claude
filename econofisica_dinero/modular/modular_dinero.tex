@@ -111,14 +111,14 @@
 \thispagestyle{fancy}
 
 \section*{Resumen}
-Este trabajo estudia el modelo de intercambio aleatorio de Drăgulescu y Yakovenko, en el que las personas se comportan como las moléculas de un gas y el dinero hace el papel de la energía. Todas empiezan con la misma cantidad e intercambian monedas al azar, sin que el total cambie. A partir de la aditividad de la entropía, de la primera ley y de la igual probabilidad de los microestados, que en este modelo puede demostrarse, se deduce que en equilibrio el dinero sigue la distribución de Boltzmann, con un coeficiente de Gini cercano a $1/2$. Una simulación propia con 2000 personas lo confirma dentro de dos errores estándar. El equilibrio llega tras unos 3000 intercambios por persona. Permitir deudas aumenta la desigualdad del modelo, y una comparación con las curvas de Lorenz de varios países, solo exploratoria porque esos datos miden ingreso y no dinero acumulado, muestra países más desiguales y más iguales que el azar.
+Este trabajo estudia el modelo de intercambio aleatorio de Drăgulescu y Yakovenko, en el que las personas se comportan como las moléculas de un gas y el dinero hace el papel de la energía. Todas empiezan con la misma cantidad e intercambian monedas al azar, sin que el total cambie. A partir de la aditividad de la entropía, de la primera ley y de la igual probabilidad de los microestados, que en este modelo puede demostrarse, se deduce que en equilibrio el dinero sigue la distribución de Boltzmann, con un coeficiente de Gini cercano a $1/2$. Una simulación propia con 2000 personas lo confirma dentro de dos errores estándar. El equilibrio llega tras unos 3000 intercambios por persona. Una comparación con las curvas de Lorenz de varios países, solo exploratoria porque esos datos miden ingreso y no dinero acumulado, muestra países más desiguales y más iguales que el azar.
 
 \section*{Introducción}
 La desigualdad económica es uno de los grandes temas de la economía política y de las relaciones internacionales. Casi siempre se explica por causas concretas, como la educación, la herencia o el poder. Aquí se hace una pregunta anterior. Si todas las personas fueran idénticas y siguieran las mismas reglas, ¿cómo quedaría repartido el dinero?
 
 La física ya conoce un caso parecido. En un gas todas las moléculas son iguales y, aun así, en equilibrio no todas tienen la misma energía, porque existen muchísimas más maneras de repartirla de forma desigual que de forma pareja \cite{reif}. Drăgulescu y Yakovenko trasladaron esta idea al dinero \cite{dy2000}. En su modelo las personas son las moléculas, el dinero es la energía y cada compra o venta es un choque en el que el total se conserva (Tabla~\ref{tab:analogia}).
 
-Aquí se deduce cómo se reparte el dinero en equilibrio, tomando en cuenta que las monedas son enteras, y se comprueba con una simulación propia. Después se estudia el efecto de las deudas y, al final, se compara el modelo con datos reales \cite{pip}.
+Aquí se deduce cómo se reparte el dinero en equilibrio, tomando en cuenta que las monedas son enteras, y se comprueba con una simulación propia. Al final se compara el modelo con datos reales \cite{pip}.
 
 \begin{table}[H]
   \begin{center}
@@ -236,22 +236,12 @@ La curva de Lorenz indica qué fracción del dinero total tiene cada fracción d
 \end{equation}
 que vale $21/41=0.5122$ con 20 monedas por persona. Es un poco mayor que $1/2$ porque, al ser enteras las monedas, más gente queda exactamente en cero.
 
-\subsection*{Extensión con deudas}
-Drăgulescu y Yakovenko también analizan qué pasa si cada persona puede tener saldo negativo hasta un límite $-m_d$, sin intereses \cite{dy2000}. La deducción anterior sirve para la variable $m'=m+m_d$, que nunca es negativa y tiene promedio $\langle m\rangle+m_d$. Resulta otra distribución geométrica, con $q=(\langle m\rangle+m_d)/(1+\langle m\rangle+m_d)$ y $T\approx\langle m\rangle+m_d+\frac12$. Poder endeudarse sube la temperatura aunque no se agregue dinero. La fracción de personas con deuda es $1-q^{m_d}$, y como recorrer la distribución no cambia la diferencia entre dos personas,
-\begin{equation}
-  G=\frac{1}{1+q}\left(1+\frac{m_d}{\langle m\rangle}\right)
-  \;\xrightarrow{\ \text{caso continuo}\ }\;
-  \frac12\left(1+\frac{m_d}{\langle m\rangle}\right).
-  \label{eq:ginideuda}
-\end{equation}
-Este Gini puede pasar de 1, algo posible solo cuando hay riqueza negativa.
-
 \section*{Metodología}
 Los resultados del modelo son datos simulados. La simulación se escribió en Python con NumPy y Numba \cite{numpy} y reproduce el modelo de la ref.~\cite{dy2000}. Hay 2000 personas con 20 monedas cada una. En cada paso se eligen al azar una persona que paga y otra que recibe, y si la primera tiene al menos una moneda se la entrega a la segunda. Cada simulación tiene $10^{4}$ intercambios por persona, es decir $2\times10^{7}$ pasos, y se repitió 40 veces con distintas secuencias de números aleatorios. En todas se comprobó que el dinero total se mantenía.
 
 Se reporta el promedio de las repeticiones con su error estándar. La teoría se tomó de dos formas. Una es la distribución geométrica para infinitas personas, y la otra el valor esperado para 2000, que se obtiene escogiendo al azar 2000 repartos posibles y midiéndolos igual que la simulación. La diferencia se expresa como $z$, en errores estándar.
 
-Se tomó como tiempo de equilibrio el momento a partir del cual el Gini promedio ya no se aleja del valor esperado más de dos errores estándar. Con 3 personas y 3 monedas se registró un millón de veces el reparto, para comprobar con una prueba $\chi^2$ que todos aparecen igual de seguido. Para las deudas se usaron límites de 0, 5, 10 y 20 monedas y 20 repeticiones. Los datos reales provienen del Banco Mundial \cite{pip}.
+Se tomó como tiempo de equilibrio el momento a partir del cual el Gini promedio ya no se aleja del valor esperado más de dos errores estándar. Con 3 personas y 3 monedas se registró un millón de veces el reparto, para comprobar con una prueba $\chi^2$ que todos aparecen igual de seguido. Los datos reales provienen del Banco Mundial \cite{pip}.
 
 \FloatBarrier
 \section*{Resultados}
@@ -298,27 +288,6 @@ La Fig.~\ref{fig:gini} sigue el Gini promedio conforme pasan los intercambios. S
 
 Los resultados no dependen de los detalles de la simulación. Con 500 personas el Gini es $0.5138\pm0.0028$, frente a 0.5113 esperado. Con 10 monedas por persona sube a $0.5230\pm0.0014$, como predice la ec.~\ref{eq:ginidiscreto}. Si cada pareja reparte su dinero con una fracción al azar, el resultado es $0.4993\pm0.0015$, cerca del $1/2$ que corresponde a esa regla continua.
 
-\subsection*{Modelo con deudas}
-La simulación con deudas sigue la ec.~\ref{eq:ginideuda} dentro de un error estándar en los cuatro casos (Tabla~\ref{tab:deuda}). Basta un límite de deuda de la cuarta parte del dinero promedio para que el Gini pase de 0.51 a 0.64 y casi una de cada cinco personas quede endeudada. Con un límite de 10 monedas, la mitad más pobre debe en conjunto más de lo que tiene.
-
-\begin{table}[!htb]
-  \begin{center}
-    \footnotesize\setlength{\tabcolsep}{3pt}
-    \begin{tabular}{|c|c|c|c|c|c|}
-      \hline
-      $m_d$ & $T$ & \textbf{Gini simulado} & \textbf{Gini exacto} & \textbf{Con deuda} & \textbf{Mitad más pobre} \\
-      \hline
-      0 & 20.50 & $0.5122\pm0.0015$ & 0.5122 & 0\% & 14.5\% (14.5\%) \\
-      5 & 25.50 & $0.6376\pm0.0015$ & 0.6373 & 17.9\% (17.8\%) & 5.8\% (5.8\%) \\
-      10 & 30.50 & $0.7633\pm0.0017$ & 0.7623 & 28.0\% (28.0\%) & $-2.9$\% ($-2.8$\%) \\
-      20 & 40.50 & $1.0145\pm0.0026$ & 1.0123 & 39.2\% (39.0\%) & $-20.2$\% ($-20.2$\%) \\
-      \hline
-    \end{tabular}
-  \end{center}
-  \caption{Modelo con deudas (datos simulados, 20 repeticiones, promedio de 20 monedas). Entre paréntesis aparece la teoría exacta. La última columna es la parte del dinero total que tiene la mitad más pobre.}
-  \label{tab:deuda}
-\end{table}
-
 \subsection*{Comparación exploratoria con datos reales}
 Esta comparación no sirve para validar el modelo. El modelo habla de dinero acumulado, mientras que los datos del Banco Mundial miden ingreso o consumo, vienen de encuestas de años distintos y tienden a quedarse cortos con los más ricos \cite{wid}. Aun así ayuda a ver dónde se parecen y dónde no. La Fig.~\ref{fig:lorenz} compara la curva de Lorenz del modelo con las de dos de los países con mayor Gini, Namibia y Colombia, con la de México y con las de los tres países con menor Gini en estos datos, Eslovaquia, Bielorrusia y Eslovenia. Las curvas de Namibia y Colombia cruzan la del modelo. Entre los más pobres van por encima, porque su 10\% más pobre recibe el 1.0\% del ingreso, más que el 0.5\% del modelo, posiblemente porque nadie puede vivir con ingreso cero. Cerca de los más ricos van por debajo, y su 10\% más rico se queda con el 43 y el 47\%, frente al 33\% del modelo. Quien pierde es la clase media. Los países más iguales muestran otra cosa. Su curva va por encima de la del modelo en toda su extensión, muy cerca de la diagonal, con un Gini de apenas 0.24. Ahí el 10\% más pobre recibe entre 3.3 y 4.5\% del ingreso, el 10\% más rico alrededor del 20\% y el 60\% de en medio entre 55 y 58\%, mucho más que el 46\% del modelo. Son más iguales de lo que produciría el puro azar.
 
@@ -333,12 +302,12 @@ Esta comparación no sirve para validar el modelo. El modelo habla de dinero acu
 \section*{Discusión}
 Si todos empiezan con 20 monedas, ¿de dónde sale la desigualdad? El punto de partida es un solo reparto entre una cantidad enorme de repartos posibles. Los intercambios hacen que el sistema los recorra todos con la misma probabilidad, y casi todos tienen forma geométrica. En equilibrio se ve el tipo de reparto que puede lograrse de más maneras, y ese no es el igualitario. Cada moneda que acumula una persona es una moneda que el resto ya no puede repartirse. Esto no quiere decir que la física obligue a la desigualdad en general, sino que con las reglas de este modelo el equilibrio es desigual.
 
-La deducción y la simulación coinciden, pero solo dentro del modelo. Lo que el trabajo sugiere es que esta distribución puede servir como referencia para estudiar distribuciones reales. No demuestra que la desigualdad real se deba al azar o al crédito, ni que la comparación con el Banco Mundial confirme el modelo.
+La deducción y la simulación coinciden, pero solo dentro del modelo. Lo que el trabajo sugiere es que esta distribución puede servir como referencia para estudiar distribuciones reales. No demuestra que la desigualdad real se deba al azar, ni que la comparación con el Banco Mundial confirme el modelo.
 
 El modelo deja fuera los precios, la producción, el ahorro, la herencia y los intereses, y sobre todo que la riqueza genera más riqueza, algo que puede concentrarla en muy pocas manos \cite{bm2000}. Su valor está en aislar el efecto del azar. Queda como hipótesis para un trabajo posterior que la desigualdad actual va más allá de la que produciría el intercambio aleatorio. La comparación exploratoria es compatible con esa idea en el extremo rico, que en Estados Unidos y Reino Unido sigue una ley de potencias \cite{dy2001}. Probarla requeriría datos de riqueza y corregir la información sobre los más ricos con datos fiscales \cite{enigh,wid}.
 
 \section*{Conclusiones}
-La desigualdad del modelo no nace de diferencias entre las personas, porque no las hay, sino de contar. Hay muchísimas más maneras de repartir el dinero de forma desigual que de forma pareja, y un sistema que intercambia al azar termina en el reparto que puede lograrse de más maneras. La mecánica estadística permite predecir ese reparto con precisión, y la simulación lo reproduce. Basta además cambiar una regla, como permitir deudas, para que la desigualdad crezca. Por eso el modelo sirve como punto de comparación. Frente a él, unos países resultan más desiguales que el azar y otros más iguales, y entender qué los separa queda como la pregunta para un trabajo posterior. El código se encuentra en la carpeta \texttt{econofisica\_dinero} del repositorio del proyecto.
+La desigualdad del modelo no nace de diferencias entre las personas, porque no las hay, sino de contar. Hay muchísimas más maneras de repartir el dinero de forma desigual que de forma pareja, y un sistema que intercambia al azar termina en el reparto que puede lograrse de más maneras. La mecánica estadística permite predecir ese reparto con precisión, y la simulación lo reproduce. Por eso el modelo sirve como punto de comparación. Frente a él, unos países resultan más desiguales que el azar y otros más iguales, y entender qué los separa queda como la pregunta para un trabajo posterior. El código se encuentra en la carpeta \texttt{econofisica\_dinero} del repositorio del proyecto.
 
 \begin{thebibliography}{99}
 \small\setlength{\itemsep}{0pt}
