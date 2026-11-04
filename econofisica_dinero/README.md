@@ -26,6 +26,7 @@ Genera `figuras/simulacion_dinero.png` e imprime la comparación con la teoría.
 ## Documento modular
 - `modelo.py`: núcleo del modelo (simulación, entropía, Gini, Lorenz, conteo exacto).
 - `generar_resultados.py`: caso base (40 semillas) y robustez (20 semillas) contra la teoría exacta discreta y el ensamble exacto; genera `figuras/fig1..fig5` y `resultados/*.csv` (≈1.5 min).
+- `figuras_documento.py`: figuras del documento: distribución de Boltzmann teórica contra la del modelo aleatorio (`fig_boltzmann.png`) y Gini contra número de intercambios (`fig_gini_tiempo.png`) (≈20 s).
 - `convergencia.py`: tiempo de equilibrio, fluctuaciones contra N e igual probabilidad de microestados; genera `fig11_convergencia.png` y `resultados/convergencia.csv` (≈2 min).
 - `deudas.py`: modelo con deuda (límite m_d); genera `fig8_deudas.png` y `resultados/deudas.csv` (≈1.5 min).
 - `banco_nacional.py`: banco nacional que inyecta monedas marcadas por tres canales (universal, apoyos, financiero); genera `fig9_rastreo_monedas.png`, `fig10_inyeccion_gini.png` y `resultados/banco_nacional.csv` (≈1.5 min).

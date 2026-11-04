@@ -241,24 +241,14 @@ Para la convergencia se promedió el Gini de 40 semillas en el tiempo y se defin
 
 \section*{Resultados}
 
-\subsection*{Igual probabilidad, convergencia y fluctuaciones}
-Con 3 personas y 3 monedas, los 10 repartos aparecen con frecuencia $0.100$ ($\chi^2=5.8$, 9 grados de libertad, $p=0.76$), como exige la simetría de la dinámica (Fig.~\ref{fig:convergencia}). El Gini promedio sube y, a partir de cierto momento, deja de cambiar y solo fluctúa alrededor de su valor de equilibrio (panel 1). Un ajuste $G(t)=G_{\rm eq}-A_1e^{-t/\tau_1}-A_2e^{-t/\tau_2}$ da dos tiempos de relajación, $\tau_1=112\pm5$ y $\tau_2=586\pm24$ intercambios por persona; el lento corresponde a llenar la cola de los más ricos, a la que solo se llega con una larga racha de ganancias. \textbf{El equilibrio se alcanza a los 3000 intercambios por persona}, y las simulaciones usan $10^{4}$. La dispersión del Gini entre semillas disminuye como $N^{-1/2}$ y coincide con la del ensamble exacto.
+\subsection*{La distribución de Boltzmann aparece sola}
+La Fig.~\ref{fig:boltzmann}(a) muestra la forma de la distribución de Boltzmann que predice la teoría (ec.~\ref{eq:geometrica}) para un promedio de 20 monedas: el valor más probable es no tener nada, la probabilidad disminuye conforme aumenta el dinero, y el 62\% de las personas tiene menos que el promedio. La Fig.~\ref{fig:boltzmann}(b) muestra lo que produce el modelo aleatorio, juntando las 40 repeticiones (80\,000 personas). Aunque todas empezaron con exactamente 20 monedas, el histograma de la simulación cae sobre la curva teórica. La Tabla~\ref{tab:base} lo cuantifica: todas las cantidades coinciden con el ensamble exacto dentro de dos errores estándar, mientras que el límite continuo se aleja hasta 11 errores estándar.
 
 \begin{figure}[H]
    \centering
-   \includegraphics[width=\textwidth]{fig11_convergencia}
-   \caption{\textbf{Datos simulados.} (1) Gini contra número de intercambios: cinco simulaciones individuales (gris) y promedio de 40 con su banda de $\pm2$ errores estándar (rojo); la línea discontinua es el valor de equilibrio. (2) Dispersión del Gini contra $N$. (3) Frecuencia de los 10 repartos de 3 monedas entre 3 personas.}
-   \label{fig:convergencia}
-\end{figure}
-
-\subsection*{Distribución de equilibrio}
-Aunque todos empezaron con 20 monedas, en equilibrio el dinero sigue la distribución geométrica y el Gini pasa de 0 a su valor de equilibrio (Fig.~\ref{fig:equilibrio}). La Tabla~\ref{tab:base} muestra que todas las cantidades coinciden con el ensamble exacto dentro de dos errores estándar, mientras que el límite continuo se aleja hasta 11 errores estándar: la distinción entre el modelo discreto y su límite es medible.
-
-\begin{figure}[H]
-   \centering
-   \includegraphics[width=0.95\textwidth]{fig_equilibrio}
-   \caption{\textbf{Datos simulados} (una semilla, $N=2000$, $m_0=20$). Izquierda: distribución tras $10^{4}$ intercambios por persona, en escala logarítmica. Derecha: evolución del Gini.}
-   \label{fig:equilibrio}
+   \includegraphics[width=\textwidth]{fig_boltzmann}
+   \caption{(a) Distribución de Boltzmann teórica para monedas enteras, con promedio de 20 monedas; el área sombreada son las personas con menos que el promedio. (b) Distribución obtenida con el modelo aleatorio (\textbf{datos simulados}, 40 repeticiones de 2000 personas, $10^{4}$ intercambios por persona) comparada con la teórica; la línea roja marca el dinero inicial de todos.}
+   \label{fig:boltzmann}
 \end{figure}
 
 \begin{table}[H]
@@ -281,6 +271,16 @@ Aunque todos empezaron con 20 monedas, en equilibrio el dinero sigue la distribu
   \caption{Caso base (\textbf{datos simulados}) contra el ensamble exacto de $N=2000$, la teoría para $N\to\infty$ y el límite continuo. $z$: diferencia con el ensamble en errores estándar. La entropía del ensamble es menor que la de $N\to\infty$ por el sesgo de muestra finita del estimador.}
   \label{tab:base}
 \end{table}
+
+\subsection*{Convergencia y comprobaciones}
+La Fig.~\ref{fig:gini} muestra el Gini promedio de las 40 repeticiones contra el número de intercambios. Sube rápidamente desde 0 y, a partir de unos \textbf{3000 intercambios por persona}, deja de cambiar y se queda en el valor teórico; las simulaciones usan $10^{4}$. Un ajuste $G(t)=G_{\rm eq}-A_1e^{-t/\tau_1}-A_2e^{-t/\tau_2}$ da dos tiempos de relajación, $\tau_1=112\pm5$ y $\tau_2=586\pm24$ intercambios por persona; el lento corresponde a llenar la cola de los más ricos, a la que solo se llega con una larga racha de ganancias. Además, con 3 personas y 3 monedas los 10 repartos posibles aparecieron con la misma frecuencia, $0.100$ ($\chi^2=5.8$, 9 grados de libertad, $p=0.76$), como exige la igual probabilidad, y la dispersión del Gini entre repeticiones disminuye como $N^{-1/2}$, igual que en el ensamble exacto.
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=0.62\textwidth]{fig_gini_tiempo}
+   \caption{Gini contra número de intercambios por persona (\textbf{datos simulados}, promedio de 40 repeticiones; la banda es $\pm2$ errores estándar). La línea discontinua es el valor teórico y la punteada marca el equilibrio.}
+   \label{fig:gini}
+\end{figure}
 
 \textbf{Robustez.} Con 20 semillas, el Gini coincide con el ensamble exacto dentro de $1.1$ errores estándar con $N=500$ ($0.5138\pm0.0028$ contra $0.5113$), con $m_0=10$ ($0.5230\pm0.0014$ contra $0.5236$, mayor por ser menor $\langle m\rangle$, como predice la ec.~\ref{eq:ginidiscreto}) y con una regla continua en que cada pareja reparte su dinero con una fracción aleatoria ($0.4993\pm0.0015$ contra $1/2$). El caso $m_0=40$, $\Delta m=2$ reproduce exactamente al caso base, lo que comprueba que el modelo es invariante de escala.
 
