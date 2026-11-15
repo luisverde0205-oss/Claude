@@ -1,6 +1,6 @@
 # Prompt para reestructurar y revisar un dossier de debate CNUD
 
-Copia todo lo que está debajo de la línea, pega al final el dossier que quieres revisar y envíalo a la IA. Si el dossier está en Word o PDF, adjúntalo además de pegarlo.
+Copia todo lo que está debajo de la línea, pega al final el dossier que quieres revisar y envíalo a la IA. Si el dossier está en Word o PDF, adjúntalo además de pegarlo. La IA te devolverá el dossier en PDF y en Word. Para eso necesitas una IA que pueda crear archivos, como Claude o ChatGPT con la opción de archivos activada.
 
 ---
 
@@ -54,7 +54,7 @@ Tu trabajo se limita a la introducción. No agregues secciones de réplica conti
 
 Las observaciones deben verse claramente distintas del texto del equipo, para que se puedan borrar fácilmente antes del congreso.
 
-- Si puedes generar un archivo Word, inserta cada observación como un comentario de Word anclado al texto que señala. Si no puedes usar comentarios, ponla en un párrafo aparte, justo debajo del elemento que señala, en letra roja y cursiva, empezando con las palabras Observación de revisión.
+- Escribe cada observación en un párrafo aparte, justo debajo del elemento que señala, en letra roja y cursiva, empezando con las palabras Observación de revisión. No uses comentarios de Word, porque no se ven en el PDF.
 - Si entregas el dossier en texto, escribe cada observación en una línea aparte que empiece con >> Observación de revisión.
 - Cada observación dice qué criterio de la boleta está en riesgo, cuál es el problema y qué se sugiere hacer, en una o dos frases.
 - Las observaciones no cuentan como texto del dossier. No se resaltan en amarillo y no tienen que seguir las reglas de estilo.
@@ -133,7 +133,7 @@ Aplican al texto del dossier, incluidas tablas y propuesta. No aplican a las obs
 Entrega, en este orden, y nada más:
 
 1. **Tabla de auditoría** de cada postura con estas columnas: criterio de la boleta, calificación estimada de 0 a 2 tal como está el dossier, y qué tendría que hacer el equipo para llegar a 2.
-2. **Dossier reestructurado completo**, con las observaciones dentro, el resaltado y el formato descritos. Si puedes generar un archivo Word, hazlo. Si no, entrégalo en texto con las tablas en formato de tabla.
+2. **Dossier reestructurado completo en PDF**, con las observaciones dentro, el resaltado amarillo, las tablas y el formato descritos, listo para descargar. Entrega también la versión en Word, para que el equipo pueda editarla. Revisa que en el PDF se vean el resaltado, las tablas completas y las observaciones en rojo. Si no puedes generar archivos, dilo al inicio de tu respuesta y entrega el dossier en texto, con las tablas en formato de tabla y el resaltado marcado con == y ==.
 3. **Conteo de palabras resaltadas** por postura y tiempo estimado de lectura.
 4. **Resumen de observaciones**, una lista corta ordenada de mayor a menor impacto en la boleta, para que el equipo sepa qué atender primero.
 
