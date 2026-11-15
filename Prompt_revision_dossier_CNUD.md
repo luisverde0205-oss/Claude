@@ -21,7 +21,7 @@ Cada criterio se califica de 0 a 2 (0 = el equipo no lo hizo, 1 = lo hizo median
 
 Total de la introducción: 16 puntos.
 
-Para tu información, el resto de la boleta evalúa la réplica continua (identificación, crítica, explicación, evidencia, razonamiento, defensa de argumentos, análisis propio, propuesta, dominio), la conclusión (puntos de choque y síntesis) y generalidades (trabajo en equipo, respeto, cumplimiento del reglamento). El dossier debe dejar material de respaldo para la réplica, pero tu corrección se centra en la introducción.
+Tu trabajo se limita a la introducción. No agregues secciones de réplica continua, puntos débiles, posibles ataques, respuestas a la contraparte, cierre persuasivo ni conclusión. El equipo ya tiene cubierta la réplica.
 
 ## 2. Paso uno. Auditoría antes de corregir
 
@@ -69,7 +69,7 @@ Las secciones son:
 
 | Afirmación | Evidencia, dato | Evidencia, fuente | Razonamiento y vínculo con la tesis |
 |---|---|---|---|
-| Argumento 1, nombre del argumento. Criterio de justicia. Afirmación en una frase. | Dato principal con cifra y año. Datos de respaldo. | Fuente del dato principal. Fuentes de respaldo. | Estos datos justifican la tesis porque... Desarrollo adicional para la réplica. |
+| Argumento 1, nombre del argumento. Criterio de justicia. Afirmación en una frase. | Dato principal con cifra y año. Datos de respaldo. | Fuente del dato principal. Fuentes de respaldo. | Estos datos justifican la tesis porque... Desarrollo adicional. |
 
 Reglas de la tabla:
 
@@ -77,6 +77,7 @@ Reglas de la tabla:
 - Cada argumento tiene al menos un dato con cifra y año, y su fuente.
 - El razonamiento siempre abre con Estos datos justifican la tesis porque, en la postura a favor, o Estos datos refutan la tesis porque, en la postura en contra, y une el dato con la tesis de forma explícita.
 - Los argumentos deben responder a los puntos de choque del tema si el material del congreso los indica.
+- El razonamiento debe afirmar con seguridad. No agregues advertencias que debiliten el propio argumento, como que el dato no debe generalizarse. Si un dato tiene límites, elige una redacción precisa que no lo exagere, pero no lo pongas en duda dentro del dossier.
 
 **Propuesta, 2 puntos.** Una propuesta SMART desarrollada letra por letra, cada letra en su propio bloque con la letra grande en negritas y su nombre:
 
@@ -90,7 +91,7 @@ La propuesta no puede ser solo jurídica. Por la corrupción, debe incluir garan
 
 ## 4. Paso tres. Resaltado para la introducción de cuatro minutos
 
-La introducción dura cuatro minutos. Resalta en amarillo solo lo que el equipo debe leer en voz alta. Todo lo demás queda en el dossier, sin resaltar, como respaldo para la réplica continua y la conclusión. Si no puedes aplicar resaltado amarillo directamente, encierra el texto a leer entre == y == para que el equipo lo resalte después en Word, y avisa que lo hiciste así.
+La introducción dura cuatro minutos. Resalta en amarillo solo lo que el equipo debe leer en voz alta. Todo lo demás queda en el dossier, sin resaltar. Si no puedes aplicar resaltado amarillo directamente, encierra el texto a leer entre == y == para que el equipo lo resalte después en Word, y avisa que lo hiciste así.
 
 Debe quedar resaltado, como mínimo, lo que la boleta califica:
 
@@ -104,6 +105,9 @@ Debe quedar resaltado, como mínimo, lo que la boleta califica:
 Límite de lectura: entre 450 y 550 palabras resaltadas por postura. Cuenta las palabras resaltadas e informa el total. Si te pasas, quita el resaltado de lo que no califica la boleta antes que de lo que sí califica. No borres contenido para recortar tiempo, solo quita el resaltado.
 
 ## 5. Reglas de estilo dentro del dossier
+
+Antes de entregar, revisa que ninguna sección ni letra de la propuesta aparezca duplicada y que no queden párrafos sueltos fuera de su sección.
+
 
 Aplican a todo el texto del dossier, incluidas tablas y propuesta. No aplican a tu reporte de auditoría.
 
@@ -122,14 +126,15 @@ Aplican a todo el texto del dossier, incluidas tablas y propuesta. No aplican a 
 
 ## 7. Qué debes entregar
 
-Entrega, en este orden:
+Entrega, en este orden, y nada más:
 
 1. **Tabla de auditoría** del dossier original, criterio por criterio, con la calificación estimada de 0 a 2 y lo que falta.
 2. **Dossier corregido completo**, con la estructura, el resaltado y el estilo descritos. Si puedes generar un archivo Word, hazlo. Si no, entrégalo en texto con las tablas en formato de tabla y el resaltado marcado con == y ==.
 3. **Conteo de palabras resaltadas** por postura y tiempo estimado de lectura.
 4. **Lista de cambios importantes**, breve, explicando qué corregiste y por qué, sobre todo en definiciones, fuentes y razonamientos.
 5. **Lista de datos por verificar**, con lo que el equipo debe confirmar en la fuente original antes del congreso.
-6. **Puntos débiles para la réplica**, tres a cinco ataques que probablemente hará la contraparte contra cada postura y cómo responderlos en una frase.
+
+No incluyas en el dossier secciones de réplica continua, puntos débiles, precisiones para la réplica, cierre persuasivo ni conclusión.
 
 ## 8. Dossier a revisar
 
