@@ -1,0 +1,41 @@
+Cada rayo que llega a una superficie, sea plana o curva, obedece la ley de Snell,
+\begin{equation}
+n_1 \sin\theta_1 = n_2 \sin\theta_2 ,
+\label{eq:snell}
+\end{equation}
+donde los ángulos se miden desde la normal en el punto donde el rayo toca la superficie.
+
+En una superficie curva la normal cambia de punto a punto. En un círculo es fácil saber hacia dónde apunta, porque siempre coincide con el radio, y de ahí sale todo lo demás.
+
+\subsection{Ecuación de una superficie refractante esférica}
+Supongamos que la frontera entre un medio de índice $n_1$ y otro de índice $n_2$ es un arco de círculo de radio $R$. Un objeto a una distancia $s_o$ de la superficie forma una imagen a una distancia $s_i$ del otro lado, y si los rayos están cerca del eje y llegan poco inclinados, a lo que se le llama aproximación paraxial, las dos distancias se relacionan con
+\begin{equation}
+\frac{n_1}{s_o} + \frac{n_2}{s_i} = \frac{n_2 - n_1}{R} .
+\label{eq:superficie}
+\end{equation}
+
+Cuando los rayos llegan paralelos, como en esta práctica, es como si el objeto estuviera infinitamente lejos. El primer término desaparece y la distancia a la que se juntan los rayos, llamada distancia focal, queda
+\begin{equation}
+f = \frac{n_2 \, R}{n_2 - n_1} .
+\label{eq:focal}
+\end{equation}
+Para luz que pasa del aire, con $n_1 = 1$, al acrílico, con $n_2 = 1.49$, esto da $f = 3.04 \, R$.
+
+\subsection{Un cilindro completo}
+Hay un problema con ese resultado. Si la pieza es un cilindro, su diámetro es $2R$, y como $3.04\,R$ es más que eso, los rayos llegan a la cara de salida antes de haberse juntado; ahí se encuentran con una segunda superficie curva, ahora del acrílico al aire, que los vuelve a doblar hacia el eje. Aplicando la ecuación \eqref{eq:superficie} dos veces se obtiene que el foco de un cilindro completo está, medido desde su centro, a
+\begin{equation}
+f = \frac{n \, R}{2 \, (n - 1)} ,
+\label{eq:cilindro}
+\end{equation}
+lo que para el acrílico da $f = 1.52 \, R$. Restando el radio, la distancia del foco a la cara de salida del cilindro es
+\begin{equation}
+d = f - R = 0.52 \, R ,
+\label{eq:distancia}
+\end{equation}
+es decir, los rayos deberían juntarse muy cerca de la pieza, a poco más de la mitad del radio.
+
+\subsection{Aberración esférica}
+La ecuación \eqref{eq:superficie} solo es exacta para rayos muy cercanos al eje. Los rayos que entran lejos del centro llegan a la superficie con ángulos grandes, y como el seno de la ley de Snell crece cada vez más despacio, estos rayos terminan doblándose de más y cruzan el eje antes que los centrales. El resultado es que no existe un punto de enfoque único, sino una zona alargada donde los rayos se van cruzando unos con otros. A este defecto se le llama aberración esférica, y la curva brillante que forman los rayos al cruzarse se conoce como cáustica.
+
+\subsection{Dispersión}
+Por último, el índice de refracción de un material cambia un poco con el color de la luz: es algo mayor para el azul que para el rojo. Por eso, cuando la fuente emite luz blanca, cada color se dobla de manera ligeramente distinta y en los bordes de los rayos aparecen franjas de colores.
