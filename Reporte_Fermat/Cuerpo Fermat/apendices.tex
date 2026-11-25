@@ -1,0 +1,43 @@
+\subsection{Ajuste por mínimos cuadrados}
+La parábola de la ecuación \eqref{eq:ajuste} se obtuvo buscando los coeficientes $\alpha$, $\beta$ y $\gamma$ de la función $L(x) = \alpha x^2 + \beta x + \gamma$ que hacen lo más pequeña posible la suma
+\begin{equation}
+S = \sum_{k=1}^{7} \left( L_k - \alpha x_k^2 - \beta x_k - \gamma \right)^2 ,
+\label{eq:minimos}
+\end{equation}
+donde $x_k$ y $L_k$ son los valores de la tabla \ref{tab:datos}. El vértice de cualquier parábola está en
+\begin{equation}
+x_{min} = -\frac{\beta}{2\alpha} = \frac{0.9927}{2(0.0393)} = 12.63 \text{ cm}.
+\label{eq:vertice}
+\end{equation}
+
+\subsection{Calidad del ajuste}
+El coeficiente de determinación compara qué tanto se alejan los datos de la curva contra qué tanto se alejan de su promedio $\bar{L}$:
+\begin{equation}
+R^2 = 1 - \frac{\sum (L_k - L(x_k))^2}{\sum (L_k - \bar{L})^2} = 0.9976 .
+\label{eq:r2}
+\end{equation}
+Un valor tan cercano a uno indica que la parábola describe muy bien los datos en el intervalo medido.
+
+\subsection{Comparación punto por punto}
+La tabla \ref{tab:comparacion} pone lado a lado lo medido y lo que da la parábola en cada punto.
+
+\begin{center}
+\begin{tabular}{cccc}
+\hline
+Punto & $L$ medida & $L$ ajuste & Diferencia \\
+ & (cm) & (cm) & (cm) \\
+\hline
+P1 & 40.4 & 40.24 & $-0.16$ \\
+P2 & 39.7 & 39.86 & 0.16 \\
+P3 & 39.5 & 39.54 & 0.04 \\
+P4 & 39.4 & 39.39 & $-0.01$ \\
+P5 & 40.5 & 40.54 & 0.04 \\
+P6 & 42.1 & 41.98 & $-0.12$ \\
+P7 & 45.6 & 45.65 & 0.05 \\
+\hline
+\end{tabular}
+\captionof{table}{Longitud medida contra la longitud que predice la ecuación \eqref{eq:ajuste}.}
+\label{tab:comparacion}
+\end{center}
+
+Ninguna diferencia pasa de dos milímetros, que es del orden de la precisión con la que se puede medir con la regla.

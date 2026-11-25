@@ -1,0 +1,49 @@
+Para hablar de cómo viaja la luz conviene empezar por su velocidad. En el vacío la luz se mueve a una velocidad $c$ de casi 300 000 km/s, pero dentro de un material como el vidrio o el agua va más lenta. La relación entre ambas velocidades se llama índice de refracción y se escribe como
+\begin{equation}
+n = \frac{c}{v},
+\label{eq:indice}
+\end{equation}
+donde $v$ es la velocidad de la luz en el medio.
+
+Un número mayor significa luz más lenta.
+
+\subsection{Principio de Fermat}
+Fermat afirmó que la luz, para ir de un punto A a un punto B, sigue la trayectoria que le toma el menor tiempo. Si el rayo recorre una distancia $d_1$ en un medio con velocidad $v_1$ y luego una distancia $d_2$ en otro medio con velocidad $v_2$, el tiempo total es
+\begin{equation}
+t = \frac{d_1}{v_1} + \frac{d_2}{v_2}.
+\label{eq:tiempo}
+\end{equation}
+Usando la ecuación \eqref{eq:indice} esto se puede reescribir como $t = (n_1 d_1 + n_2 d_2)/c$, y a la cantidad $n_1 d_1 + n_2 d_2$ se le llama camino óptico. Buscar el menor tiempo es lo mismo que buscar el menor camino óptico, y matemáticamente eso se pide derivando e igualando a cero:
+\begin{equation}
+\frac{dL}{dx} = 0 .
+\label{eq:fermat}
+\end{equation}
+
+\subsection{Ley de la reflexión}
+Cuando el rayo no cambia de medio, la velocidad es la misma en todo el recorrido. Entonces minimizar el tiempo equivale simplemente a minimizar la distancia recorrida.
+
+Pongamos el espejo sobre el eje $x$. El punto A está a una altura $a$ y en la posición horizontal $x_A$, el punto B está a una altura $b$ y en la posición $x_B$, y el rayo toca el espejo en un punto P de coordenada $x$. Con el teorema de Pitágoras, la longitud total del camino A, P, B es
+\begin{equation}
+L(x) = \sqrt{(x - x_A)^2 + a^2} + \sqrt{(x - x_B)^2 + b^2}.
+\label{eq:longitud}
+\end{equation}
+Al derivar e igualar a cero, como pide la ecuación \eqref{eq:fermat}, se obtiene
+\begin{equation}
+\frac{x_A - x}{\sqrt{(x - x_A)^2 + a^2}} = \frac{x - x_B}{\sqrt{(x - x_B)^2 + b^2}}.
+\label{eq:derivada}
+\end{equation}
+Cada lado de esa igualdad es justamente el seno del ángulo que forma el rayo con la normal, de modo que $\sin\theta_i = \sin\theta_r$, y como ambos ángulos están entre 0 y 90 grados,
+\begin{equation}
+\theta_i = \theta_r .
+\label{eq:reflexion}
+\end{equation}
+
+Hay además un truco geométrico muy útil. Si reflejamos el punto A del otro lado del espejo obtenemos un punto imagen A', y la distancia de A' a cualquier punto P del espejo es igual a la distancia de A a ese mismo punto. Por eso el camino A, P, B mide lo mismo que A', P, B, y el más corto de todos es aquel en el que A', P y B quedan alineados en una sola recta.
+
+\subsection{Ley de Snell}
+Si el rayo sí cambia de medio, se repite el mismo procedimiento pero ahora con el tiempo de la ecuación \eqref{eq:tiempo}. Lo que resulta es la ley de Snell,
+\begin{equation}
+n_i \sin\theta_i = n_t \sin\theta_t ,
+\label{eq:snell}
+\end{equation}
+donde $\theta_t$ es el ángulo del rayo transmitido. En esta práctica solo trabajamos con reflexión, pero vale la pena notar que una misma idea, la del tiempo mínimo, explica los dos fenómenos. Ambas leyes también pueden obtenerse a partir de las ecuaciones de Maxwell y de las condiciones que deben cumplir los campos electromagnéticos en la frontera entre dos medios, aunque ese camino es bastante más largo.
