@@ -1,0 +1,30 @@
+\subsection{Generación de los datos simulados}
+Para cada ángulo de incidencia $\theta_i$ se calculó primero el ángulo de refracción teórico despejándolo de la ecuación \eqref{eq:snell} con $n = 1.49$:
+\begin{equation}
+\theta_t^{teo} = \arcsin\left( \frac{\sin\theta_i}{1.49} \right).
+\label{eq:teorico}
+\end{equation}
+Después se multiplicó por un factor fijo de 1.08, para simular un error sistemático de alineación, y por un factor aleatorio cercano a 1 con una desviación de 2.5 por ciento, para simular el error de lectura. El resultado se redondeó a medio grado.
+
+\subsection{Ajuste de una recta por el origen}
+Como la ecuación \eqref{eq:recta} no tiene término independiente, la pendiente que mejor se ajusta a los puntos por mínimos cuadrados se calcula como
+\begin{equation}
+n = \frac{\sum \sin\theta_i \, \sin\theta_t}{\sum \sin^2\theta_t} = 1.396 .
+\label{eq:pendiente}
+\end{equation}
+
+\subsection{Promedio y desviación estándar}
+El promedio de los ocho índices de la tabla \ref{tab:angulos} y su desviación estándar se calcularon con
+\begin{equation}
+\bar{n} = \frac{1}{8}\sum_{k=1}^{8} n_k , \qquad
+s = \sqrt{\frac{\sum (n_k - \bar{n})^2}{7}} ,
+\label{eq:promedio}
+\end{equation}
+lo que da $\bar{n} = 1.399$ y $s = 0.023$.
+
+\subsection{Ángulo crítico}
+Sustituyendo el índice obtenido en la ecuación \eqref{eq:critico},
+\begin{equation}
+\theta_c = \arcsin\left( \frac{1}{1.396} \right) = 45.8 \text{ grados}.
+\label{eq:critico_calc}
+\end{equation}
