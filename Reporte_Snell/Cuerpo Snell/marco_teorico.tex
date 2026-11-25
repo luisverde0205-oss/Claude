@@ -1,0 +1,43 @@
+La luz no viaja igual de rápido en todos lados. En el vacío alcanza una velocidad $c$ cercana a 300 000 km/s, pero dentro del agua, del vidrio o del acrílico va más despacio, y para comparar qué tan lenta es en cada material se usa el índice de refracción,
+\begin{equation}
+n = \frac{c}{v},
+\label{eq:indice}
+\end{equation}
+donde $v$ es la velocidad de la luz dentro del material. El aire tiene un índice muy cercano a 1. El acrílico anda alrededor de 1.49.
+
+\subsection{Ley de Snell}
+Imaginemos un rayo que llega a la frontera entre dos medios. Si trazamos una línea perpendicular a esa frontera, llamada normal, el ángulo entre el rayo que llega y la normal es el ángulo de incidencia $\theta_i$, y el ángulo entre el rayo que sigue de largo dentro del segundo medio y la normal es el ángulo de refracción $\theta_t$. Snell encontró que estos ángulos siempre cumplen
+\begin{equation}
+n_i \sin\theta_i = n_t \sin\theta_t ,
+\label{eq:snell}
+\end{equation}
+con $n_i$ el índice del medio de donde viene la luz y $n_t$ el del medio al que entra.
+
+Una consecuencia es fácil de ver. Si la luz entra a un medio más lento, el rayo se acerca a la normal; si sale hacia uno más rápido, se aleja de ella.
+
+\subsection{Relación con el principio de Fermat}
+La ecuación \eqref{eq:snell} no es una regla suelta. Si un rayo va de un punto A en el aire a un punto B dentro del acrílico, el tiempo que tarda es
+\begin{equation}
+t = \frac{d_1}{v_1} + \frac{d_2}{v_2},
+\label{eq:tiempo}
+\end{equation}
+y al buscar el punto de la frontera que hace mínimo ese tiempo, derivando e igualando a cero, aparece exactamente la ley de Snell.
+
+\subsection{Cómo obtener el índice con una gráfica}
+Cuando la luz viene del aire, $n_i \approx 1$, y la ecuación \eqref{eq:snell} se reduce a
+\begin{equation}
+\sin\theta_i = n \sin\theta_t .
+\label{eq:recta}
+\end{equation}
+Esto es una recta que pasa por el origen. Si en el eje horizontal ponemos $\sin\theta_t$ y en el vertical $\sin\theta_i$, la pendiente de la recta es directamente el índice de refracción $n$ del acrílico.
+
+\subsection{Por qué una lente de media luna}
+La lente tiene una cara plana y una cara curva. Cuando el rayo pega en el centro de la cara plana, la parte de la trayectoria que va dentro del acrílico sigue un radio del semicírculo, así que al llegar a la cara curva lo hace de frente, es decir, a lo largo de la normal, y ya no se vuelve a doblar. Gracias a eso el ángulo que se lee en la escala al salir de la lente es el mismo ángulo de refracción que tuvo en la cara plana.
+
+\subsection{Ángulo crítico}
+Si la luz va del acrílico hacia el aire, el rayo se aleja de la normal, y existe un ángulo a partir del cual ya no puede salir y se refleja por completo. Ese ángulo crítico cumple
+\begin{equation}
+\sin\theta_c = \frac{1}{n},
+\label{eq:critico}
+\end{equation}
+y para el acrílico vale unos 42 grados.
