@@ -1,0 +1,99 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-tabla,es-nodecimaldot]{babel} % Formato a español, Tabla en lugar de Cuadro
+\usepackage{lmodern} % Fuente compatible
+\usepackage{pgfplots} % Para poder realizar gráficas
+    \pgfplotsset{compat=1.18}
+\usepackage[T1]{fontenc}    % Permite utilizar otras tipografías
+\usepackage{amsmath}
+\usepackage[vmargin=2.5cm,hmargin=2cm]{geometry}
+\usepackage{multicol}   % Unir columnas en tablas y formato a dos columnas
+\usepackage{multirow}   % Unir filas en tablas
+\usepackage{graphicx}   % Necesario para insertar gráficas
+\usepackage{float}      % Corregir ubicación de imágenes y tablas
+\usepackage{url}        % Hipervínculo a direcciones URL
+\usepackage{listings}
+%\usepackage{minted}    % Solo hace falta si se inserta código; requiere -shell-escape
+\usepackage[none]{hyphenat} % Permite utilizar el comando \sloppy
+\usepackage[small]{caption} % Reduce el tamaño de letra de los pies de figura y permite \captionof
+\usepackage{hyperref}   % Agrega enlaces internos de las secciones, figuras y tablas.
+\usepackage{color}      % Definición de colores
+    \hypersetup{colorlinks=true, linkcolor=[rgb]{0,0,1}, citecolor=[rgb]{0,0,1}, urlcolor=[rgb]{0,0,1}}
+\usepackage{xcolor}     % Permite definir un color para utilizarlo dentro del documento.
+    \definecolor{gris}{RGB}{70,70,70}
+    \definecolor{negro}{RGB}{40,40,40}
+%%%%%%%% Modificación de los títulos de secciones %%%%%%%%%%
+% Los nombres de las secciones van en MAYÚSCULAS y con letra más grande que el texto
+\usepackage{titlesec}
+\renewcommand\thesection{\Roman{section}}
+\renewcommand\thesubsection{\Roman{subsection}}
+\titlespacing*{\section}{0pt}{3mm}{1.5mm}
+\titleformat{\section}[block]{\Large\bfseries\centering}{\thesection.}{0.6em}{\MakeUppercase}
+\titleformat{\subsection}[block]{\normalsize\bfseries\raggedright}{\thesubsection.}{0.6em}{\MakeUppercase}
+\usepackage{amssymb}
+\pagestyle{plain} % Hojas enumeradas
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\colorhrule}[3]{\begingroup\color{#1}\rule{#2}{#3}\endgroup}
+\setlength{\intextsep}{1mm}
+\setlength{\columnsep}{5mm}
+
+% -------------------------------------------------------------------
+\begin{document}
+\sloppy
+\begin{center}
+\begin{tabular}{cc}
+\multirow{2}{3.5cm}{\includegraphics[width=3cm]{udg_logo.jpeg}} & \huge{\textsc{\textbf{Universidad de Guadalajara}}}\\
+ & \scriptsize{\textsc{CENTRO UNIVERSITARIO DE CIENCIAS EXACTAS E INGENIERÍAS}}\\[0.5mm]
+ & \Large{\textsf{\textbf{Práctica 1. Principio de Fermat}}}\\
+ & \small{\textsf{Saul Emmanuel Ramirez Gonzalez [22382607]}}\\ \vspace{0.5mm}
+ & \small{\textsf{Omar Emiliano Alcala Montes [220124466]}}\\ \vspace{0.5mm}
+ & \small{\textsf{Luis Alberto Roman Verde [223826372]}}\\ \vspace{1mm}
+ & \small{\textsc{Licenciatura en Física $|$ Óptica}}\\
+ & \today\\
+\end{tabular}
+\end{center}
+
+\begin{center}
+\colorhrule{negro}{16.5cm}{1.2pt}
+\end{center}
+\begin{abstract}
+\noindent \input{Cuerpo Fermat/resumen}
+\end{abstract}
+\begin{center}
+\vspace{-0.1mm}
+\colorhrule{gris}{16.5cm}{0.7pt}
+\end{center}
+\begin{multicols}{2}
+
+\section{Introducción}
+\input{Cuerpo Fermat/introduccion}
+
+\section{Objetivos}
+\input{Cuerpo Fermat/objetivos}
+
+\section{Marco teórico}
+\input{Cuerpo Fermat/marco_teorico}
+
+\section{Material}
+\input{Cuerpo Fermat/material}
+
+\section{Desarrollo experimental}
+\input{Cuerpo Fermat/desarrollo}
+
+\section{Resultados}
+\input{Cuerpo Fermat/resultados}
+
+\section{Análisis y conclusiones}
+\input{Cuerpo Fermat/analisis_conclusiones}
+
+
+\section{Preguntas}
+\input{Cuerpo Fermat/preguntas}
+
+\section{Bibliografía}
+\input{Cuerpo Fermat/bibliografia}
+
+\end{multicols}
+
+\end{document}
