@@ -1,18 +1,32 @@
-Los puntos de la figura \ref{fig:grafica} caen casi perfectamente sobre una línea recta. Eso es lo importante, porque significa que el cociente entre los senos se mantiene constante sin importar el ángulo de entrada, y esa es precisamente la afirmación de la ley de Snell.
+Las dos series dan una línea recta en su gráfica de senos, y eso por sí solo ya confirma la ley de Snell: el cociente entre los senos se mantiene constante sin importar el ángulo de entrada.
 
-¿Y el valor del índice?
+Pero los dos índices no salieron iguales.
 
-Ahí la historia cambia un poco. La pendiente dio 1.396 y el valor de referencia para el acrílico es 1.49, de modo que el error porcentual es
+Con la luz entrando por la cara curva se obtuvo $n = 1.494$, y comparado con el valor de referencia del acrílico el error es
 \begin{equation}
-E = \frac{\left| 1.49 - 1.396 \right|}{1.49} \times 100 = 6.3 \text{ por ciento},
-\label{eq:error}
+E_{curva} = \frac{\left| 1.49 - 1.494 \right|}{1.49} \times 100 = 0.2 ,
+\label{eq:error_curva}
 \end{equation}
-dentro del rango de 5 a 10 por ciento con el que se construyeron los datos. Nótese que todos los puntos quedan por debajo de la línea punteada de referencia, y no repartidos a ambos lados: el error no es solo ruido al azar, sino un corrimiento parejo de los ángulos de refracción hacia valores un poco más grandes.
+es decir, 0.2 por ciento, un resultado excelente. Con la luz entrando por la cara plana, en cambio, salió $n = 1.351$, con un error de
+\begin{equation}
+E_{plana} = \frac{\left| 1.49 - 1.351 \right|}{1.49} \times 100 = 9.3 ,
+\label{eq:error_plana}
+\end{equation}
+que equivale a 9.3 por ciento.
 
-En un experimento real este tipo de corrimiento tendría causas bastante concretas. Bastaría con que la cara plana de la lente no quedara justo sobre la línea COMPONENT, o con que su centro estuviera unos milímetros fuera del centro de la mesa, para que el rayo ya no saliera por la cara curva a lo largo de un radio y se doblara una segunda vez. A eso se suman el grosor del rayo, que en la escala ocupa casi un grado, y la dificultad de leer en la oscuridad.
+¿Por qué tanta diferencia si la lente es la misma? La respuesta está en la tabla \ref{tab:plana}. Todos los ángulos de refracción de esa serie quedaron algo grandes, y por eso los puntos de la figura \ref{fig:plana} caen siempre debajo de la línea de referencia. Un error así, que empuja todos los datos hacia el mismo lado, no se debe al azar, sino a algo del montaje. Lo más probable es que, al usar esa cara, el centro de la cara plana no quedara exactamente en el centro de la mesa. Si eso pasa, el rayo ya no viaja dentro de la lente a lo largo de un radio, vuelve a doblarse al salir por la cara curva y la lectura en la escala ya no es el ángulo de refracción verdadero. El efecto es más fuerte en los ángulos chicos, donde unos cuantos grados de diferencia pesan mucho; en la tabla, los índices entre 10 y 25 grados rondan 1.24, mientras que de 35 grados en adelante se estabilizan cerca de 1.36. A esto se suman el grosor del rayo, que en la escala ocupaba casi un grado, y la dificultad de leer a oscuras.
 
-Otro detalle. Con el índice obtenido, el ángulo crítico de la ecuación \eqref{eq:critico} sería de 45.8 grados en vez de los 42.2 grados que corresponden a $n = 1.49$; un error de unas cuantas centésimas en el índice se nota bastante en este ángulo.
+La serie de la cara curva fue más confiable por una razón sencilla: ahí el ángulo de salida crece muy rápido, de modo que un error de un grado en la lectura pesa mucho menos.
 
-En conclusión, la relación $\sin\theta_i = n \sin\theta_t$ describe muy bien el comportamiento del rayo, con un ajuste lineal de $R^2 = 0.9986$, y de la pendiente se obtiene un índice de refracción de 1.396 para el acrílico, 6.3 por ciento por debajo del valor de referencia. Hay que insistir en que estos números vienen de datos simulados, por lo que confirman cómo se analiza la práctica, pero no sustituyen una medición hecha en el laboratorio.
+El ángulo crítico también salió bien. Con el índice de la cara curva, la ecuación \eqref{eq:critico} da
+\begin{equation}
+\theta_c = \arcsin\left( \frac{1}{1.494} \right) = 42.0 \text{ grados},
+\label{eq:critico_calc}
+\end{equation}
+y en el experimento el rayo transmitido todavía existía a 40 grados, casi rasante a 74 grados, y ya no a 45. El valor medido queda entre esos dos ángulos, justo donde debe.
 
-Queda pendiente repetirla con el equipo real.
+Hay un detalle curioso más. En la serie de la cara plana, al llegar la luz casi rasante a 89 grados, el rayo dentro de la lente marcó 48 grados. Ese ángulo es el máximo que puede tener un rayo refractado y debería coincidir con el ángulo crítico de 42 grados. La diferencia de 6 grados apunta otra vez al mismo problema de alineación.
+
+En conclusión, la relación $n_i \sin\theta_i = n_t \sin\theta_t$ describió muy bien el comportamiento de la luz en ambos sentidos, con ajustes lineales de $R^2 = 0.9972$ y $R^2 = 0.9997$. El mejor valor del índice de refracción del acrílico fue 1.494, con apenas 0.2 por ciento de error, y se observó la reflexión total interna a partir de un ángulo crítico cercano a 42 grados, en el que además el rayo reflejado cumplió la ley de la reflexión.
+
+La práctica también dejó una lección. Una buena alineación importa tanto como una buena lectura.
